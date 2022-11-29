@@ -1,0 +1,29 @@
+{
+    "name": "findkit/findkit",
+    "description": "WordPress plugin for findkit.com",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Esa-Matti Suuronen",
+            "email": "esa-matti.suuronen@valu.fi",
+            "role": "developer"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Findkit\\": "src/"
+        }
+    },
+    "require": {
+        "firebase/php-jwt": "^6.3"
+    },
+    "scripts": {},
+    "support": {
+        "issues": "https://github.com/findkit/wp-findkit/issues",
+        "source": "https://github.com/findkit/wp-findkit"
+    }
+}
