@@ -35,7 +35,7 @@ class JavaScriptGlobal
 
 		// We'll use type=module to avoid creating accidental globals
 		echo '<script type="module">';
-		readfile(__DIR__ . '/jwt.js');
+		readfile(__DIR__ . '/global.js');
 		printf(
 			'init(%s);',
 			wp_json_encode([
