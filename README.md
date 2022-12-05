@@ -28,7 +28,7 @@ add_filter('findkit_page_meta', function ($meta, $post) {
 
 ## JWT Authentication
 
-NOTE: This is this WIP
+NOTE: This is WIP
 
 The Findkit Search Endpoint can be configured to require JWT token
 authentication.
