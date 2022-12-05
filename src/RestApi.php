@@ -31,7 +31,7 @@ class RestApi
 		}
 
 		return [
-			'token' => $token,
+			'jwt' => $token,
 		];
 	}
 }
