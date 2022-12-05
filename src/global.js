@@ -21,9 +21,7 @@ function init(params) {
 				headers: { "x-wp-nonce": params.nonce },
 			});
 
-			const data = await res.json();
-
-			return data?.token;
+			return res.json();
 		},
 	});
 }

@@ -44,15 +44,15 @@ class KeyPair
 			return null;
 		}
 
-		$findkit_project_id = get_option('findkit_project_id');
+		$findkit_project_id = \get_option('findkit_project_id');
 
 		if (!$findkit_project_id) {
 			return null;
 		}
 
-		$allow = apply_filters(
+		$allow = \apply_filters(
 			'findkit_allow_jwt',
-			is_user_logged_in(),
+			\is_user_logged_in(),
 			$findkit_project_id
 		);
 
