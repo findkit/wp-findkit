@@ -31,6 +31,8 @@ add_filter('findkit_page_meta', function ($meta, $post) {
 The Findkit Search Endpoint can be configured to require JWT token
 authentication.
 
+## Setup
+
 This plugin automatically generates a private / public key pair to the
 `findkit_pubkey` and `findkit_privkey` options. Add the public key to the
 `findkit.toml` file and set the endpoint to private:
@@ -71,4 +73,15 @@ picked by the `@findkit/ui` library.
 ```
 wp option set findkit_project_id 'plnGp6Rv0'
 wp option set findkit_enable_jwt 1
+```
+
+## Authentication
+
+By default this plugin allows only users logged in to use the search endpoint but it can be modified using the `findkit_allow_jwt` filter:
+
+<!-- prettier-ignore -->
+```php
+add_filter('findkit_allow_jwt', function ($allow) {
+    return current_user_can('edit_posts');
+}, 10, 1);
 ```
