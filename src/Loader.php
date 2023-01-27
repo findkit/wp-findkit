@@ -29,5 +29,6 @@ class Loader
 		(new JavaScriptGlobal())->bind();
 		(new RestApi())->bind();
 		(new PageMeta())->bind();
+		(new LiveUpdate())->bind();
 	}
 }
