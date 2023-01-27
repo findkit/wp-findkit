@@ -1,5 +1,5 @@
 {
-    "name": "findkit/findkit",
+    "name": "findkit/wp-findkit",
     "description": "WordPress plugin for findkit.com",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
