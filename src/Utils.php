@@ -11,12 +11,6 @@ class Utils
 	 */
 	static function get_public_permalink(\WP_Post $post)
 	{
-		// trashed just has a __trashed suffix
-		if (preg_match('/__trashed\/\z/', get_permalink($post))) {
-			$url = get_permalink($post);
-			return preg_replace('/__trashed\/\z/', '/', $url);
-		}
-
 		// create public clone
 		$clone = clone $post;
 		$clone->post_status = 'publish';
@@ -26,6 +20,7 @@ class Utils
 			$clone->ID
 		);
 
-		return get_permalink($clone);
+		$url = get_permalink($post);
+		return preg_replace('/__trashed\/\z/', '/', $url);
 	}
 }
