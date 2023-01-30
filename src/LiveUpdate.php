@@ -133,9 +133,22 @@ class LiveUpdate
 
 	function enqueue_post(\WP_Post $post)
 	{
+		$can_live_update = apply_filters(
+			'findkit_can_live_update',
+			# By default do not equeue post in cli because integrations might
+			# cause unwanted live updates
+			php_sapi_name() !== 'cli',
+			$post
+		);
+
+		if (!$can_live_update) {
+			return;
+		}
+
 		if ($this->pending_posts === null) {
 			$this->pending_posts = [];
 		}
+
 		$this->pending_posts[] = $post;
 	}
 
