@@ -8,17 +8,27 @@ class Loader
 {
 	static $instance = null;
 
-	static function init()
+	/**
+	 * @var ApiClient
+	 */
+	public $api_client = null;
+
+	static function instance()
 	{
 		if (self::$instance === null) {
 			self::$instance = new self();
-			self::$instance->bind();
+			self::$instance->init();
 		}
 
 		return self::$instance;
 	}
 
-	function bind()
+	function __construct()
+	{
+		$this->api_client = new ApiClient();
+	}
+
+	function init()
 	{
 		$pair = KeyPair::load_from_options();
 
@@ -29,6 +39,6 @@ class Loader
 		(new JavaScriptGlobal())->bind();
 		(new RestApi())->bind();
 		(new PageMeta())->bind();
-		(new LiveUpdate())->bind();
+		(new LiveUpdate($this->api_client))->bind();
 	}
 }

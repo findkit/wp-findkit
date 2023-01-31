@@ -22,4 +22,26 @@ if (!\class_exists('\Finkdit\Loader')) {
 // the vendor/ into git so you won't add all development dependencies too. Eg.
 // before checking it in you should always run "composer install --no-dev" first.
 
-\Findkit\Loader::init();
+\Findkit\Loader::instance();
+
+/////////////////////////
+// Public API functions
+/////////////////////////
+
+function findkit_full_crawl()
+{
+	$loader = \Findkit\Loader::instance();
+	$loader->api_client->full_crawl();
+}
+
+function findkit_manual_crawl(array $urls)
+{
+	$loader = \Findkit\Loader::instance();
+	$loader->api_client->manual_crawl($urls);
+}
+
+function findkit_partial_crawl()
+{
+	$loader = \Findkit\Loader::instance();
+	$loader->api_client->partial_crawl();
+}

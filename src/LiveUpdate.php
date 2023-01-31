@@ -11,11 +11,14 @@ class LiveUpdate
 	 */
 	private $pending_posts = null;
 
-	private $log_respones = false;
+	/**
+	 * @var ApiClient
+	 */
+	private $api_client = null;
 
-	function __construct()
+	function __construct(ApiClient $api_client)
 	{
-		$this->log_respones = \get_option('findkit_log_api_responses', false);
+		$this->api_client = $api_client;
 	}
 
 	function bind()
@@ -39,72 +42,13 @@ class LiveUpdate
 			return;
 		}
 
-		$apikey = self::get_api_key();
-		if (!$apikey) {
-			error_log(
-				'Findkit: ERROR No API key is set. Cannot flush live updates.'
-			);
-			return;
-		}
-
-		$project_id = get_option('findkit_project_id');
-
-		$endpoint = apply_filters(
-			'findkit_manual_crawl_endpoint',
-			"https://api.findkit.com/v1/projects/$project_id/crawls",
-			$project_id
-		);
-
-		if (!$project_id) {
-			error_log(
-				'Findkit: ERROR Live update is enabled but no project ID is set'
-			);
-			return;
-		}
-
 		$urls = [];
 
 		foreach ($this->pending_posts as $post) {
 			$urls[] = Utils::get_public_permalink($post);
 		}
 
-		if (empty($urls)) {
-			return;
-		}
-
-		$json = wp_json_encode([
-			'mode' => 'manual',
-			'urls' => $urls,
-			'message' => 'Live update from WordPress plugin v0.0.0',
-		]);
-
-		$response = wp_remote_request($endpoint, [
-			'headers' => [
-				'content-type' => 'application/json',
-				'authorization' => 'Bearer ' . $apikey,
-				'user-agent' => 'Findkit WordPress Plugin v0.0.0',
-			],
-			'method' => 'POST',
-			'body' => $json,
-			'timeout' => 20,
-			'blocking' => $this->log_respones,
-		]);
-
-		if (\is_wp_error($response)) {
-			error_log(
-				'Findkit: Live update error: ' . $response->get_error_message()
-			);
-			return;
-		}
-
-		if ($this->log_respones) {
-			$body = wp_remote_retrieve_body($response);
-			error_log(
-				'Findkit: Live update response code: ' .
-					wp_remote_retrieve_response_code($response)
-			);
-			error_log('Findkit: Live update response body: ' . $body);
-		}
+		return $this->api_client->manual_crawl($urls);
 	}
 
 	function __action_transition_post_status($new_status, $old_status, $post)
@@ -134,7 +78,7 @@ class LiveUpdate
 	function enqueue_post(\WP_Post $post)
 	{
 		$can_live_update = apply_filters(
-			'findkit_can_live_update',
+			'findkit_can_live_update_post',
 			# By default do not equeue post in cli because integrations might
 			# cause unwanted live updates
 			php_sapi_name() !== 'cli',
@@ -166,15 +110,5 @@ class LiveUpdate
 		}
 
 		return false;
-	}
-
-	static function get_api_key(): ?string
-	{
-		if (defined('FINDKIT_API_KEY')) {
-			return FINDKIT_API_KEY;
-		}
-
-		$findkit_api_key = get_option('findkit_api_key');
-		return $findkit_api_key;
 	}
 }
