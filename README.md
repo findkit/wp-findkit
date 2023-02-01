@@ -1,5 +1,24 @@
 # Findkit WordPress Plugin
 
+## Install
+
+This plugin is not yet published to the WordPress plugin repository or composer Packagist.
+
+But meanwhile it can be installed using using the [zile
+file](https://github.com/findkit/wp-findkit/zipball/main).
+
+Or with composer by adding this to the `repositories` field of your `composer.json` file
+
+```json
+{
+	"type": "vcs",
+	"url": "https://github.com/findkit/wp-findkit.git",
+	"no-api": true
+}
+```
+
+and running `composer require findkit/wp-findkit`
+
 ## Page Meta
 
 The plugin automatically exposes basic Findkit [Page
