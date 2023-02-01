@@ -45,3 +45,7 @@ function findkit_partial_crawl(array $options = [])
 	$loader = \Findkit\Loader::instance();
 	$loader->api_client->partial_crawl($options);
 }
+
+function findkit_get_page_meta(\WP_post $post) {
+	return Findkit\PageMeta::get($post);
+}
