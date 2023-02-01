@@ -143,6 +143,6 @@ class ApiClient
 		}
 
 		$findkit_api_key = get_option('findkit_api_key');
-		return $findkit_api_key;
+		return $findkit_api_key ? $findkit_api_key : null;
 	}
 }
