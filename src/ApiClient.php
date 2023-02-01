@@ -99,24 +99,40 @@ class ApiClient
 		return "/v1/projects/$project_id/crawls";
 	}
 
-	function manual_crawl(array $urls)
+	function manual_crawl(array $urls, array $options = [])
 	{
 		$this->request('POST', $this->get_crawls_path(), [
-			'data' => ['mode' => 'manual', 'urls' => $urls],
+			'data' => [
+				'mode' => 'manual',
+				'urls' => $urls,
+				'message' =>
+					$options['message'] ??
+					'Manual crawl started using Findkit WordPress plugin',
+			],
 		]);
 	}
 
-	function partial_crawl()
+	function partial_crawl(array $options = [])
 	{
 		$this->request('POST', $this->get_crawls_path(), [
-			'data' => ['mode' => 'partial'],
+			'data' => [
+				'mode' => 'partial',
+				'message' =>
+					$options['message'] ??
+					'Partial crawl started using Findkit WordPress plugin',
+			],
 		]);
 	}
 
-	function full_crawl()
+	function full_crawl(array $options = [])
 	{
 		$this->request('POST', $this->get_crawls_path(), [
-			'data' => ['mode' => 'full'],
+			'data' => [
+				'mode' => 'full',
+				'message' =>
+					$options['message'] ??
+					'Full crawl started using Findkit WordPress plugin',
+			],
 		]);
 	}
 

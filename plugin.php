@@ -28,20 +28,20 @@ if (!\class_exists('\Finkdit\Loader')) {
 // Public API functions
 /////////////////////////
 
-function findkit_full_crawl()
+function findkit_full_crawl(array $options = [])
 {
 	$loader = \Findkit\Loader::instance();
-	$loader->api_client->full_crawl();
+	$loader->api_client->full_crawl($options);
 }
 
-function findkit_manual_crawl(array $urls)
+function findkit_manual_crawl(array $urls, array $options = [])
 {
 	$loader = \Findkit\Loader::instance();
-	$loader->api_client->manual_crawl($urls);
+	$loader->api_client->manual_crawl($urls, $options);
 }
 
-function findkit_partial_crawl()
+function findkit_partial_crawl(array $options = [])
 {
 	$loader = \Findkit\Loader::instance();
-	$loader->api_client->partial_crawl();
+	$loader->api_client->partial_crawl($options);
 }
