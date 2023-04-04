@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Findkit\Settings;
 
+use Findkit\Utils;
+
 class Page
 {
 	private $page = 'findkit_settings';
@@ -118,30 +120,27 @@ class Page
         <?php
 	}
 
+	// prettier-ignore
 	function __options_page_findkit_settings()
 	{
+		$logo_url = esc_attr(Utils::get_logo_url());
+
 		?>
-
 		<div class="wrap">
-			<h1>
-                <?php _e('Findkit Settings', 'findkit'); ?>
-            </h1>
-            <p>
-                <?php _e(
-                	'Findkit is a site search toolkit that helps your users find the right content on your website.',
-                	'findkit'
-                ); ?>
+			<img alt="<?php _e( 'Findkit Settings', 'findkit'); ?>" style='height: 50px; margin-top: 10px; margin-bottom: 20px;' src='<?php echo $logo_url; ?>' alt='Findkit' />
 
+            <p>
+                <?php _e( 'Findkit is a site search toolkit that helps your users find the right content on your website.', 'findkit'); ?>
                 <?php $this->render_create_findkit_project_button(); ?>
                 <?php $this->render_hub_link(); ?>
-
-
             </p>
+
 			<form method="post" action="options.php">
-        <?php
-        settings_fields($this->page);
-        do_settings_sections($this->page);
-        submit_button();?>
+				<?php
+					settings_fields($this->page);
+					do_settings_sections($this->page);
+					submit_button();
+				?>
 			</form>
 		</div>
 		<?php

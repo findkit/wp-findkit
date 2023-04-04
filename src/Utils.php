@@ -44,4 +44,9 @@ class Utils
 		]);
 		return 'https://hub-next.findkit.com/new-project?' . $qs;
 	}
+
+	static function get_logo_url()
+	{
+		return plugins_url('logo.svg', __DIR__);
+	}
 }

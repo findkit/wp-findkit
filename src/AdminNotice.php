@@ -30,24 +30,21 @@ class AdminNotice
 			return;
 		}
 
-		$findkit_settings_url = \admin_url(
-			'options-general.php?page=findkit_settings'
-		);
+		$this->render_notice();
+	}
+
+	// prettier-ignore
+	function render_notice() {
+		$findkit_settings_url = \admin_url('options-general.php?page=findkit_settings');
+
 		?>
-        <div class="notice notice-info">
+        <div class="notice">
             <p>
-                <strong>
-                    <?php printf(__('Findkit', 'findkit'), ''); ?>:
-                </strong>
-                <?php printf(
-                	__(
-                		'Plugin activated. Configure the plugin on the <a href="%s">settings page</a>.',
-                		'findkit'
-                	),
-                	$findkit_settings_url
-                ); ?>
+		        <img style='height: 20px; margin-right: 10px' src='<?php echo esc_attr( Utils::get_logo_url()); ?>' alt='Findkit' />
+                <?php printf( __( 'Findkit Plugin activated. Configure the plugin on the <a href="%s">settings page</a>.', 'findkit'), $findkit_settings_url); ?>
             </p>
         </div>
         <?php
-	}
+
+    }
 }
