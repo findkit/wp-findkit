@@ -33,4 +33,15 @@ class Utils
 	{
 		return preg_replace('/__trashed\/\z/', '/', $url);
 	}
+
+	static function generate_new_project_url()
+	{
+		$site_domain = parse_url(get_site_url())['host'];
+		$site_name = get_bloginfo('name');
+		$qs = http_build_query([
+			'domain' => $site_domain,
+			'name' => $site_name,
+		]);
+		return 'https://hub-next.findkit.com/new-project?' . $qs;
+	}
 }

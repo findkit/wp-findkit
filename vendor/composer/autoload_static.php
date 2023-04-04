@@ -27,12 +27,15 @@ class ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Findkit\\ApiClient' => __DIR__ . '/../..' . '/src/ApiClient.php',
         'Findkit\\JavaScriptGlobal' => __DIR__ . '/../..' . '/src/JavaScriptGlobal.php',
         'Findkit\\KeyPair' => __DIR__ . '/../..' . '/src/KeyPair.php',
         'Findkit\\LiveUpdate' => __DIR__ . '/../..' . '/src/LiveUpdate.php',
         'Findkit\\Loader' => __DIR__ . '/../..' . '/src/Loader.php',
         'Findkit\\PageMeta' => __DIR__ . '/../..' . '/src/PageMeta.php',
         'Findkit\\RestApi' => __DIR__ . '/../..' . '/src/RestApi.php',
+        'Findkit\\Settings\\Page' => __DIR__ . '/../..' . '/src/Settings/Page.php',
+        'Findkit\\Settings\\Section' => __DIR__ . '/../..' . '/src/Settings/Section.php',
         'Findkit\\Utils' => __DIR__ . '/../..' . '/src/Utils.php',
         'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
         'Firebase\\JWT\\CachedKeySet' => __DIR__ . '/..' . '/firebase/php-jwt/src/CachedKeySet.php',

@@ -7,12 +7,15 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Findkit\\ApiClient' => $baseDir . '/src/ApiClient.php',
     'Findkit\\JavaScriptGlobal' => $baseDir . '/src/JavaScriptGlobal.php',
     'Findkit\\KeyPair' => $baseDir . '/src/KeyPair.php',
     'Findkit\\LiveUpdate' => $baseDir . '/src/LiveUpdate.php',
     'Findkit\\Loader' => $baseDir . '/src/Loader.php',
     'Findkit\\PageMeta' => $baseDir . '/src/PageMeta.php',
     'Findkit\\RestApi' => $baseDir . '/src/RestApi.php',
+    'Findkit\\Settings\\Page' => $baseDir . '/src/Settings/Page.php',
+    'Findkit\\Settings\\Section' => $baseDir . '/src/Settings/Section.php',
     'Findkit\\Utils' => $baseDir . '/src/Utils.php',
     'Firebase\\JWT\\BeforeValidException' => $vendorDir . '/firebase/php-jwt/src/BeforeValidException.php',
     'Firebase\\JWT\\CachedKeySet' => $vendorDir . '/firebase/php-jwt/src/CachedKeySet.php',
