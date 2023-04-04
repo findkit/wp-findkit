@@ -131,9 +131,11 @@ class Page
 
             <p>
                 <?php _e( 'Findkit is a site search toolkit that helps your users find the right content on your website.', 'findkit'); ?>
-                <?php $this->render_create_findkit_project_button(); ?>
-                <?php $this->render_hub_link(); ?>
+                <?php _e( 'See the Plugin documentation on <a target="_blank" href="https://findk.it/wp">here</a>.', 'findkit'); ?>
             </p>
+
+			<?php $this->render_create_findkit_project_button(); ?>
+			<?php $this->render_hub_link(); ?>
 
 			<form method="post" action="options.php">
 				<?php
