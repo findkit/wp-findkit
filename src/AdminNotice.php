@@ -13,7 +13,9 @@ class AdminNotice
 	function __action_admin_notices()
 	{
 		$screen = \get_current_screen();
-		if ($screen && $screen->base === 'settings_page_findkit_settings') {
+		$allowed_screens = ['plugins', 'dashboard'];
+
+		if (!$screen || !in_array($screen->base, $allowed_screens)) {
 			return;
 		}
 
