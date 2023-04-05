@@ -45,6 +45,16 @@ class Page
 				),
 			])
 			->add_field([
+				'name' => 'findkit_adminbar',
+				'type' => 'checkbox',
+				'default' => '1',
+				'title' => __('Show admin bar search button', 'findkit'),
+				'description' => __(
+					'Show Findkit Search in the WP Admin top adminbar',
+					'findkit'
+				),
+			])
+			->add_field([
 				'name' => 'findkit_enable_live_update',
 				'type' => 'checkbox',
 				'default' => '0',

@@ -23,10 +23,14 @@ class FindkitAdminSearch {
 		this.publicToken = options.publicToken;
 		this.version = options.version;
 		document.addEventListener("click", (e) => {
-			if (e.target instanceof HTMLButtonElement) {
-				this.handleClick({
-					target: e.target,
-				});
+			if (e.target instanceof HTMLElement) {
+				if (
+					e.target.classList.contains("findkit-admin-search") ||
+					e.target.closest(".findkit-adminbar-search")
+				) {
+					e.preventDefault();
+					this.bindClick(e.target);
+				}
 			}
 		});
 
@@ -38,21 +42,17 @@ class FindkitAdminSearch {
 
 	/**
 	 *
-	 * @param {{target: HTMLButtonElement}} event
+	 * @param {HTMLElement} element
 	 */
-	async handleClick(event) {
-		if (!event.target.classList.contains("findkit-admin-search")) {
-			return;
-		}
-
-		const origText = event.target.innerText;
-		event.target.innerText = "Loading...";
+	async bindClick(element) {
+		const origText = element.innerText;
+		element.innerText = "Loading...";
 
 		const ui = await this.getFindkitUI();
 
 		ui.open();
 
-		event.target.innerText = origText;
+		element.innerText = origText;
 	}
 
 	async getFindkitUI() {
