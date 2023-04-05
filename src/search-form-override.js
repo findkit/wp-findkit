@@ -25,6 +25,11 @@ class FindkitSearchFormOverride {
 		document.addEventListener("DOMContentLoaded", () => {
 			this.onDomReady();
 		});
+
+		const qs = new URLSearchParams(window.location.search);
+		if (qs.has("findkit_wp_override_q")) {
+			this.getFindkitUI();
+		}
 	}
 
 	async getFindkitUI() {
