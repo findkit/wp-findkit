@@ -151,6 +151,10 @@ class JavaScriptGlobal
 			return;
 		}
 
+		$findkit_settings_url = current_user_can('manage_options')
+			? Utils::get_findkit_settings_url()
+			: null;
+
 		$this->render_js_module_script(
 			'admin-search.js',
 			sprintf(
@@ -158,7 +162,7 @@ class JavaScriptGlobal
 				wp_json_encode([
 					'publicToken' => $public_token,
 					'version' => $this->get_findkit_ui_version(),
-					'settingsURL' => Utils::get_findkit_settings_url(),
+					'settingsURL' => $findkit_settings_url,
 				])
 			)
 		);

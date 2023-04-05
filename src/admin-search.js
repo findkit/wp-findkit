@@ -88,11 +88,13 @@ class FindkitAdminSearch {
 				Header: (props) => {
 					return html`
 						${props.children}
-						<a
-							href="${this.settingsURL}"
-							class="findkit--wp-admin-link findkit--hit-url findkit--link"
-							>Open Findkit WordPress Settings</a
-						>
+						${this.settingsURL
+							? html` <a
+									href="${this.settingsURL}"
+									class="findkit--wp-admin-link findkit--hit-url findkit--link"
+									>Open Findkit WordPress Settings</a
+							  >`
+							: null}
 					`;
 				},
 				Hit(props) {
