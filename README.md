@@ -45,6 +45,13 @@ add_filter('findkit_page_meta', function ($meta, $post) {
 }, 10, 2);
 ```
 
+## API Keys
+
+Api keys are used to trigger crawls from the WordPress itself.
+For example pages can be live updated as their edits are published.
+
+TODO.....
+
 ## JWT Authentication
 
 The Findkit Search Endpoint can be configured to require JWT token
