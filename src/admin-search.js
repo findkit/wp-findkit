@@ -32,7 +32,7 @@ class FindkitAdminSearch {
 					e.target.closest(".findkit-adminbar-search")
 				) {
 					e.preventDefault();
-					this.bindClick(e.target);
+					this.handleClick(e.target);
 				}
 			}
 		});
@@ -47,7 +47,7 @@ class FindkitAdminSearch {
 	 *
 	 * @param {HTMLElement} element
 	 */
-	async bindClick(element) {
+	async handleClick(element) {
 		const origText = element.innerText;
 		element.innerText = "Loading...";
 
