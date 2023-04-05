@@ -158,6 +158,7 @@ class JavaScriptGlobal
 				wp_json_encode([
 					'publicToken' => $public_token,
 					'version' => $this->get_findkit_ui_version(),
+					'settingsURL' => Utils::get_findkit_settings_url(),
 				])
 			)
 		);

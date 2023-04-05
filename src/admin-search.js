@@ -5,6 +5,7 @@
  */
 class FindkitAdminSearch {
 	publicToken = "";
+	settingsURL = "";
 
 	/**
 	 * @type {Promise<any> | undefined}
@@ -17,11 +18,13 @@ class FindkitAdminSearch {
 	 * @param {{
 	 *  publicToken: string,
 	 *  version: string,
+	 *  settingsURL: string,
 	 * }} options
 	 */
 	constructor(options) {
 		this.publicToken = options.publicToken;
 		this.version = options.version;
+		this.settingsURL = options.settingsURL;
 		document.addEventListener("click", (e) => {
 			if (e.target instanceof HTMLElement) {
 				if (
@@ -82,6 +85,16 @@ class FindkitAdminSearch {
 				}
 			`,
 			slots: {
+				Header: (props) => {
+					return html`
+						${props.children}
+						<a
+							href="${this.settingsURL}"
+							class="findkit--wp-admin-link findkit--hit-url findkit--link"
+							>Open Findkit WordPress Settings</a
+						>
+					`;
+				},
 				Hit(props) {
 					const wpAdminEditUrl = new URL(window.location.toString());
 

@@ -49,4 +49,9 @@ class Utils
 	{
 		return plugins_url('logo.svg', __DIR__);
 	}
+
+	static function get_findkit_settings_url()
+	{
+		return \admin_url('options-general.php?page=findkit_settings');
+	}
 }
