@@ -4,21 +4,16 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a
+class ComposerStaticInit3dbd55451118dd7cbe07b614331170ea
 {
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
-            'Firebase\\JWT\\' => 13,
             'Findkit\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Firebase\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
-        ),
         'Findkit\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -27,6 +22,8 @@ class ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Findkit\\AdminBar' => __DIR__ . '/../..' . '/src/AdminBar.php',
+        'Findkit\\AdminNotice' => __DIR__ . '/../..' . '/src/AdminNotice.php',
         'Findkit\\ApiClient' => __DIR__ . '/../..' . '/src/ApiClient.php',
         'Findkit\\JavaScriptGlobal' => __DIR__ . '/../..' . '/src/JavaScriptGlobal.php',
         'Findkit\\KeyPair' => __DIR__ . '/../..' . '/src/KeyPair.php',
@@ -37,21 +34,14 @@ class ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a
         'Findkit\\Settings\\Page' => __DIR__ . '/../..' . '/src/Settings/Page.php',
         'Findkit\\Settings\\Section' => __DIR__ . '/../..' . '/src/Settings/Section.php',
         'Findkit\\Utils' => __DIR__ . '/../..' . '/src/Utils.php',
-        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
-        'Firebase\\JWT\\CachedKeySet' => __DIR__ . '/..' . '/firebase/php-jwt/src/CachedKeySet.php',
-        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
-        'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
-        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
-        'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
-        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite6edfdf2708e6b3ac5c00f21425c990a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit3dbd55451118dd7cbe07b614331170ea::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit3dbd55451118dd7cbe07b614331170ea::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3dbd55451118dd7cbe07b614331170ea::$classMap;
 
         }, null, ClassLoader::class);
     }
