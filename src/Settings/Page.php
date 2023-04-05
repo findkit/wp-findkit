@@ -32,12 +32,25 @@ class Page
 				),
 			])
 			->add_field([
+				'name' => 'findkit_override_search_form',
+				'type' => 'checkbox',
+				'default' => '0',
+				'title' => __(
+					'Override the default frontend search form',
+					'findkit'
+				),
+				'description' => __(
+					'Looks for the default search form with role=search and replaces it with the Findkit search. Findkit Public Token must be defined. For more personalized search experience we recommend manually integrating the search interface to your theme. Please refer to the Findkit <a target="_blank" href="https://docs.findkit.com/ui/">documentation</a> for more information.',
+					'findkit'
+				),
+			])
+			->add_field([
 				'name' => 'findkit_enable_live_update',
 				'type' => 'checkbox',
 				'default' => '0',
 				'title' => __('Enable live update', 'findkit'),
 				'description' => __(
-					'Automatically update the search index when content is updated. Requires a Findkit API key.',
+					'Automatically update the search index when the content is updated. Requires a Findkit API key.',
 					'findkit'
 				),
 			])
@@ -131,7 +144,7 @@ class Page
 
             <p>
                 <?php _e( 'Findkit is a site search toolkit that helps your users find the right content on your website.', 'findkit'); ?>
-                <?php _e( 'See the Plugin documentation on <a target="_blank" href="https://findk.it/wp">here</a>.', 'findkit'); ?>
+                <?php _e( 'See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit'); ?>
             </p>
 
 			<?php $this->render_create_findkit_project_button(); ?>
