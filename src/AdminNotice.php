@@ -37,7 +37,7 @@ class AdminNotice
 
 	// prettier-ignore
 	function render_notice() {
-		$findkit_settings_url = \admin_url('options-general.php?page=findkit_settings');
+		$findkit_settings_url = Utils::get_findkit_settings_url();
 
 		?>
         <div class="notice">

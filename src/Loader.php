@@ -40,6 +40,7 @@ class Loader
 		(new RestApi())->bind();
 		(new PageMeta())->bind();
 		(new AdminNotice())->bind();
+		(new AdminBar())->bind();
 		(new LiveUpdate($this->api_client))->bind();
 		(new Settings\Page())->bind();
 	}
