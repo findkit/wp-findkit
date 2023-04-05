@@ -2,7 +2,7 @@
 
 ## Install
 
-Get zip file from [releases]](https://github.com/findkit/wp-findkit/releases/) or install using Composer
+Get zip file from [releases](https://github.com/findkit/wp-findkit/releases/) or install using Composer
 
 ```
 composer require findkit/wp-findkit
