@@ -86,14 +86,15 @@ class FindkitAdminSearch {
 			`,
 			slots: {
 				Header: (props) => {
+					// prettier-ignore
 					return html`
 						${props.children}
 						${this.settingsURL
-							? html` <a
-									href="${this.settingsURL}"
-									class="findkit--wp-admin-link findkit--hit-url findkit--link"
-									>Open Findkit WordPress Settings</a
-							  >`
+							? html`
+								<a href="${this.settingsURL}"
+									class="findkit--wp-admin-link findkit--hit-url findkit--link">
+									Open Findkit WordPress Settings
+								</a>`
 							: null}
 					`;
 				},
@@ -107,14 +108,13 @@ class FindkitAdminSearch {
 						props.hit.url,
 					);
 
+					// prettier-ignore
 					return html`
 						${props.children}
-
-						<a
-							href="${wpAdminEditUrl.toString()}"
-							class="findkit--wp-admin-link findkit--hit-url findkit--link"
-							>Edit in WP Admin</a
-						>
+						<a href="${wpAdminEditUrl.toString()}"
+							class="findkit--wp-admin-link findkit--hit-url findkit--link">
+							Edit in WP Admin
+						</a>
 					`;
 				},
 			},
