@@ -80,6 +80,7 @@ class Page
 		]);
 	}
 
+	// prettier-ignore
 	function render_hub_link()
 	{
 		$project_id = \get_option('findkit_project_id');
@@ -89,24 +90,37 @@ class Page
 
 		$hub_url = "https://hub.findkit.com/p/$project_id";
 		?>
-                <h2>
-                    <?php _e('Findkit Hub', 'findkit'); ?>
-                </h2>
+			<h2>
+				<?php _e('Findkit Hub', 'findkit'); ?>
+			</h2>
 
-                <p>
-                    <?php _e(
-                    	'The Findkit Project is managed in the Findkit Hub. You can access the Findkit Hub by clicking the button below.',
-                    	'findkit'
-                    ); ?>
-                </p>
-                <p>
-                    <a href="<?php echo $hub_url; ?>" target="_blank" class="button button-primary">
-						<?php _e('Open Project in Findkit Hub', 'findkit'); ?>
-                    </a>
-                </p>
+			<p>
+				<?php _e( 'The Findkit Project is managed in the Findkit Hub. You can access the Findkit Hub by clicking the button below.', 'findkit'); ?>
+			</p>
+			<p>
+				<a href="<?php echo $hub_url; ?>" target="_blank" class="button button-primary">
+					<?php _e('Open Project in Findkit Hub', 'findkit'); ?>
+				</a>
+			</p>
         <?php
 	}
 
+	// prettier-ignore
+	function render_search_button()
+	{
+		$project_id = \get_option('findkit_project_id');
+		if (!$project_id) {
+			return;
+		}
+
+		?>
+			<button type="button" class="findkit-admin-search button button-primary">
+				<?php _e('Open Findkit Search', 'findkit'); ?>
+			</button>
+        <?php
+	}
+
+	// prettier-ignore
 	function render_create_findkit_project_button()
 	{
 		if (\get_option('findkit_project_id')) {
@@ -120,10 +134,7 @@ class Page
                 </h2>
 
                 <p>
-                    <?php _e(
-                    	' To get started, you need to create a project in the Findkit Hub.',
-                    	'findkit'
-                    ); ?>
+                    <?php _e( ' To get started, you need to create a project in the Findkit Hub.', 'findkit'); ?>
                 </p>
                 <p>
                     <a href="<?php echo $hub_url; ?>" target="_blank" class="button button-primary">
@@ -147,6 +158,7 @@ class Page
                 <?php _e( 'See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit'); ?>
             </p>
 
+			<?php $this->render_search_button(); ?>
 			<?php $this->render_create_findkit_project_button(); ?>
 			<?php $this->render_hub_link(); ?>
 

@@ -11,13 +11,17 @@ class FindkitSearchFormOverride {
 	 */
 	uiPromise = undefined;
 
+	version = "";
+
 	/**
 	 * @param {{
 	 *  publicToken: string,
+	 *  version: string,
 	 * }} options
 	 */
 	constructor(options) {
 		this.publicToken = options.publicToken;
+		this.version = options.version;
 		document.addEventListener("DOMContentLoaded", () => {
 			this.onDomReady();
 		});
@@ -36,12 +40,12 @@ class FindkitSearchFormOverride {
 	async initFindkitUI() {
 		const { FindkitUI } = await import(
 			// @ts-ignore
-			"https://cdn.findkit.com/ui/v0.1.1/esm/index.js"
+			`https://cdn.findkit.com/ui/v${this.version}/esm/index.js`
 		);
 
 		const ui = new FindkitUI({
 			publicToken: this.publicToken,
-			instanceId: "wp-override",
+			instanceId: "findkit_wp_override",
 		});
 
 		ui.preload();

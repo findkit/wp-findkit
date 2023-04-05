@@ -19,6 +19,56 @@ class JavaScriptGlobal
 			// @findkit/ui library loads
 			-10
 		);
+
+		add_action(
+			'admin_head',
+			[$this, '__action_admin_head'],
+			// This should be very early so it is available before the
+			// @findkit/ui library loads
+			-10
+		);
+
+		add_action('admin_init', [$this, '__action_handle_edit_redirect']);
+	}
+
+	function __action_handle_edit_redirect()
+	{
+		if (empty($_GET['findkit_edit_redirect'])) {
+			return;
+		}
+
+		$url = $_GET['findkit_edit_redirect'];
+
+		// Handle site.example/?p=123 style urls
+		$parsed = parse_url($url);
+		if (!empty($parsed['query'])) {
+			$qs = parse_str($parsed['query']);
+			if (!empty($qs['p'])) {
+				$this->redirect_to_post_id($qs['p']);
+			}
+		}
+
+		$this->redirect_to_post_id(url_to_postid($url));
+	}
+
+	function redirect_to_post_id($post_id)
+	{
+		if (!get_post($post_id)) {
+			http_response_code(404);
+			printf(
+				'No post found for %s',
+				esc_html($_GET['findkit_edit_redirect'])
+			);
+
+			echo '<p><a onclick="history.back()" href="#">Go back</a></p>';
+
+			die();
+		}
+
+		wp_redirect(
+			get_site_url() . "/wp-admin/post.php?post=${post_id}&action=edit"
+		);
+		die();
 	}
 
 	function render_js_module_script(string $filename, ?string $extra_js)
@@ -76,6 +126,38 @@ class JavaScriptGlobal
 				'new FindkitSearchFormOverride(%s);',
 				wp_json_encode([
 					'publicToken' => $public_token,
+					'version' => $this->get_findkit_ui_version(),
+				])
+			)
+		);
+	}
+
+	function get_findkit_ui_version()
+	{
+		$version = get_option('findkit_ui_version');
+
+		if (!$version) {
+			return '0.2.3';
+		}
+
+		return $version;
+	}
+
+	function admin_search()
+	{
+		$public_token = get_option('findkit_project_id');
+
+		if (!$public_token) {
+			return;
+		}
+
+		$this->render_js_module_script(
+			'admin-search.js',
+			sprintf(
+				'new FindkitAdminSearch(%s);',
+				wp_json_encode([
+					'publicToken' => $public_token,
+					'version' => $this->get_findkit_ui_version(),
 				])
 			)
 		);
@@ -85,5 +167,10 @@ class JavaScriptGlobal
 	{
 		$this->enable_jwt();
 		$this->override_default_search_form();
+	}
+
+	function __action_admin_head()
+	{
+		$this->admin_search();
 	}
 }
