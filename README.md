@@ -1,5 +1,7 @@
 # Findkit WordPress Plugin
 
+See [findkit.com](https://findkit.com/) and [docs.findkit.com](https://docs.findkit.com/).
+
 ## Install
 
 Get zip file from [releases](https://github.com/findkit/wp-findkit/releases/) or install using Composer
