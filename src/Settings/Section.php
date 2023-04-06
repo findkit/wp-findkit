@@ -79,7 +79,10 @@ class Section
 
 	function render_input(array $field)
 	{
+		// Intentionally allowing html in the description
 		$description = $field['description'] ?? '';
+		$placeholder = esc_attr($field['placeholder'] ?? '');
+		$disabled = $field['disabled'] ?? false;
 		$type = $field['type'] ?? 'input';
 		$rows = $field['rows'] ?? '25';
 		$option = $field['name'];
@@ -87,6 +90,8 @@ class Section
 		if ($type === 'input') { ?>
             <input
                 type="text"
+                <?php echo $disabled ? 'disabled' : ''; ?>
+                <?php echo $placeholder ? "placeholder='$placeholder'" : ''; ?>
                 name="<?php echo esc_attr($option); ?>"
                 id="<?php echo esc_attr($this->get_id($field)); ?>"
                 value="<?php echo get_option($option, ''); ?>"

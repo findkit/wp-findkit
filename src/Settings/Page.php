@@ -70,6 +70,10 @@ class Page
 				'default' => '',
 				'title' => __('Findkit API Key', 'findkit'),
 				'description' => __('Used for the live update', 'findkit'),
+				'disabled' => defined('FINDKIT_API_KEY'),
+				'placeholder' => defined('FINDKIT_API_KEY')
+					? __('Defined in wp-config.php', 'findkit')
+					: '',
 			]);
 
 		\add_action('admin_menu', [$this, '__action_admin_menu']);
