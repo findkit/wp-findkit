@@ -90,6 +90,7 @@ class Section
 		if ($type === 'input') { ?>
             <input
                 type="text"
+                style="width: 100%"
                 <?php echo $disabled ? 'disabled' : ''; ?>
                 <?php echo $placeholder ? "placeholder='$placeholder'" : ''; ?>
                 name="<?php echo esc_attr($option); ?>"
