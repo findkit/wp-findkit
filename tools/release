@@ -45,6 +45,7 @@ if [ "$(git status . --porcelain)" != "" ]; then
 fi
 
 >&2 echo "Syncing public and origin remotes"
+>&2 echo
 
 git push public HEAD:$upstream_branch
 git push origin HEAD:$upstream_branch
@@ -67,6 +68,7 @@ version_file=plugin.php
 
 current_version="$(cat $version_file | sed -En 's/.*Version: ([^ ]*)/\1/p')"
 
+echo
 echo "Current version is: $current_version"
 
 read -p "New version> " new_version
