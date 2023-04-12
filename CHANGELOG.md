@@ -7,6 +7,5 @@
 - Fix domain [a9ae4fc](https://github.com/findkit/wp-findkit/commit/a9ae4fc) - Esa-Matti Suuronen
 - 100% width settings inputs [0cec7f7](https://github.com/findkit/wp-findkit/commit/0cec7f7) - Esa-Matti Suuronen
 - Disable api key setting if defined in wp-config [680119e](https://github.com/findkit/wp-findkit/commit/680119e) - Esa-Matti Suuronen
-- docs [2ddf0e3](https://github.com/findkit/wp-findkit/commit/2ddf0e3) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.1.1...v0.1.2
