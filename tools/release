@@ -127,4 +127,12 @@ if [ "$(git status . --porcelain)" != "" ]; then
     git push origin HEAD:$upstream_branch
     git push public HEAD:$upstream_branch
     git push public HEAD:release/$new_version
+
+    >&2 echo ""
+    >&2 echo "Release triggered in Github Actions."
+    >&2 echo "Pull in the changes once it is ready and push to origin too"
+    >&2 echo ""
+    >&2 echo "     git pull public $upstream_branch"
+    >&2 echo "     git push origin $upstream_branch"
+    >&2 echo "     git push origin --tags"
 fi
