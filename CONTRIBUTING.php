@@ -1,5 +1,5 @@
 
-## Creating release
+## Creating releases
 
 Run
 
