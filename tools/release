@@ -131,8 +131,7 @@ if [ "$(git status . --porcelain)" != "" ]; then
     >&2 echo ""
     >&2 echo "Release triggered in Github Actions."
     >&2 echo "Pull in the changes once it is ready and push to origin too"
+    >&2 echo "Or use this script:"
     >&2 echo ""
-    >&2 echo "     git pull public $upstream_branch"
-    >&2 echo "     git push origin $upstream_branch"
-    >&2 echo "     git push origin --tags"
+    >&2 echo "     ./tools/sync-remotes"
 fi

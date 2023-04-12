@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+upstream_branch="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} | cut -d / -f 2)"
+
+set -x
+git pull public $upstream_branch
+git push public $upstream_branch:$upstream_branch
+git push origin $upstream_branch:$upstream_branch
