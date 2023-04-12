@@ -38,7 +38,8 @@ add_filter('findkit_page_meta', function ($meta, $post) {
 
 ## Live Update
 
-The plugin can automatically trigger near instant recrawls as pages are edited.
+The plugin can automatically trigger near instant recrawls as pages are being
+created/edited/deleted. Enable live update in the plugin settings.
 
 ## JWT Authentication
 
