@@ -1,15 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
-project="findkit/wp-findkit"
-version_file="plugin.php"
 
 set -eu
+set -o pipefail
 
 help() {
     >&2 echo "
-    Create new release. Creates git tag and github release
+    Update change and trigger new release in GitHub Actions
     "
 }
+
+repo="$(git remote get-url public | sed -nre 's/git@github\.com:(.+)\.git/\1/p')"
 
 if [ "${1:-}" = "-h" -o "${1:-}" = "--help" ]; then
     help
@@ -26,12 +27,40 @@ if [ "$(git status . --porcelain)" != "" ]; then
     exit 1
 fi
 
+
+
 if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then
+    echo
     echo "Not on the main branch"
+    echo
     exit 2
 fi
 
-git push public main:main
+if [ "$(git status . --porcelain)" != "" ]; then
+    echo
+    echo "Dirty git. Commit changes"
+    echo
+    exit 1
+fi
+
+git fetch public
+git fetch origin
+
+if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+    echo
+    echo "Repository not up to date with origin/main. Do your git push/pull/rebase dance"
+    echo
+    exit 1
+fi
+
+if [ "$(git rev-parse HEAD)" != "$(git rev-parse public/main)" ]; then
+    echo
+    echo "Repository not up to date with public/main. Do your git push/pull/rebase dance"
+    echo
+    exit 1
+fi
+
+version_file=plugin.php
 
 current_version="$(cat $version_file | sed -En 's/.*Version: ([^ ]*)/\1/p')"
 
@@ -39,30 +68,56 @@ echo "Current version is: $current_version"
 
 read -p "New version> " new_version
 
+if [ "$new_version" = "" ]; then
+    echo "Bad version"
+    exit 1
+fi
 
-sed -E -i  "" "s/(.*Version:) .*/\1 ${new_version}/" $version_file
 
-rm -rf composer.lock vendor/
-composer dump-autoload
+prev_tag="$(git describe --abbrev=0 --match "v*" || true)"
+next_tag="v$new_version"
 
-git add "$version_file"  vendor
-git commit -m "Release v${new_version}"
-git tag -a "v${new_version}" -m "Release v${new_version}"
+tmp_changelog=changelog_entry.md
 
-git push public main:main
-git push public --tags
-git push public main:stable -f
+echo "## v$new_version" > "$tmp_changelog"
+echo >> "$tmp_changelog"
+date +'%Y-%m-%d' >> "$tmp_changelog"
+echo >> "$tmp_changelog"
+git log --format="-   %s [%h](https://github.com/${repo}/commit/%h) - %an" HEAD...$prev_tag . >> "$tmp_changelog"
+echo >> "$tmp_changelog"
+echo "All changes https://github.com/${repo}/compare/${prev_tag}...${next_tag}" >> "$tmp_changelog"
+echo >> "$tmp_changelog"
 
-range="v${new_version}...v${current_version}"
+if [ -f CHANGELOG.md ]; then
+    cat CHANGELOG.md >> $tmp_changelog
+fi
 
-echo
-echo
-git log --format='  - %s %h' $range | sed 1,1d
-echo
-echo
-echo "All changes https://github.com/${project}/compare/${range}"
-echo
-echo
+mv $tmp_changelog CHANGELOG.md
 
-set -x
-open "https://github.com/${project}/releases/new?title=v${new_version}&tag=v${new_version}"
+while true; do
+    echo
+    echo
+    echo "----------------------------------------------------------------------"
+    git diff
+    echo "----------------------------------------------------------------------"
+    echo
+    echo
+    echo "👆 The CHANGELOG.md file was updated automatically."
+    echo
+    echo "Type 'e' to edit in vscode and 'c' to commit and continue"
+    read -p "> " changelog_mode
+
+    if [ "$changelog_mode" = "e" ]; then
+        code CHANGELOG.md
+    fi
+
+    if [ "$changelog_mode" = "c" ]; then
+        break
+    fi
+done
+
+# if [ "$(git status . --porcelain)" != "" ]; then
+#     git add CHANGELOG.md
+#     git commit -m "Update changelog for $pkg v$new_version"
+#     git push $remote $upstream_branch:$upstream_branch
+# fi

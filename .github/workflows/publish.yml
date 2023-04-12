@@ -14,10 +14,8 @@ jobs:
     # if: ${{ github.event.repository.full_name == 'findkit/wp-findkit' }}
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
         with:
-          node-version: "16.x"
-
+          fetch-depth: 0
       - uses: valu-digital/slack-action@master
         with:
           token: ${{ secrets.SLACK_ACCESS_TOKEN }}
@@ -25,8 +23,59 @@ jobs:
 
       - name: Update version number and tag
         run: |
+          set -eu
+          set -x
           echo "$GITHUB_REF"
-          exit 3
+          next_version=$(echo "$GITHUB_REF" | cut -d / -f 4)
+          echo "version:$next_version"
+
+          next_tag="v$next_version"
+
+          prev_tag="$(git describe --abbrev=0 --match "v*" || true)"
+          prev_version=$(echo "$prev_tag" | sed -E "s/v([0-9\.]+)\$/\1/")
+
+          echo "prev_version:$prev_version"
+
+          link_ver="$(echo $next_version | tr -cd '[:alnum:]')"
+          changelog_link="https://github.com/${GITHUB_REPOSITORY}/blob/${{ github.event.repository.default_branch }}/CHANGELOG.md#v${link_ver}"
+
+          if [ "$next_version" = "$prev_version" ]; then
+            echo "Cannot release $prev_version again"
+            exit 9
+          fi
+
+          sed -E -i "s/(.*Version:) .*/\1 ${next_version}/" plugin.php
+
+          git config user.email "action@github.com"
+          git config user.name "${{ github.actor }}"
+          git add plugin.php
+          git commit -m "Bump version number to v${next_version}"
+          git tag -a "$next_tag" -m "v$next_version"
+
+          git push origin HEAD:${{ github.event.repository.default_branch }}
+          git push origin --tags
+
+          echo "next_version=$next_version" >> $GITHUB_ENV
+          echo "next_tag=$next_tag" >> $GITHUB_ENV
+          echo "changelog_link=$changelog_link" >> $GITHUB_ENV
+
+      - name: Create Github Release entry for STABLE release
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let body = `Changelog ${process.env.changelog_link}\n\n`;
+            body += 'by @${{ github.actor }}\n\n';
+
+            await github.rest.repos.createRelease({
+              draft: false,
+              body,
+              generate_release_notes: false,
+              name: process.env.next_tag,
+              owner: context.repo.owner,
+              prerelease: false,
+              repo: context.repo.repo,
+              tag_name: process.env.next_tag,
+            });
 
       - name: Notify publish fail
         if: failure()
