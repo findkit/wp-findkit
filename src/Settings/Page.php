@@ -95,7 +95,6 @@ class Page
 		]);
 
 		$url = "https://hub.findkit.com/p/$project_id?$qs";
-		$url = "http://localhost:3000/p/$project_id?$qs";
 
 		return ' ' .
 			sprintf(
