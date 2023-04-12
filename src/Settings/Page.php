@@ -69,7 +69,9 @@ class Page
 				'type' => 'input',
 				'default' => '',
 				'title' => __('Findkit API Key', 'findkit'),
-				'description' => __('Used for the live update', 'findkit'),
+				'description' =>
+					__('Used for the live update.', 'findkit') .
+					$this->get_apikeys_link_description(),
 				'disabled' => defined('FINDKIT_API_KEY'),
 				'placeholder' => defined('FINDKIT_API_KEY')
 					? __('Defined in wp-config.php', 'findkit')
@@ -77,6 +79,32 @@ class Page
 			]);
 
 		\add_action('admin_menu', [$this, '__action_admin_menu']);
+	}
+
+	function get_apikeys_link_description()
+	{
+		$project_id = \get_option('findkit_project_id');
+
+		if (!$project_id) {
+			return;
+		}
+
+		$domain = Utils::get_domain();
+		$qs = http_build_query([
+			'apikey' => "Live update key for $domain",
+		]);
+
+		$url = "https://hub.findkit.com/p/$project_id?$qs";
+		$url = "http://localhost:3000/p/$project_id?$qs";
+
+		return ' ' .
+			sprintf(
+				__(
+					'You can create the API key in the <a target="_blank" href="%s">Findkit project settings in the Findkit Hub</a>.',
+					'findkit'
+				),
+				$url
+			);
 	}
 
 	function add_section($section_name, $options): Section
