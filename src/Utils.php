@@ -34,15 +34,19 @@ class Utils
 		return preg_replace('/__trashed\/\z/', '/', $url);
 	}
 
+	static function get_domain()
+	{
+		return parse_url(get_site_url())['host'];
+	}
+
 	static function generate_new_project_url()
 	{
-		$site_domain = parse_url(get_site_url())['host'];
 		$site_name = get_bloginfo('name');
 		$qs = http_build_query([
-			'domain' => $site_domain,
+			'domain' => Utils::get_domain(),
 			'name' => $site_name,
 		]);
-		return 'https://hub-next.findkit.com/new-project?' . $qs;
+		return 'https://hub.findkit.com/new-project?' . $qs;
 	}
 
 	static function get_logo_url()
