@@ -36,12 +36,9 @@ add_filter('findkit_page_meta', function ($meta, $post) {
 }, 10, 2);
 ```
 
-## API Keys
+## Live Update
 
-Api keys are used to trigger crawls from the WordPress itself.
-For example pages can be live updated as their edits are published.
-
-TODO.....
+The plugin can automatically trigger near instant recrawls as pages are edited.
 
 ## JWT Authentication
 
