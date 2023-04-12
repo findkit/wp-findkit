@@ -86,7 +86,14 @@ class Page
 		$project_id = \get_option('findkit_project_id');
 
 		if (!$project_id) {
-			return;
+			return ' ' .
+				sprintf(
+					__(
+						'You can create the API key in the Findkit Hub once you have created the Findkit Project.',
+						'findkit'
+					),
+					$url
+				);
 		}
 
 		$domain = Utils::get_domain();
