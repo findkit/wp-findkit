@@ -11,7 +11,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    # if: ${{ github.event.repository.full_name == 'findkit/wp-findkit' }}
+    if: ${{ github.event.repository.full_name == 'findkit/wp-findkit' }}
     steps:
       - uses: actions/checkout@v3
         with:
