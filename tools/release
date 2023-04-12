@@ -44,8 +44,10 @@ if [ "$(git status . --porcelain)" != "" ]; then
     exit 1
 fi
 
-git fetch public
-git fetch origin
+>&2 echo "Syncing public and origin remotes"
+
+git push public HEAD:$upstream_branch
+git push origin HEAD:$upstream_branch
 
 if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/$upstream_branch)" ]; then
     echo
