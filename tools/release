@@ -11,7 +11,7 @@ help() {
 }
 
 repo="$(git remote get-url public | sed -nre 's/git@github\.com:(.+)\.git/\1/p')"
-upstream_branch="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} | cut -d / -f 2)"
+upstream_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 
 if [ "${1:-}" = "-h" -o "${1:-}" = "--help" ]; then
     help
@@ -22,13 +22,6 @@ if [ "$(uname)" != "Darwin" ]; then
     echo "Sorry, this script only works on macOS for now."
     exit 1
 fi
-
-if [ "$(git status . --porcelain)" != "" ]; then
-    echo "Dirty git. Commit changes"
-    exit 1
-fi
-
-
 
 if [ "$(git rev-parse --abbrev-ref HEAD)" != "$upstream_branch" ]; then
     echo

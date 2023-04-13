@@ -3,7 +3,7 @@
 set -eu
 set -o pipefail
 
-upstream_branch="$(git rev-parse --abbrev-ref --symbolic-full-name @{u} | cut -d / -f 2)"
+upstream_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 
 set -x
 git pull public $upstream_branch
