@@ -18,6 +18,13 @@ if [ "${1:-}" = "-h" -o "${1:-}" = "--help" ]; then
     exit 1
 fi
 
+if ! git remote | grep -q "public"; then
+    echo
+    echo "No public remote found"
+    echo
+    exit 1
+fi
+
 if [ "$(uname)" != "Darwin" ]; then
     echo "Sorry, this script only works on macOS for now."
     exit 1
