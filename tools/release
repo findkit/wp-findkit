@@ -6,7 +6,7 @@ set -o pipefail
 
 help() {
     >&2 echo "
-    Update change and trigger new release in GitHub Actions
+    Update version number, changelog and trigger new release in GitHub Actions
     "
 }
 
