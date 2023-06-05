@@ -40,7 +40,12 @@ class Section
 			return;
 		}
 
-		\add_settings_section($this->section, $this->title, null, $this->page);
+		\add_settings_section(
+			$this->section,
+			$this->title,
+			function () {},
+			$this->page
+		);
 
 		foreach ($this->fields as $field) {
 			\register_setting($this->page, $field['name']);

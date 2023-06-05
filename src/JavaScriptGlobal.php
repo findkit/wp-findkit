@@ -42,7 +42,7 @@ class JavaScriptGlobal
 		// Handle site.example/?p=123 style urls
 		$parsed = parse_url($url);
 		if (!empty($parsed['query'])) {
-			$qs = parse_str($parsed['query']);
+			parse_str($parsed['query'], $qs);
 			if (!empty($qs['p'])) {
 				$this->redirect_to_post_id($qs['p']);
 			}

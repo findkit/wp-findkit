@@ -46,7 +46,7 @@ class PageMeta
 	/**
 	 * Return Findkit PageMeta for the given post
 	 */
-	static function get(\WP_post $post)
+	static function get(\WP_Post $post)
 	{
 		$public = $post->post_status === 'publish';
 
