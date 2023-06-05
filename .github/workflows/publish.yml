@@ -16,15 +16,25 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - uses: valu-digital/slack-action@master
         with:
           token: ${{ secrets.SLACK_ACCESS_TOKEN }}
           channel: "${{ secrets.SLACK_CHANNEL }}"
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
       - name: Update version number and tag
         run: |
           set -eu
           set -x
+
+          git config user.email "action@github.com"
+          git config user.name "${{ github.actor }}"
+
           echo "$GITHUB_REF"
           next_version=$(echo "$GITHUB_REF" | cut -d / -f 4)
           echo "version:$next_version"
@@ -44,12 +54,16 @@ jobs:
             exit 9
           fi
 
-          sed -E -i "s/(.*Version:) .*/\1 ${next_version}/" plugin.php
+          composer install --no-dev --optimize-autoloader
+          if [ "$(git status --porcelain)" != "" ]; then
+            git add .
+            git commit -m "Composer production install"
+          fi
 
-          git config user.email "action@github.com"
-          git config user.name "${{ github.actor }}"
+          sed -E -i "s/(.*Version:) .*/\1 ${next_version}/" plugin.php
           git add plugin.php
           git commit -m "Bump version number to v${next_version}"
+
           git tag -a "$next_tag" -m "v$next_version"
 
           git push origin HEAD:${{ github.event.repository.default_branch }}
