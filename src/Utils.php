@@ -22,8 +22,7 @@ class Utils
 		$clone->post_status = 'publish';
 		// post_name might not be available yet
 		$clone->post_name = sanitize_title(
-			$clone->post_name ? $clone->post_name : $clone->post_title,
-			$clone->ID
+			$clone->post_name ? $clone->post_name : $clone->post_title
 		);
 
 		return self::clean_trashed_post_name(get_permalink($clone));

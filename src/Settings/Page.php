@@ -9,12 +9,6 @@ use Findkit\Utils;
 class Page
 {
 	private $page = 'findkit_settings';
-	private $sections = null;
-
-	function __construct()
-	{
-		$this->sections = [];
-	}
 
 	function bind()
 	{
@@ -91,8 +85,7 @@ class Page
 					__(
 						'You can create the API key in the Findkit Hub once you have created the Findkit Project.',
 						'findkit'
-					),
-					$url
+					)
 				);
 		}
 
@@ -115,9 +108,7 @@ class Page
 
 	function add_section($section_name, $options): Section
 	{
-		$section = new Section($this->page, $section_name, $options);
-		$this->sections[] = $section;
-		return $section;
+		return new Section($this->page, $section_name, $options);
 	}
 
 	function __action_admin_menu()
