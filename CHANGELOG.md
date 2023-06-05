@@ -1,24 +1,3 @@
-## v0.1.3
-
-2023-06-05
-
-
-All changes https://github.com/findkit/wp-findkit/compare/...v0.1.3
-
-## v0.1.3
-
-2023-06-05
-
-
-All changes https://github.com/findkit/wp-findkit/compare/...v0.1.3
-
-## v0.1.3
-
-2023-06-05
-
-
-All changes https://github.com/findkit/wp-findkit/compare/...v0.1.3
-
 ## v0.1.2
 
 2023-04-12
