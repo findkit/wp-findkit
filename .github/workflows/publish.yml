@@ -8,7 +8,7 @@ on:
     branches:
       - "release/*"
 jobs:
-  test:
+  publish:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     if: ${{ github.event.repository.full_name == 'findkit/wp-findkit' }}
@@ -88,7 +88,6 @@ jobs:
               tag_name: process.env.next_tag,
             });
 
-            console.log("release", release.data.id)
             core.exportVariable("RELEASE_ID", release.data.id)
 
       - name: Make release zip
