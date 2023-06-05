@@ -1,3 +1,24 @@
+## v0.1.4
+
+2023-06-05
+
+- Use PHPStan to validate code
+- Fix PHP notices reported by PHPStan
+- Fix invalid url generation on wp-admin
+- Remove `vendor` from git
+- Upload a custom zip file with `vendor` to Github Releases
+- Fix composer autoload due to "finkdit" typo
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.3...v0.1.4
+
+## v0.1.3
+
+2023-06-05
+
+Broken release.
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.2...v0.1.3
+
 ## v0.1.2
 
 2023-04-12
