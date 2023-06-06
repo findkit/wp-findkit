@@ -43,7 +43,12 @@ class AdminNotice
         <div class="notice">
             <p>
 		        <img style='height: 20px; margin-right: 10px' src='<?php echo esc_attr( Utils::get_logo_url()); ?>' alt='Findkit' />
-                <?php printf( __( 'Findkit Plugin activated. Configure the plugin on the <a href="%s">settings page</a>.', 'findkit'), $findkit_settings_url); ?>
+				<?php
+					printf(
+						wp_kses_post( __( 'Findkit Plugin activated. Configure the plugin on the <a href="%s">settings page</a>.', 'findkit') ),
+						esc_url( $findkit_settings_url )
+					);
+				?>
             </p>
         </div>
         <?php

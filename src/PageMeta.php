@@ -28,6 +28,7 @@ class PageMeta
 			return;
 		}
 
+		// phpcs:ignore
 		echo "<script type='application/json' id='findkit'>$json</script>";
 	}
 
