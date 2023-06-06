@@ -130,15 +130,15 @@ class Page
 		$hub_url = "https://hub.findkit.com/p/$project_id";
 		?>
 			<h2>
-				<?php _e('Findkit Hub', 'findkit'); ?>
+				<?php esc_html_e('Findkit Hub', 'findkit'); ?>
 			</h2>
 
 			<p>
-				<?php _e( 'The Findkit Project is managed in the Findkit Hub. You can access the Findkit Hub by clicking the button below.', 'findkit'); ?>
+				<?php esc_html_e( 'The Findkit Project is managed in the Findkit Hub. You can access the Findkit Hub by clicking the button below.', 'findkit'); ?>
 			</p>
 			<p>
-				<a href="<?php echo $hub_url; ?>" target="_blank" class="button button-primary">
-					<?php _e('Open Project in Findkit Hub', 'findkit'); ?>
+				<a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button button-primary">
+					<?php esc_html_e('Open Project in Findkit Hub', 'findkit'); ?>
 				</a>
 			</p>
         <?php
@@ -154,7 +154,7 @@ class Page
 
 		?>
 			<button type="button" class="findkit-admin-search button button-primary">
-				<?php _e('Open Findkit Search', 'findkit'); ?>
+				<?php esc_html_e('Open Findkit Search', 'findkit'); ?>
 			</button>
         <?php
 	}
@@ -169,15 +169,15 @@ class Page
 		$hub_url = \Findkit\Utils::generate_new_project_url();
 		?>
                 <h2>
-                    <?php _e('Create Findkit Project', 'findkit'); ?>
+                    <?php esc_html_e('Create Findkit Project', 'findkit'); ?>
                 </h2>
 
                 <p>
-                    <?php _e( ' To get started, you need to create a project in the Findkit Hub.', 'findkit'); ?>
+                    <?php esc_html_e( ' To get started, you need to create a project in the Findkit Hub.', 'findkit'); ?>
                 </p>
                 <p>
-                    <a href="<?php echo $hub_url; ?>" target="_blank" class="button button-primary">
-						<?php _e('Create Findkit Project', 'findkit'); ?>
+                    <a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button button-primary">
+						<?php esc_html_e('Create Findkit Project', 'findkit'); ?>
                     </a>
                 </p>
         <?php
@@ -190,11 +190,11 @@ class Page
 
 		?>
 		<div class="wrap">
-			<img alt="<?php _e( 'Findkit Settings', 'findkit'); ?>" style='height: 50px; margin-top: 10px; margin-bottom: 20px;' src='<?php echo $logo_url; ?>' alt='Findkit' />
+			<img alt="<?php esc_html_e( 'Findkit Settings', 'findkit'); ?>" style='height: 50px; margin-top: 10px; margin-bottom: 20px;' src='<?php echo esc_url($logo_url); ?>' alt='Findkit' />
 
             <p>
-                <?php _e( 'Findkit is a site search toolkit that helps your users find the right content on your website.', 'findkit'); ?>
-                <?php _e( 'See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit'); ?>
+                <?php esc_html_e( 'Findkit is a site search toolkit that helps your users find the right content on your website.', 'findkit'); ?>
+                <?php esc_html_e( 'See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit'); ?>
             </p>
 
 			<?php $this->render_search_button(); ?>

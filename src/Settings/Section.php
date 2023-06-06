@@ -84,9 +84,8 @@ class Section
 
 	function render_input(array $field)
 	{
-		// Intentionally allowing html in the description
 		$description = $field['description'] ?? '';
-		$placeholder = esc_attr($field['placeholder'] ?? '');
+		$placeholder = $field['placeholder'] ?? '';
 		$disabled = $field['disabled'] ?? false;
 		$type = $field['type'] ?? 'input';
 		$rows = $field['rows'] ?? '25';
@@ -97,10 +96,14 @@ class Section
                 type="text"
                 style="width: 100%"
                 <?php echo $disabled ? 'disabled' : ''; ?>
-                <?php echo $placeholder ? "placeholder='$placeholder'" : ''; ?>
+				<?php if ($placeholder) {
+					echo "placeholder='";
+					echo esc_attr($placeholder);
+					echo "'";
+				} ?>
                 name="<?php echo esc_attr($option); ?>"
                 id="<?php echo esc_attr($this->get_id($field)); ?>"
-                value="<?php echo get_option($option, ''); ?>"
+                value="<?php echo esc_attr( get_option($option, '') ); ?>"
 
             />
         <?php } elseif ($type === 'textarea') { ?>
@@ -113,7 +116,7 @@ class Section
                 name="<?php echo esc_attr($option); ?>"
                 value=""
 
-            ><?php echo get_option($option, ''); ?></textarea>
+            ><?php echo esc_textarea( get_option($option, '') ); ?></textarea>
 
             <?php } elseif ($type === 'checkbox') { ?>
 
@@ -128,7 +131,12 @@ class Section
 		?>
 
 		<p class="description">
-			<?php echo $description; ?>
+			<?php
+				// description can contain html intentionally
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo $description;
+			?>
+
 			<sub>(<?php echo esc_html($option); ?>)</sub>
 		</p>
 		<?php

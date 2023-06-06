@@ -33,11 +33,11 @@ class JavaScriptGlobal
 
 	function __action_handle_edit_redirect()
 	{
-		if (empty($_GET['findkit_edit_redirect'])) {
+		$url = filter_input(INPUT_GET, 'findkit_edit_redirect', FILTER_SANITIZE_URL);
+
+		if (empty($url)) {
 			return;
 		}
-
-		$url = $_GET['findkit_edit_redirect'];
 
 		// Handle site.example/?p=123 style urls
 		$parsed = parse_url($url);
@@ -53,11 +53,12 @@ class JavaScriptGlobal
 
 	function redirect_to_post_id($post_id)
 	{
+		$url = filter_input(INPUT_GET, 'findkit_edit_redirect', FILTER_SANITIZE_URL);
 		if (!get_post($post_id)) {
 			http_response_code(404);
 			printf(
 				'No post found for %s',
-				esc_html($_GET['findkit_edit_redirect'])
+				esc_url($url)
 			);
 
 			echo '<p><a onclick="history.back()" href="#">Go back</a></p>';
@@ -77,6 +78,7 @@ class JavaScriptGlobal
 		echo '<script type="module">';
 		readfile(__DIR__ . '/' . $filename);
 		if ($extra_js) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			echo $extra_js;
 		}
 		echo '</script>';
