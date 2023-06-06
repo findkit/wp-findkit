@@ -20,3 +20,6 @@ jobs:
 
       - name: Run phpstan
         run: composer phpstan
+
+      - name: Run php code sniffer
+        run: composer phpcs
