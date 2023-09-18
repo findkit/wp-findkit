@@ -67,6 +67,18 @@ class LiveUpdate
 			return;
 		}
 
+		// Gutenberg fires transition_post_status twice when saving a post.
+		// Once to /wp-admin/post.php and once to the REST API. Ignore the
+		// former to avoid duplicate live updates. We cannot ignore the latter
+		// because then we would ignore legit standalone updates via REST API.
+		$is_rest_request = defined('REST_REQUEST') && REST_REQUEST;
+		if (
+			!$is_rest_request &&
+			\use_block_editor_for_post_type($post->post_type)
+		) {
+			return;
+		}
+
 		// Revision are not public
 		if (\wp_is_post_revision($post)) {
 			return;
