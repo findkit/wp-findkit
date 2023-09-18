@@ -4,7 +4,7 @@
  * Plugin Name: Findkit.com
  * Plugin URI: https://github.com/findkit/wp-findkit
  * Description: Findkit.com helpers
- * Author: Esa-Matti Suuronen
+ * Author: Esa-Matti Suuronen <findkit@findkit.com>
  * Version: 0.1.4
  */
 
