@@ -5,6 +5,7 @@ Requires at least: 5.0
 Tested up to: 6.2
 Stable tag: 4.3
 Requires PHP: 7.2
+Donate link: https://www.findkit.com/
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +29,11 @@ Findkit.com is a paid service but it has a free plan for small websites. See
 pricing at [Findkit.com](https://www.findkit.com/#pricing) as well as [Terms &
 Conditions](https://www.findkit.com/terms-and-conditions/) and [Privacy
 Policy](https://www.findkit.com/privacy-policy/).
+
+== Screenshots ==
+
+1. Screenshot of the WordPress Admin interface with the Findkit plugin installed and activated.
+2. Screenshot of the WordPress Admin search interface
 
 == Changelog ==
 
