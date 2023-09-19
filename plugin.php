@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Plugin Name: Findkit.com
+ * Plugin Name: Findkit
  * Plugin URI: https://github.com/findkit/wp-findkit
  * Description: Findkit.com helpers
- * Author: Esa-Matti Suuronen, Valu Digital Oy
- * Version: 0.1.3
+ * Author: Esa-Matti Suuronen <findkit@findkit.com>
+ * Version: 0.1.4
  */
 
 // To make this plugin work properly for both Composer users and non-composer
@@ -46,6 +46,7 @@ function findkit_partial_crawl(array $options = [])
 	$loader->api_client->partial_crawl($options);
 }
 
-function findkit_get_page_meta(\WP_post $post) {
+function findkit_get_page_meta(\WP_post $post)
+{
 	return Findkit\PageMeta::get($post);
 }
