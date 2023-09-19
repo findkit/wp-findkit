@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: Findkit.com
+ * Plugin Name: Findkit
  * Plugin URI: https://github.com/findkit/wp-findkit
  * Description: Findkit.com helpers
  * Author: Esa-Matti Suuronen <findkit@findkit.com>
