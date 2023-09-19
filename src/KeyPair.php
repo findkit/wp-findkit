@@ -75,12 +75,18 @@ class KeyPair
 		return new self($pubkey, $privkey);
 	}
 
-	static function generate(): self
+	static function generate(): ?self
 	{
 		$raw_key = openssl_pkey_new([
 			'private_key_bits' => 4096,
 			'private_key_type' => OPENSSL_KEYTYPE_RSA,
 		]);
+
+		if ($raw_key === false) {
+			error_log('[findkit] Failed to generate RSA keypair');
+			return null;
+		}
+
 		$private_key = null;
 
 		openssl_pkey_export($raw_key, $private_key);
