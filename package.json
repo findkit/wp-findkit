@@ -5,12 +5,31 @@
 	"main": "index.js",
 	"repository": "github:findkit/wp-findkit",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "wp-scripts start",
+		"build": "wp-scripts build",
+		"build-commit": "npm run build && npm run build-changes-show && git add build && git commit -m 'Build changes' && npm run build-changes-hide",
+		"build-changes-hide": "git update-index --assume-unchanged $(git ls-files build)",
+		"build-changes-show": "git update-index --no-assume-unchanged $(git ls-files build)"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"@prettier/plugin-php": "^0.19.2",
 		"prettier": "^2.8.0"
+	},
+	"devDependencies": {
+		"@types/react": "^18.2.22",
+		"@types/react-dom": "^18.2.7",
+		"@types/wordpress__components": "^23.0.3",
+		"@types/wordpress__edit-post": "^7.5.1",
+		"@types/wordpress__plugins": "^3.0.0",
+		"@wordpress/core-data": "^6.18.0",
+		"@wordpress/data": "^9.11.0",
+		"@wordpress/scripts": "^26.12.0",
+		"typescript": "^5.2.2"
+	},
+	"volta": {
+		"node": "18.18.0"
 	}
 }
