@@ -1,6 +1,10 @@
 {
 	"compilerOptions": {
 		"strict": true,
-		"noUncheckedIndexedAccess": true
-	}
+		"noUncheckedIndexedAccess": true,
+		"jsx": "react",
+		"skipLibCheck": true,
+		"noEmit": true
+	},
+	"include": ["src/**/*"]
 }

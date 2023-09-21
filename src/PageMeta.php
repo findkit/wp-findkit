@@ -45,7 +45,8 @@ class PageMeta
 	}
 
 	/**
-	 * Return Findkit PageMeta for the given post
+	 * Generate "findkit page meta" for a post.
+	 * See https://docs.findkit.com/crawler/meta-tag/
 	 */
 	static function get(\WP_Post $post)
 	{
@@ -103,14 +104,36 @@ class PageMeta
 
 		$created = \get_the_date('c', $post);
 		$modified = \get_the_modified_date('c', $post);
+		$show_in_search = \is_archive() ? false : $public;
+
+		// Defaults to true. Only used to explicitly disable showing the page in the findkit search.
+		if (
+			\get_post_meta($post->ID, 'findkit_show_in_search', true) === 'no'
+		) {
+			$show_in_search = false;
+		}
 
 		$meta = [
-			'showInSearch' => \is_archive() ? false : $public,
+			'showInSearch' => $show_in_search,
 			'title' => \html_entity_decode($title),
 			'created' => $created,
 			'modified' => $modified,
 			'tags' => $tags,
 		];
+
+		$superwords = \get_post_meta($post->ID, 'findkit_superwords', true);
+		if ($superwords) {
+			$superwords = trim($superwords);
+			if (!empty($superwords)) {
+				$meta['superwords'] = [];
+				foreach (preg_split('/\s+/', $superwords) as $word) {
+					$word = \esc_js(trim($word));
+					if ($word) {
+						$meta['superwords'][] = $word;
+					}
+				}
+			}
+		}
 
 		// Use the post language if using polylang instead of the blog locale.
 		if (function_exists('\pll_get_post_language')) {
