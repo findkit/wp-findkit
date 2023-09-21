@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -23,3 +28,21 @@ jobs:
 
       - name: Run php code sniffer
         run: composer phpcs
+
+      - name: Install node modules
+        run: npm ci
+
+      - name: Check types
+        run: npm run tsc
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Ensure assets are committed
+        run: |
+          if [ "$(git status --porcelain)" != "" ]; then
+            echo "Assets not build. Run 'npm run build-commit'"
+            exit 1
+          fi
+
+
