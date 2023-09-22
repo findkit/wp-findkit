@@ -1,3 +1,14 @@
+## v0.1.5
+
+2023-09-22
+
+- Add Search Trigger Block [438801f](https://github.com/findkit/wp-findkit/commit/438801f) - Esa-Matti Suuronen
+- Add search icon to the wp-admin search item [8f65800](https://github.com/findkit/wp-findkit/commit/8f65800) - Esa-Matti Suuronen
+- Add Findkit sidebar to Gutenberg [d457e09](https://github.com/findkit/wp-findkit/commit/d457e09) - Esa-Matti Suuronen
+- Rename plugin to "Findkit" [6c3945a](https://github.com/findkit/wp-findkit/commit/6c3945a) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.3...v0.1.5
+
 ## v0.1.4
 
 2023-06-05
