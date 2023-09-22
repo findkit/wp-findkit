@@ -1,3 +1,11 @@
+## v0.1.8
+
+2023-09-22
+
+-   Fix admin search edit link in the frontend [38f331d](https://github.com/findkit/wp-findkit/commit/38f331d) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.7...v0.1.8
+
 ## v0.1.7
 
 2023-09-22
