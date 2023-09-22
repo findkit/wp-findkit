@@ -1,0 +1,32 @@
+name: Check build assets
+
+on:
+  push:
+
+jobs:
+  test:
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install node modules
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
+      - name: Ensure assets are committed
+        run: |
+          if [ "$(git status --porcelain)" != "" ]; then
+            echo "Assets not build. Run 'npm run build-commit'"
+            exit 1
+          fi
+
+
