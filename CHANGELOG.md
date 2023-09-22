@@ -1,3 +1,11 @@
+## v0.1.9
+
+2023-09-22
+
+-   fix post meta usage in page meta generation [b6264bf](https://github.com/findkit/wp-findkit/commit/b6264bf) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.8...v0.1.9
+
 ## v0.1.8
 
 2023-09-22
