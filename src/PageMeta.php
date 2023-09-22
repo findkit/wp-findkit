@@ -108,7 +108,7 @@ class PageMeta
 
 		// Defaults to true. Only used to explicitly disable showing the page in the findkit search.
 		if (
-			\get_post_meta($post->ID, 'findkit_show_in_search', true) === 'no'
+			\get_post_meta($post->ID, '_findkit_show_in_search', true) === 'no'
 		) {
 			$show_in_search = false;
 		}
@@ -121,7 +121,7 @@ class PageMeta
 			'tags' => $tags,
 		];
 
-		$superwords = \get_post_meta($post->ID, 'findkit_superwords', true);
+		$superwords = \get_post_meta($post->ID, '_findkit_superwords', true);
 		if ($superwords) {
 			$superwords = trim($superwords);
 			if (!empty($superwords)) {
