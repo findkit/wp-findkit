@@ -47,6 +47,7 @@ fi
 >&2 echo "Syncing public and origin remotes"
 >&2 echo
 
+git fetch public
 git push public HEAD:$upstream_branch
 git push origin HEAD:$upstream_branch
 
