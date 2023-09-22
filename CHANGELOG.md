@@ -1,3 +1,12 @@
+## v0.1.7
+
+2023-09-22
+
+- Use wp-admin colors for admin search [7dd0844](https://github.com/findkit/wp-findkit/commit/7dd0844) - Esa-Matti Suuronen
+- Fix findkit admin search on the frontend [82b54e6](https://github.com/findkit/wp-findkit/commit/82b54e6) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.6...v0.1.7
+
 ## v0.1.6
 
 2023-09-22
