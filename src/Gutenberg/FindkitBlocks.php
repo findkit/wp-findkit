@@ -18,6 +18,29 @@ class FindkitBlocks
 			$this,
 			'__action_enqueue_block_editor_assets',
 		]);
+
+		\add_action('wp_enqueue_scripts', [
+			$this,
+			'__action_wp_enqueue_scripts',
+		]);
+	}
+
+
+	function __action_wp_enqueue_scripts()
+	{
+		\wp_localize_script(
+			'findkit-search-trigger-view-script',
+			'FINDKIT_SEARCH_TRIGGER_VIEW',
+			[
+				'projectId' => \get_option('findkit_project_id'),
+			]
+		);
+
+		$scripts = \wp_scripts();
+		$scripts->add_data('findkit-search-trigger-view-script', 'strategy', 'async');
+		// To footer
+		// $scripts->add_data('findkit-search-trigger-view-script', 'group', 1);
+		// See https://github.com/WordPress/WordPress/blob/2d7e5afa3e2516d3f457160f30a4244c1899b536/wp-includes/functions.wp-scripts.php#L191
 	}
 
 	function __action_enqueue_block_editor_assets()
@@ -39,7 +62,7 @@ class FindkitBlocks
 		]);
 
 		foreach ($this->post_types as $type) {
-			register_post_meta($type, '_findkit_superwords', [
+			\register_post_meta($type, '_findkit_superwords', [
 				'show_in_rest' => true,
 				'single' => true,
 				'type' => 'string',
@@ -48,7 +71,7 @@ class FindkitBlocks
 				},
 			]);
 
-			register_post_meta($type, '_findkit_show_in_search', [
+			\register_post_meta($type, '_findkit_show_in_search', [
 				'show_in_rest' => true,
 				'single' => true,
 				'type' => 'string',
@@ -63,7 +86,15 @@ class FindkitBlocks
 		);
 
 		if (!$success) {
-			error_log('Failed to register Findkit block type ');
+			error_log('Failed to register Findkit Sidebar');
+		}
+
+		$success = register_block_type(
+			__DIR__ . '/../../build/Gutenberg/blocks/search-trigger'
+		);
+
+		if (!$success) {
+			error_log('Failed to register Findkit Search Trigger block type');
 		}
 	}
 }

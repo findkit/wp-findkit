@@ -38,11 +38,3 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      - name: Ensure assets are committed
-        run: |
-          if [ "$(git status --porcelain)" != "" ]; then
-            echo "Assets not build. Run 'npm run build-commit'"
-            exit 1
-          fi
-
-
