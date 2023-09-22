@@ -193,8 +193,11 @@ class Page
 			<img alt="<?php esc_html_e( 'Findkit Settings', 'findkit'); ?>" style='height: 50px; margin-top: 10px; margin-bottom: 20px;' src='<?php echo esc_url($logo_url); ?>' alt='Findkit' />
 
             <p>
-                <?php esc_html_e( 'Findkit is a site search toolkit that helps your users find the right content on your website.', 'findkit'); ?>
-                <?php esc_html_e( 'See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit'); ?>
+				<?php
+				// not a user input
+				// phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction
+				_e( 'Findkit is a site search toolkit that helps your users find the right content on your website. See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit' );
+				?>
             </p>
 
 			<?php $this->render_search_button(); ?>
