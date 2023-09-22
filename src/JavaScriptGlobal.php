@@ -67,22 +67,11 @@ class JavaScriptGlobal
 		}
 
 		wp_redirect(
-			get_site_url() . "/wp-admin/post.php?post=${post_id}&action=edit"
+			get_site_url() . "/wp-admin/post.php?post=$post_id&action=edit"
 		);
 		die();
 	}
 
-	function render_js_module_script(string $filename, ?string $extra_js)
-	{
-		// We'll use type=module to avoid creating accidental globals
-		echo '<script type="module">';
-		readfile(__DIR__ . '/' . $filename);
-		if ($extra_js) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $extra_js;
-		}
-		echo '</script>';
-	}
 
 	function enable_jwt()
 	{
@@ -96,7 +85,7 @@ class JavaScriptGlobal
 			return;
 		}
 
-		$this->render_js_module_script(
+		Utils::render_js_module_script(
 			'jwt.js',
 			sprintf(
 				'init(%s);',
@@ -122,53 +111,19 @@ class JavaScriptGlobal
 			return;
 		}
 
-		$this->render_js_module_script(
+		Utils::render_js_module_script(
 			'search-form-override.js',
 			sprintf(
 				'new FindkitSearchFormOverride(%s);',
 				wp_json_encode([
 					'publicToken' => $public_token,
-					'version' => $this->get_findkit_ui_version(),
+					'version' => Utils::get_findkit_ui_version(),
 				])
 			)
 		);
 	}
 
-	function get_findkit_ui_version()
-	{
-		$version = get_option('findkit_ui_version');
 
-		if (!$version) {
-			return '0.2.3';
-		}
-
-		return $version;
-	}
-
-	function admin_search()
-	{
-		$public_token = get_option('findkit_project_id');
-
-		if (!$public_token) {
-			return;
-		}
-
-		$findkit_settings_url = current_user_can('manage_options')
-			? Utils::get_findkit_settings_url()
-			: null;
-
-		$this->render_js_module_script(
-			'admin-search.js',
-			sprintf(
-				'new FindkitAdminSearch(%s);',
-				wp_json_encode([
-					'publicToken' => $public_token,
-					'version' => $this->get_findkit_ui_version(),
-					'settingsURL' => $findkit_settings_url,
-				])
-			)
-		);
-	}
 
 	function __action_wp_head()
 	{
@@ -178,6 +133,6 @@ class JavaScriptGlobal
 
 	function __action_admin_head()
 	{
-		$this->admin_search();
+		$this->enable_jwt();
 	}
 }

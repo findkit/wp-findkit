@@ -57,4 +57,27 @@ class Utils
 	{
 		return \admin_url('options-general.php?page=findkit_settings');
 	}
+
+	static function render_js_module_script(string $filename, ?string $extra_js)
+	{
+		// We'll use type=module to avoid creating accidental globals
+		echo '<script type="module">';
+		readfile(__DIR__ . '/' . $filename);
+		if ($extra_js) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo $extra_js;
+		}
+		echo '</script>';
+	}
+
+	static function get_findkit_ui_version()
+	{
+		$version = get_option('findkit_ui_version');
+
+		if (!$version) {
+			return '0.5.1';
+		}
+
+		return $version;
+	}
 }

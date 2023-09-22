@@ -78,10 +78,18 @@ class FindkitAdminSearch {
 			publicToken: this.publicToken,
 			instanceId: "findkit_wp_admin",
 			css: `
+				:host {
+					--findkit--brand-color: #2271b1
+				}
+
+				a {
+					color: var(--findkit--brand-color);
+				}
+
 				.findkit--wp-admin-link {
 					display: block;
 					margin-top: 10px;
-					color: blue;
+					font-weight: 800;
 				}
 			`,
 			slots: {
