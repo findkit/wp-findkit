@@ -12,7 +12,23 @@ class AdminBar
 {
 	function bind()
 	{
-		add_action('admin_bar_menu', [$this, '__admin_bar_menu'], 100);
+		\add_action('admin_bar_menu', [$this, '__admin_bar_menu'], 100);
+		\add_action('admin_head', [$this, '__action_admin_head'], 10);
+	}
+
+	// prettier-ignore
+	function __action_admin_head()
+	{
+?>
+		<style>
+			#wp-admin-bar-findkit-adminbar a::before {
+				content: "\f179";
+				top: 2px;
+			}
+		</style>
+
+
+<?php
 	}
 
 	function __admin_bar_menu($wp_admin_bar)
