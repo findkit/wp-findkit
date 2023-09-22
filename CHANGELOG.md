@@ -1,3 +1,11 @@
+## v0.1.6
+
+2023-09-22
+
+- Fix html escaping in wp-admin settings [a23420a](https://github.com/findkit/wp-findkit/commit/a23420a) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.5...v0.1.6
+
 ## v0.1.5
 
 2023-09-22
