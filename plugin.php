@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/findkit/wp-findkit
  * Description: Findkit.com helpers
  * Author: Esa-Matti Suuronen <findkit@findkit.com>
- * Version: 0.1.7
+ * Version: 0.1.8
  */
 
 // To make this plugin work properly for both Composer users and non-composer
