@@ -7,7 +7,7 @@
 - Add Findkit sidebar to Gutenberg [d457e09](https://github.com/findkit/wp-findkit/commit/d457e09) - Esa-Matti Suuronen
 - Rename plugin to "Findkit" [6c3945a](https://github.com/findkit/wp-findkit/commit/6c3945a) - Esa-Matti Suuronen
 
-All changes https://github.com/findkit/wp-findkit/compare/v0.1.3...v0.1.5
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.4...v0.1.5
 
 ## v0.1.4
 
