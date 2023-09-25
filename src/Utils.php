@@ -55,7 +55,7 @@ class Utils
 
 	static function get_findkit_settings_url()
 	{
-		return \admin_url('options-general.php?page=findkit_settings');
+		return \admin_url('admin.php?page=findkit_settings');
 	}
 
 	static function render_js_module_script(string $filename, ?string $extra_js)
