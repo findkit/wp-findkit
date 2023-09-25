@@ -41,6 +41,9 @@ class AdminBar
 			return;
 		}
 
+		if (!get_option('findkit_project_id')) {
+			return;
+		}
 
 		$wp_admin_bar->add_node([
 			'id' => 'findkit-adminbar',
