@@ -1,8 +1,17 @@
+## v0.1.10
+
+2023-09-28
+
+- Upgrade @findkit/ui [9088f27](https://github.com/findkit/wp-findkit/commit/9088f27) - Esa-Matti Suuronen
+- Hide admin search search findkit_project_id is not set [f13e408](https://github.com/findkit/wp-findkit/commit/f13e408) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.9...v0.1.10
+
 ## v0.1.9
 
 2023-09-22
 
--   fix post meta usage in page meta generation [b6264bf](https://github.com/findkit/wp-findkit/commit/b6264bf) - Esa-Matti Suuronen
+- fix post meta usage in page meta generation [b6264bf](https://github.com/findkit/wp-findkit/commit/b6264bf) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.1.8...v0.1.9
 
@@ -10,7 +19,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v0.1.8...v0.1.9
 
 2023-09-22
 
--   Fix admin search edit link in the frontend [38f331d](https://github.com/findkit/wp-findkit/commit/38f331d) - Esa-Matti Suuronen
+- Fix admin search edit link in the frontend [38f331d](https://github.com/findkit/wp-findkit/commit/38f331d) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.1.7...v0.1.8
 
