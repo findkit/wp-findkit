@@ -1,0 +1,13 @@
+version: 2
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file#ignore
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    allow:
+      - dependency-name: "@findkit/ui"
+    groups:
+      findkitui:
+        patterns:
+          - "@findkit/ui"
