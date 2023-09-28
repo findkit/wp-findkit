@@ -75,7 +75,7 @@ class Utils
 		$version = get_option('findkit_ui_version');
 
 		if (!$version) {
-			return '0.5.1';
+			return '0.6.1';
 		}
 
 		return $version;
