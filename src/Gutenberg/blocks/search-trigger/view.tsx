@@ -1,9 +1,12 @@
 import "./view.css";
-import { FindkitUI } from "@findkit/ui";
+import { FindkitUI, FindkitUIOptions } from "@findkit/ui";
 
 const settings: {
 	projectId?: string;
 } = (window as any).FINDKIT_SEARCH_TRIGGER_VIEW;
+
+const customOptions: Partial<FindkitUIOptions> = (window as any)
+	.FINDKIT_UI_OPTIONS;
 
 if (!settings.projectId) {
 	throw new Error(
