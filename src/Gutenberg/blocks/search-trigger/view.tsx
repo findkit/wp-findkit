@@ -16,6 +16,7 @@ if (!settings.projectId) {
 
 const ui = new FindkitUI({
 	publicToken: settings.projectId,
+	...customOptions,
 });
 
 function bind(el: Element) {
