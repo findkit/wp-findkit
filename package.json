@@ -6,12 +6,12 @@
 	"repository": "github:findkit/wp-findkit",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "wp-scripts start",
+		"dev": "npm run build-changes-hide && wp-scripts start",
 		"tsc": "tsc",
 		"build": "wp-scripts build",
 		"build-commit": "npm run build && npm run build-changes-show && git add build && git commit -m 'Build changes' && npm run build-changes-hide",
-		"build-changes-hide": "git update-index --assume-unchanged $(git ls-files build)",
-		"build-changes-show": "git update-index --no-assume-unchanged $(git ls-files build)"
+		"build-changes-hide": "echo '*' > build/.gitignore && git update-index --assume-unchanged $(git ls-files build)",
+		"build-changes-show": "rm -f build/.gitignore && git update-index --no-assume-unchanged $(git ls-files build)"
 	},
 	"author": "",
 	"license": "ISC",
