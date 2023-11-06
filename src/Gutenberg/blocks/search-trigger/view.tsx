@@ -5,7 +5,7 @@ const settings: {
 	projectId?: string;
 } = (window as any).FINDKIT_SEARCH_TRIGGER_VIEW;
 
-const customOptions: Partial<FindkitUIOptions> = (window as any)
+const customOptions: Partial<FindkitUIOptions<any>> = (window as any)
 	.FINDKIT_UI_OPTIONS;
 
 if (!settings.projectId) {
