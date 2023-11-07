@@ -1,3 +1,11 @@
+## v0.1.12
+
+2023-11-07
+
+-   Build changes [ba33e17](https://github.com/findkit/wp-findkit/commit/ba33e17) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.11...v0.1.12
+
 ## v0.1.11
 
 2023-11-07
