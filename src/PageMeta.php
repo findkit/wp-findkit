@@ -12,7 +12,7 @@ class PageMeta
 
 	function __action_wp_head()
 	{
-		global $post;
+		$post = \get_queried_object();
 
 		if (!$post) {
 			return;
