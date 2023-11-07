@@ -14,10 +14,11 @@
 // class_exists(). If not it means there's no global autoloader in place and
 // the user is not using composer. In that case we can try to require the
 // bundled autoloader code.
-if (!\class_exists('\Findkit\Loader')) {
-	if (\is_readable(__DIR__ . '/vendor/autoload.php')) {
-		require_once __DIR__ . '/vendor/autoload.php';
-	}
+if (
+	!\class_exists('\Findkit\Loader') &&
+	\is_readable(__DIR__ . '/vendor/autoload.php')
+) {
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 // This way we can add the vendor/ directory to git and have the plugin "just
 // work" when it is cloned to wp-content/plugins. But be careful when checking
