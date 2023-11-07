@@ -1,9 +1,12 @@
 import "./view.css";
-import { FindkitUI } from "@findkit/ui";
+import { FindkitUI, FindkitUIOptions } from "@findkit/ui";
 
 const settings: {
 	projectId?: string;
 } = (window as any).FINDKIT_SEARCH_TRIGGER_VIEW;
+
+const customOptions: Partial<FindkitUIOptions<any>> = (window as any)
+	.FINDKIT_UI_OPTIONS;
 
 if (!settings.projectId) {
 	throw new Error(
@@ -13,14 +16,18 @@ if (!settings.projectId) {
 
 const ui = new FindkitUI({
 	publicToken: settings.projectId,
+	...customOptions,
 });
 
-function bind(el: Element) {
+function bind(el: Element | null) {
 	if (!(el instanceof HTMLElement)) {
 		return;
 	}
 
-	if (!(el instanceof HTMLButtonElement)) {
+	if (
+		!(el instanceof HTMLButtonElement) &&
+		!(el instanceof HTMLAnchorElement)
+	) {
 		el.role = "button";
 		el.tabIndex = 0;
 	}
@@ -29,11 +36,13 @@ function bind(el: Element) {
 }
 
 function bindAll() {
-	document
-		.querySelectorAll(
-			".wp-block-findkit-search-trigger a, .wp-block-findkit-search-trigger figure",
-		)
-		.forEach(bind);
+	const triggers = Array.from(
+		document.querySelectorAll(".wp-block-findkit-search-trigger"),
+	);
+
+	for (const trigger of triggers) {
+		bind(trigger.firstElementChild);
+	}
 }
 
 if (document.readyState === "loading") {
