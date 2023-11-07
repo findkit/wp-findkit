@@ -1,3 +1,16 @@
+## v0.1.11
+
+2023-11-07
+
+- Upgrade @findkit/ui [bfe8fa0](https://github.com/findkit/wp-findkit/commit/bfe8fa0) - Esa-Matti Suuronen
+- Use get_queried_object() to get post for Findkit Page Meta [6e3cda6](https://github.com/findkit/wp-findkit/commit/6e3cda6) - Esa-Matti Suuronen
+- Gracefully handle broken autoload [a7d0637](https://github.com/findkit/wp-findkit/commit/a7d0637) - Esa-Matti Suuronen
+- Better trigger finding [68061d1](https://github.com/findkit/wp-findkit/commit/68061d1) - Esa-Matti Suuronen
+- Add global FINDKIT_UI_OPTIONS support to the search trigger block [dfe6829](https://github.com/findkit/wp-findkit/commit/dfe6829) - Esa-Matti Suuronen
+- Remove margins from search trigger <figure> elements [a529982](https://github.com/findkit/wp-findkit/commit/a529982) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.10...v0.1.11
+
 ## v0.1.10
 
 2023-09-28
