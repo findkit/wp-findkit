@@ -14,7 +14,7 @@ class PageMeta
 	{
 		$post = \get_queried_object();
 
-		if (!$post) {
+		if (!($post instanceof \WP_Post)) {
 			return;
 		}
 
