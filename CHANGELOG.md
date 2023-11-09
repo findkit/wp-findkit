@@ -1,3 +1,11 @@
+## v0.1.13
+
+2023-11-09
+
+-   Render page only for WP_Post objects (for now) [4766155](https://github.com/findkit/wp-findkit/commit/4766155) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.1.12...v0.1.13
+
 ## v0.1.12
 
 2023-11-07
