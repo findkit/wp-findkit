@@ -10,7 +10,6 @@ namespace Findkit;
  */
 class AdminBar
 {
-
 	function bind()
 	{
 		\add_action('admin_bar_menu', [$this, '__admin_bar_menu'], 100);
@@ -30,9 +29,7 @@ class AdminBar
 				top: 2px;
 			}
 		</style>
-
-
-<?php
+		<?php
 	}
 
 	function __admin_bar_menu($wp_admin_bar)
@@ -91,7 +88,11 @@ class AdminBar
 			return;
 		}
 
-		$url = filter_input(INPUT_GET, 'findkit_edit_redirect', FILTER_SANITIZE_URL);
+		$url = filter_input(
+			INPUT_GET,
+			'findkit_edit_redirect',
+			FILTER_SANITIZE_URL
+		);
 
 		if (empty($url)) {
 			return;
@@ -111,13 +112,15 @@ class AdminBar
 
 	function redirect_to_post_id($post_id)
 	{
-		$url = filter_input(INPUT_GET, 'findkit_edit_redirect', FILTER_SANITIZE_URL);
+		$url = filter_input(
+			INPUT_GET,
+			'findkit_edit_redirect',
+			FILTER_SANITIZE_URL
+		);
+
 		if (!get_post($post_id)) {
 			http_response_code(404);
-			printf(
-				'No post found for %s',
-				esc_url($url)
-			);
+			printf('No post found for %s', esc_url($url));
 
 			echo '<p><a onclick="history.back()" href="#">Go back</a></p>';
 

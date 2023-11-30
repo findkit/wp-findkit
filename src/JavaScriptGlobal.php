@@ -29,8 +29,6 @@ class JavaScriptGlobal
 		);
 	}
 
-
-
 	function enable_jwt()
 	{
 		if (!get_option('findkit_enable_jwt')) {
@@ -80,8 +78,6 @@ class JavaScriptGlobal
 			)
 		);
 	}
-
-
 
 	function __action_wp_head()
 	{
