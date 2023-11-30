@@ -19,17 +19,14 @@ class PageMeta
 		}
 
 		$meta = self::get($post);
+
 		if (empty($meta)) {
 			return;
 		}
 
-		$json = \wp_json_encode($meta);
-		if (false === $json) {
-			return;
-		}
-
-		// phpcs:ignore
-		echo "<script type='application/json' id='findkit'>$json</script>";
+		echo "<script type='application/json' class='wordpress escaped' id='findkit'>";
+		echo \esc_html(\wp_json_encode($meta));
+		echo '</script>';
 	}
 
 	/**
