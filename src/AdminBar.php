@@ -15,14 +15,35 @@ class AdminBar
 		\add_action('admin_bar_menu', [$this, '__admin_bar_menu'], 100);
 		\add_action('admin_head', [$this, '__action_head'], 10);
 		\add_action('wp_head', [$this, '__action_head'], 10);
-		add_action('admin_init', [$this, '__action_handle_edit_redirect'], 10);
-		add_action('init', [$this, '__action_handle_edit_redirect'], 10);
+		\add_action('admin_init', [$this, '__action_handle_edit_redirect'], 10);
+		\add_action('init', [$this, '__action_handle_edit_redirect'], 10);
+		\add_action(
+			'admin_enqueue_scripts',
+			[$this, '__action_admin_enqueue_scripts'],
+			10
+		);
 	}
 
+	function __action_admin_enqueue_scripts()
+	{
+		$handle = Utils::register_asset_script('admin.ts', [
+			'FINDKIT_ADMIN_SEARCH' => [
+				'publicToken' => \get_option('findkit_project_id'),
+				'settingsURL' => \current_user_can('manage_options')
+					? Utils::get_findkit_settings_url()
+					: null,
+			],
+		]);
+
+		if (\is_admin_bar_showing()) {
+			wp_enqueue_script($handle);
+		}
+	}
+
+	// prettier-ignore
 	function __action_head()
 	{
-		$this->admin_search();
-?>
+		?>
 		<style>
 			#wp-admin-bar-findkit-adminbar a::before {
 				content: "\f179";
@@ -51,35 +72,6 @@ class AdminBar
 				'class' => 'findkit-adminbar-search',
 			],
 		]);
-	}
-
-	function admin_search()
-	{
-		if (!\is_admin_bar_showing()) {
-			return;
-		}
-
-		$public_token = get_option('findkit_project_id');
-
-		if (!$public_token) {
-			return;
-		}
-
-		$findkit_settings_url = current_user_can('manage_options')
-			? Utils::get_findkit_settings_url()
-			: null;
-
-		Utils::render_js_module_script(
-			'admin-search.js',
-			sprintf(
-				'new FindkitAdminSearch(%s);',
-				wp_json_encode([
-					'publicToken' => $public_token,
-					'version' => Utils::get_findkit_ui_version(),
-					'settingsURL' => $findkit_settings_url,
-				])
-			)
-		);
 	}
 
 	function __action_handle_edit_redirect()
