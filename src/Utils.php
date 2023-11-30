@@ -80,4 +80,17 @@ class Utils
 
 		return $version;
 	}
+
+	/**
+	 * Echo html with links
+	 */
+	static function echo_sanitized_html(string $html)
+	{
+		echo wp_kses($html, [
+			'a' => [
+				'href' => [],
+				'target' => [],
+			],
+		]);
+	}
 }

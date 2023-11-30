@@ -82,9 +82,10 @@ class Section
 		return $this->section . "-option-{$field['name']}";
 	}
 
+	// prettier-ignore
 	function render_input(array $field)
 	{
-		$description = $field['description'] ?? '';
+		$render_description = $field['description'];
 		$placeholder = $field['placeholder'] ?? '';
 		$disabled = $field['disabled'] ?? false;
 		$type = $field['type'] ?? 'input';
@@ -131,12 +132,7 @@ class Section
 		?>
 
 		<p class="description">
-			<?php
-				// description can contain html intentionally
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo $description;
-			?>
-
+			<?php if ($render_description) { $render_description(); } ?>
 			<sub>(<?php echo esc_html($option); ?>)</sub>
 		</p>
 		<?php

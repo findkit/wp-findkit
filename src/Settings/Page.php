@@ -20,10 +20,14 @@ class Page
 				'type' => 'input',
 				'default' => '',
 				'title' => __('Findkit Public Token', 'findkit'),
-				'description' => __(
-					'The Findkit public token for your project. You can find it from the <a href="https://hub.findkit.com" target="_blank">Findkit Hub</a>.',
-					'findkit'
-				),
+				'description' => function () {
+					Utils::echo_sanitized_html(
+						__(
+							'The Findkit public token for your project. You can find it from the <a href="https://hub.findkit.com" target="_blank">Findkit Hub</a>.',
+							'findkit'
+						)
+					);
+				},
 			])
 			->add_field([
 				'name' => 'findkit_override_search_form',
@@ -33,39 +37,48 @@ class Page
 					'Override the default frontend search form',
 					'findkit'
 				),
-				'description' => __(
-					'Looks for the default search form with role=search and replaces it with the Findkit search. Findkit Public Token must be defined. For more personalized search experience we recommend manually integrating the search interface to your theme. Please refer to the Findkit <a target="_blank" href="https://docs.findkit.com/ui/">documentation</a> for more information.',
-					'findkit'
-				),
+				'description' => function () {
+					Utils::echo_sanitized_html(
+						__(
+							'Looks for the default search form with role=search and replaces it with the Findkit search. Findkit Public Token must be defined. For more personalized search experience we recommend manually integrating the search interface to your theme. Please refer to the Findkit <a target="_blank" href="https://docs.findkit.com/ui/">documentation</a> for more information.',
+							'findkit'
+						)
+					);
+				},
 			])
 			->add_field([
 				'name' => 'findkit_adminbar',
 				'type' => 'checkbox',
 				'default' => '1',
 				'title' => __('Show admin bar search button', 'findkit'),
-				'description' => __(
-					'Show Findkit Search in the WP Admin top adminbar',
-					'findkit'
-				),
+				'description' => function () {
+					esc_html_e(
+						'Show Findkit Search in the WP Admin top adminbar',
+						'findkit'
+					);
+				},
 			])
 			->add_field([
 				'name' => 'findkit_enable_live_update',
 				'type' => 'checkbox',
 				'default' => '0',
 				'title' => __('Enable live update', 'findkit'),
-				'description' => __(
-					'Automatically update the search index when the content is updated. Requires a Findkit API key.',
-					'findkit'
-				),
+				'description' => function () {
+					esc_html_e(
+						'Automatically update the search index when the content is updated. Requires a Findkit API key.',
+						'findkit'
+					);
+				},
 			])
 			->add_field([
 				'name' => 'findkit_api_key',
 				'type' => 'input',
 				'default' => '',
 				'title' => __('Findkit API Key', 'findkit'),
-				'description' =>
-					__('Used for the live update.', 'findkit') .
-					$this->get_apikeys_link_description(),
+				'description' => function () {
+					esc_html_e('Used for the live update.', 'findkit');
+					$this->render_apikeys_link_description();
+				},
 				'disabled' => defined('FINDKIT_API_KEY'),
 				'placeholder' => defined('FINDKIT_API_KEY')
 					? __('Defined in wp-config.php', 'findkit')
@@ -75,18 +88,16 @@ class Page
 		\add_action('admin_menu', [$this, '__action_admin_menu']);
 	}
 
-	function get_apikeys_link_description()
+	function render_apikeys_link_description()
 	{
 		$project_id = \get_option('findkit_project_id');
 
 		if (!$project_id) {
-			return ' ' .
-				sprintf(
-					__(
-						'You can create the API key in the Findkit Hub once you have created the Findkit Project.',
-						'findkit'
-					)
-				);
+			esc_html_e(
+				'You can create the API key in the Findkit Hub once you have created the Findkit Project.',
+				'findkit'
+			);
+			return;
 		}
 
 		$domain = Utils::get_domain();
@@ -96,14 +107,16 @@ class Page
 
 		$url = "https://hub.findkit.com/p/$project_id?$qs";
 
-		return ' ' .
+		echo ' ';
+		Utils::echo_sanitized_html(
 			sprintf(
 				__(
 					'You can create the API key in the <a target="_blank" href="%s">Findkit project settings in the Findkit Hub</a>.',
 					'findkit'
 				),
-				$url
-			);
+				esc_attr($url)
+			)
+		);
 	}
 
 	function add_section($section_name, $options): Section
