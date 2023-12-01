@@ -25,7 +25,6 @@ class FindkitBlocks
 		]);
 	}
 
-
 	function __action_wp_enqueue_scripts()
 	{
 		\wp_localize_script(
@@ -82,7 +81,7 @@ class FindkitBlocks
 		}
 
 		$success = register_block_type(
-			__DIR__ . '/../../build/Gutenberg/blocks/sidebar'
+			__DIR__ . '/../../build/blocks/Gutenberg/blocks/sidebar'
 		);
 
 		if (!$success) {
@@ -90,7 +89,7 @@ class FindkitBlocks
 		}
 
 		$success = register_block_type(
-			__DIR__ . '/../../build/Gutenberg/blocks/search-trigger'
+			__DIR__ . '/../../build/blocks/Gutenberg/blocks/search-trigger'
 		);
 
 		if (!$success) {

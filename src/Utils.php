@@ -78,8 +78,9 @@ class Utils
 		string $filename,
 		$options = []
 	) {
-		$asset_path = plugin_dir_path(__DIR__) . "build/$filename.asset.php";
-		$file_path = plugin_dir_path(__DIR__) . "build/$filename.js";
+		$asset_path =
+			plugin_dir_path(__DIR__) . "build/scripts/$filename.asset.php";
+		$file_path = plugin_dir_path(__DIR__) . "build/scripts/$filename.js";
 
 		$script_asset = require $asset_path;
 
@@ -94,7 +95,7 @@ class Utils
 		} else {
 			\wp_register_script(
 				$handle,
-				plugin_dir_url(__DIR__) . "build/$filename.js",
+				plugin_dir_url(__DIR__) . "build/scripts/$filename.js",
 				$script_asset['dependencies'],
 				$script_asset['version'],
 				$options['in_footer'] ?? true
