@@ -9,7 +9,7 @@ Object.assign(window, {
 		if (FINDKIT_JWT.initialToken) {
 			const token = FINDKIT_JWT.initialToken;
 			FINDKIT_JWT.initialToken = null;
-			return token;
+			return { jwt: token };
 		}
 
 		const res = await fetch(FINDKIT_JWT.endpoint, {

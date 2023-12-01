@@ -47,7 +47,7 @@ class JWT
 					'endpoint' => \rest_url('findkit/v1/jwt'),
 					'nonce' => \wp_create_nonce('wp_rest'),
 					// Optimize the first jwt token request by inlining it
-					'token' => KeyPair::request_jwt_token(),
+					'initialToken' => KeyPair::request_jwt_token(),
 				],
 			],
 		]);
