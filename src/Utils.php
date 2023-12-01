@@ -58,27 +58,47 @@ class Utils
 		return \admin_url('admin.php?page=findkit_settings');
 	}
 
-	static function render_js_module_script(string $filename, ?string $extra_js)
-	{
-		// We'll use type=module to avoid creating accidental globals
-		echo '<script type="module">';
-		readfile(__DIR__ . '/' . $filename);
-		if ($extra_js) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $extra_js;
+	/**
+	 * Register script build using wp-scripts. Returns the handle.
+	 *
+	 * @param string $filename
+	 * @param array $localize Create global variables for the script
+	 */
+	static function register_asset_script(
+		string $handle,
+		string $filename,
+		array $options = []
+	) {
+		$asset_path = plugin_dir_path(__DIR__) . "build/$filename.asset.php";
+		$file_path = plugin_dir_path(__DIR__) . "build/$filename.js";
+
+		$script_asset = require $asset_path;
+
+		if (
+			($options['inline'] ?? false) &&
+			// not available in old versions of wp. We can just fallback to
+			// normal registration if not
+			function_exists('wp_add_inline_script')
+		) {
+			\wp_register_script($handle, false);
+			\wp_add_inline_script($handle, file_get_contents($file_path));
+		} else {
+			\wp_register_script(
+				$handle,
+				plugin_dir_url(__DIR__) . "build/$filename.js",
+				$script_asset['dependencies'],
+				$script_asset['version'],
+				[
+					'in_footer' => $options['in_footer'] ?? true,
+				]
+			);
 		}
-		echo '</script>';
-	}
 
-	static function get_findkit_ui_version()
-	{
-		$version = get_option('findkit_ui_version');
-
-		if (!$version) {
-			return '0.12.1';
+		if ($options['globals'] ?? false) {
+			foreach ($options['globals'] as $name => $value) {
+				\wp_localize_script($handle, $name, $value);
+			}
 		}
-
-		return $version;
 	}
 
 	/**

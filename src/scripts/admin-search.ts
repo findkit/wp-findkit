@@ -1,9 +1,9 @@
 import { FindkitUI, html, css } from "@findkit/ui";
 
-const FINDKIT_ADMIN_SEARCH: {
+declare const FINDKIT_ADMIN_SEARCH: {
 	publicToken: string;
 	settingsURL: string;
-} = (window as any).FINDKIT_ADMIN_SEARCH;
+};
 
 const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
@@ -24,7 +24,7 @@ const ui = new FindkitUI({
 		}
 	`,
 	slots: {
-		Header: (props) => {
+		Header(props) {
 			// prettier-ignore
 			return html`
                 ${props.children}
@@ -38,10 +38,21 @@ const ui = new FindkitUI({
             `;
 		},
 		Hit(props) {
+			let canEdit = props.hit.tags.includes("wordpress");
+			if (!canEdit) {
+				const host = window.location.host;
+				canEdit = props.hit.tags.some((tag) => {
+					return tag.startsWith(`domain${host}`);
+				});
+			}
+
+			if (!canEdit) {
+				return props.children;
+			}
+
 			const wpAdminEditUrl = new URL(window.location.toString());
 
 			wpAdminEditUrl.search = "";
-
 			wpAdminEditUrl.searchParams.set("findkit_edit_redirect", props.hit.url);
 
 			// prettier-ignore
@@ -56,14 +67,28 @@ const ui = new FindkitUI({
 	},
 });
 
-document.addEventListener("click", (e) => {
+function isAdminItem(e: { target: unknown }) {
 	if (e.target instanceof HTMLElement) {
 		if (
 			e.target.classList.contains("findkit-admin-search") ||
 			e.target.closest(".findkit-adminbar-search")
 		) {
-			e.preventDefault();
-			ui.open();
+			return true;
 		}
+	}
+
+	return false;
+}
+
+document.addEventListener("click", (e) => {
+	if (isAdminItem(e)) {
+		e.preventDefault();
+		ui.open();
+	}
+});
+
+document.addEventListener("mouseover", (e) => {
+	if (isAdminItem(e)) {
+		ui.preload();
 	}
 });
