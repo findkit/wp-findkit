@@ -3,6 +3,14 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+/**
+ * @phpstan-type FindkitRegisterScriptOptions array{
+ *	globals?: mixed,
+ *	inline?: bool,
+ *	in_footer?: bool
+ * }
+ */
+
 class Utils
 {
 	/**
@@ -61,13 +69,14 @@ class Utils
 	/**
 	 * Register script build using wp-scripts. Returns the handle.
 	 *
+	 * @param string $handle
 	 * @param string $filename
-	 * @param array $localize Create global variables for the script
+	 * @param FindkitRegisterScriptOptions $options
 	 */
 	static function register_asset_script(
 		string $handle,
 		string $filename,
-		array $options = []
+		$options = []
 	) {
 		$asset_path = plugin_dir_path(__DIR__) . "build/$filename.asset.php";
 		$file_path = plugin_dir_path(__DIR__) . "build/$filename.js";
@@ -88,9 +97,7 @@ class Utils
 				plugin_dir_url(__DIR__) . "build/$filename.js",
 				$script_asset['dependencies'],
 				$script_asset['version'],
-				[
-					'in_footer' => $options['in_footer'] ?? true,
-				]
+				$options['in_footer'] ?? true
 			);
 		}
 
