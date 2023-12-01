@@ -42,7 +42,7 @@ const ui = new FindkitUI({
 			if (!canEdit) {
 				const host = window.location.host;
 				canEdit = props.hit.tags.some((tag) => {
-					return tag.startsWith(`domain${host}`);
+					return tag.startsWith(`domain/${host}`);
 				});
 			}
 
