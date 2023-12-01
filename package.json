@@ -9,6 +9,7 @@
 		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*",
 		"tsc": "tsc",
 		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*",
+		"build-hide": "git valu-hide-changes build",
 		"build-commit": "npm run build && git valu-commit-changes build"
 	},
 	"author": "",
