@@ -11,7 +11,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v0.2.0...v0.2.1
 2023-12-01
 
 - Upgrade @findkit/ui to v0.16.0
-- Bundle all scripts wp-scripts
+- Bundle all scripts with wp-scripts
 - Follow WordPress plugin directory guidelines more closely
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.1.13...v0.2.0
