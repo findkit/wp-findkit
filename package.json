@@ -6,9 +6,9 @@
 	"repository": "github:findkit/wp-findkit",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/admin.ts",
+		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*",
 		"tsc": "tsc",
-		"build": "git valu-hide-changes build && wp-scripts build src/scripts/admin.ts",
+		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*",
 		"build-commit": "npm run build && git valu-commit-changes build"
 	},
 	"author": "",
