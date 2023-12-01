@@ -73,9 +73,9 @@ class FindkitMetaBox
 	{
 		if (
 			!\wp_verify_nonce(
-				// wp_verify_nonce has build-in sanitization
-				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-				$_POST['_wpnonce_findkit'] ?? null,
+				sanitize_text_field(
+					wp_unslash($_POST['_wpnonce_findkit'] ?? null)
+				),
 				'findkit_superwords'
 			)
 		) {
@@ -89,9 +89,7 @@ class FindkitMetaBox
 		\update_post_meta(
 			$post_id,
 			'_findkit_superwords',
-			// update_post_meta has build in sanitization
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-			$_POST['findkit_superwords'] ?? ''
+			sanitize_text_field(wp_unslash($_POST['findkit_superwords'] ?? ''))
 		);
 	}
 }
