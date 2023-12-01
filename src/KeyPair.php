@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace Findkit;
 
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+
+if (!defined('ABSPATH')) {
+	exit();
+}
 
 class KeyPair
 {

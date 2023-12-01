@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Findkit\Gutenberg;
 
-use Findkit\Utils;
+if (!defined('ABSPATH')) {
+	exit();
+}
 
 class FindkitBlocks
 {
@@ -36,7 +38,11 @@ class FindkitBlocks
 		);
 
 		$scripts = \wp_scripts();
-		$scripts->add_data('findkit-search-trigger-view-script', 'strategy', 'async');
+		$scripts->add_data(
+			'findkit-search-trigger-view-script',
+			'strategy',
+			'async'
+		);
 		// To footer
 		// $scripts->add_data('findkit-search-trigger-view-script', 'group', 1);
 		// See https://github.com/WordPress/WordPress/blob/2d7e5afa3e2516d3f457160f30a4244c1899b536/wp-includes/functions.wp-scripts.php#L191

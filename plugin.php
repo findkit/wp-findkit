@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 /**
  * Plugin Name: Findkit
  * Plugin URI: https://github.com/findkit/wp-findkit

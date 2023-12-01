@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Findkit\Settings;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 class Section
 {
 	private $section = null;

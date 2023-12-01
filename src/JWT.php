@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 /**
  * Expose FINDKIT_GET_JWT_TOKEN() which is used by the @findkit/ui library to
  * get the JWT tokens. It will automatically use the global when it is available

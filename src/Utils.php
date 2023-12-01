@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 /**
  * @phpstan-type FindkitRegisterScriptOptions array{
  *	globals?: mixed,

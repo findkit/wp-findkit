@@ -6,6 +6,10 @@ namespace Findkit\Settings;
 
 use Findkit\Utils;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 class Page
 {
 	private $page = 'findkit_settings';
