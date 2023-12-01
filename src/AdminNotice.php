@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 class AdminNotice
 {
 	function bind()

@@ -102,7 +102,7 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -H "Content-Type: application/octet-stream" \
-            https://uploads.github.com/repos/${{ github.event.repository.full_name }}/releases/${RELEASE_ID}/assets?name=findkit.${next_version}.zip \
+            https://uploads.github.com/repos/${{ github.event.repository.full_name }}/releases/${RELEASE_ID}/assets?name=findkit-vendor.${next_version}.zip \
             --data-binary "@/tmp/release.zip"
 
       - name: Notify publish fail

@@ -6,17 +6,20 @@
 	"repository": "github:findkit/wp-findkit",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "npm run build-changes-hide && wp-scripts start",
 		"tsc": "tsc",
-		"build": "wp-scripts build",
-		"build-commit": "npm run build && npm run build-changes-show && git add build && git commit -m 'Build changes' && npm run build-changes-hide",
-		"build-changes-hide": "echo '*' > build/.gitignore && git update-index --assume-unchanged $(git ls-files build)",
-		"build-changes-show": "rm -f build/.gitignore && git update-index --no-assume-unchanged $(git ls-files build)"
+		"dev:scripts": "wp-scripts start --output-path=build/scripts src/scripts/*",
+		"dev:blocks": "wp-scripts start --output-path=build/blocks",
+		"dev": "git valu-hide-changes build && run-p 'dev:*'",
+		"build:scripts": "wp-scripts build --output-path=build/scripts src/scripts/*",
+		"build:blocks": "wp-scripts build --output-path=build/blocks",
+		"build": "git valu-hide-changes build && run-s 'build:*'",
+		"build-hide": "git valu-hide-changes build",
+		"build-commit": "npm run build && git valu-commit-changes build"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@findkit/ui": "^0.12.1",
+		"@findkit/ui": "^0.16.0",
 		"@prettier/plugin-php": "^0.19.2",
 		"prettier": "^2.8.0"
 	},
@@ -28,9 +31,11 @@
 		"@types/wordpress__components": "^23.0.3",
 		"@types/wordpress__edit-post": "^7.5.1",
 		"@types/wordpress__plugins": "^3.0.0",
+		"@valu/git-tools": "^1.1.0",
 		"@wordpress/core-data": "^6.18.0",
 		"@wordpress/data": "^9.11.0",
-		"@wordpress/scripts": "^26.12.0",
+		"@wordpress/scripts": "^26.18.0",
+		"npm-run-all": "^4.1.5",
 		"typescript": "^5.2.2"
 	},
 	"volta": {

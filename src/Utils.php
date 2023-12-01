@@ -3,6 +3,18 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
+/**
+ * @phpstan-type FindkitRegisterScriptOptions array{
+ *	globals?: mixed,
+ *	inline?: bool,
+ *	in_footer?: bool
+ * }
+ */
+
 class Utils
 {
 	/**
@@ -58,26 +70,59 @@ class Utils
 		return \admin_url('admin.php?page=findkit_settings');
 	}
 
-	static function render_js_module_script(string $filename, ?string $extra_js)
-	{
-		// We'll use type=module to avoid creating accidental globals
-		echo '<script type="module">';
-		readfile(__DIR__ . '/' . $filename);
-		if ($extra_js) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo $extra_js;
+	/**
+	 * Register script build using wp-scripts. Returns the handle.
+	 *
+	 * @param string $handle
+	 * @param string $filename
+	 * @param FindkitRegisterScriptOptions $options
+	 */
+	static function register_asset_script(
+		string $handle,
+		string $filename,
+		$options = []
+	) {
+		$asset_path =
+			plugin_dir_path(__DIR__) . "build/scripts/$filename.asset.php";
+		$file_path = plugin_dir_path(__DIR__) . "build/scripts/$filename.js";
+
+		$script_asset = require $asset_path;
+
+		if (
+			($options['inline'] ?? false) &&
+			// not available in old versions of wp. We can just fallback to
+			// normal registration if not
+			function_exists('wp_add_inline_script')
+		) {
+			\wp_register_script($handle, false);
+			\wp_add_inline_script($handle, file_get_contents($file_path));
+		} else {
+			\wp_register_script(
+				$handle,
+				plugin_dir_url(__DIR__) . "build/scripts/$filename.js",
+				$script_asset['dependencies'],
+				$script_asset['version'],
+				$options['in_footer'] ?? true
+			);
 		}
-		echo '</script>';
+
+		if ($options['globals'] ?? false) {
+			foreach ($options['globals'] as $name => $value) {
+				\wp_localize_script($handle, $name, $value);
+			}
+		}
 	}
 
-	static function get_findkit_ui_version()
+	/**
+	 * Echo html with links
+	 */
+	static function echo_sanitized_html(string $html)
 	{
-		$version = get_option('findkit_ui_version');
-
-		if (!$version) {
-			return '0.12.1';
-		}
-
-		return $version;
+		echo wp_kses($html, [
+			'a' => [
+				'href' => [],
+				'target' => [],
+			],
+		]);
 	}
 }

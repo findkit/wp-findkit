@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 /**
  * API client for the Findkit REST API
  */

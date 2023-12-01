@@ -1,9 +1,10 @@
 {
 	"compilerOptions": {
 		"strict": true,
+		"target": "es2020",
 		"noUncheckedIndexedAccess": true,
-		"resolveJsonModule": true,
 		"esModuleInterop": true,
+		"moduleResolution": "Bundler",
 		"jsx": "react",
 		"skipLibCheck": true,
 		"noEmit": true

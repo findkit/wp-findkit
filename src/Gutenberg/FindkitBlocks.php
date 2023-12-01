@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Findkit\Gutenberg;
 
-use Findkit\Utils;
+if (!defined('ABSPATH')) {
+	exit();
+}
 
 class FindkitBlocks
 {
@@ -25,7 +27,6 @@ class FindkitBlocks
 		]);
 	}
 
-
 	function __action_wp_enqueue_scripts()
 	{
 		\wp_localize_script(
@@ -37,7 +38,11 @@ class FindkitBlocks
 		);
 
 		$scripts = \wp_scripts();
-		$scripts->add_data('findkit-search-trigger-view-script', 'strategy', 'async');
+		$scripts->add_data(
+			'findkit-search-trigger-view-script',
+			'strategy',
+			'async'
+		);
 		// To footer
 		// $scripts->add_data('findkit-search-trigger-view-script', 'group', 1);
 		// See https://github.com/WordPress/WordPress/blob/2d7e5afa3e2516d3f457160f30a4244c1899b536/wp-includes/functions.wp-scripts.php#L191
@@ -82,7 +87,7 @@ class FindkitBlocks
 		}
 
 		$success = register_block_type(
-			__DIR__ . '/../../build/Gutenberg/blocks/sidebar'
+			__DIR__ . '/../../build/blocks/Gutenberg/blocks/sidebar'
 		);
 
 		if (!$success) {
@@ -90,7 +95,7 @@ class FindkitBlocks
 		}
 
 		$success = register_block_type(
-			__DIR__ . '/../../build/Gutenberg/blocks/search-trigger'
+			__DIR__ . '/../../build/blocks/Gutenberg/blocks/search-trigger'
 		);
 
 		if (!$success) {

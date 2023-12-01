@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/block.json",
+  "apiVersion": 2,
+  "name": "findkit/search-trigger",
+  "version": "0.1.0",
+  "title": "Findkit Search Trigger [EXPERIMENTAL]",
+  "icon": "search",
+  "description": "A search trigger for Findkit full screen modal. This block is still considered as an experimental feature.",
+  "supports": {},
+  "textdomain": "findkit",
+  "viewScript": "file:view.js",
+  "style": "file:view.css",
+  "editorScript": "file:editor.js",
+  "editorStyle": "file:editor.css"
+}

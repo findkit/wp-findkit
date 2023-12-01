@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Findkit;
 
+if (!defined('ABSPATH')) {
+	exit();
+}
+
 class Loader
 {
 	static $instance = null;
@@ -36,12 +40,12 @@ class Loader
 			KeyPair::generate();
 		}
 
-		(new JavaScriptGlobal())->bind();
-		(new RestApi())->bind();
 		(new PageMeta())->bind();
 		(new AdminNotice())->bind();
-		(new AdminBar())->bind();
+		(new AdminSearch())->bind();
 		(new FindkitMetaBox())->bind();
+		(new JWT())->bind();
+		(new SearchFormOverride())->bind();
 		(new LiveUpdate($this->api_client))->bind();
 		(new Settings\Page())->bind();
 		(new Gutenberg\FindkitBlocks())->bind();
