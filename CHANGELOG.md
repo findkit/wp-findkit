@@ -1,3 +1,11 @@
+## v0.2.1
+
+2023-12-01
+
+- More explicit sanitization
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.0...v0.2.1
+
 ## v0.2.0
 
 2023-12-01
