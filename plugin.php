@@ -71,7 +71,7 @@ function findkit_partial_crawl(array $options = [])
 	$loader->api_client->partial_crawl($options);
 }
 
-function findkit_get_page_meta(\WP_post $post)
+function findkit_get_page_meta(\WP_Post $post)
 {
 	return Findkit\PageMeta::get($post);
 }
