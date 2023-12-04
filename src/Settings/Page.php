@@ -211,7 +211,7 @@ class Page
 
             <p>
 				<?php
-				Utils::echo_sanitized_html(_('Findkit is a site search toolkit that helps your users find the right content on your website. See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit' ));
+				Utils::echo_sanitized_html(__('Findkit is a site search toolkit that helps your users find the right content on your website. See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit' ));
 				?>
             </p>
 
