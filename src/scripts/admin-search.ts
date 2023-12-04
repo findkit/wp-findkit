@@ -67,6 +67,22 @@ const ui = new FindkitUI({
 	},
 });
 
+ui.on("loading", () => {
+	const el = document.querySelector(".findkit-adminbar-search a");
+	if (el instanceof HTMLElement) {
+		el.dataset.origContent = el.innerHTML;
+		el.innerHTML = "Loading...";
+	}
+});
+
+ui.on("loading-done", () => {
+	const el = document.querySelector(".findkit-adminbar-search a");
+	if (el instanceof HTMLElement && el.dataset.origContent) {
+		el.innerHTML = el.dataset.origContent;
+		delete el.dataset.origContent;
+	}
+});
+
 function isAdminItem(e: { target: unknown }) {
 	if (e.target instanceof HTMLElement) {
 		if (
