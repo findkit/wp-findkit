@@ -24,10 +24,6 @@ if (
 ) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
-// This way we can add the vendor/ directory to git and have the plugin "just
-// work" when it is cloned to wp-content/plugins. But be careful when checking
-// the vendor/ into git so you won't add all development dependencies too. Eg.
-// before checking it in you should always run "composer install --no-dev" first.
 
 // If the class still doesn't exist it means the autoloader files are not bundled in the plugin
 if (!\class_exists('\Findkit\Loader')) {
