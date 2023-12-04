@@ -5,8 +5,10 @@
 	"main": "index.js",
 	"repository": "github:findkit/wp-findkit",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "tsc && composer phpstan && composer phpcs",
 		"tsc": "tsc",
+		"phpstan": "composer phpstan",
+		"phpcs": "composer phpcs",
 		"dev:scripts": "wp-scripts start --output-path=build/scripts src/scripts/*",
 		"dev:blocks": "wp-scripts start --output-path=build/blocks",
 		"dev": "git valu-hide-changes build && run-p 'dev:*'",
