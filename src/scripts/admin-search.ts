@@ -13,6 +13,10 @@ const ui = new FindkitUI({
 			--findkit--brand-color: #2271b1;
 		}
 
+		.findkit--magnifying-glass-lightning {
+			visibility: visible;
+		}
+
 		a {
 			color: var(--findkit--brand-color);
 		}
