@@ -1,3 +1,12 @@
+## v0.2.2
+
+2023-12-04
+
+- Use the new brand color [20d960b](https://github.com/findkit/wp-findkit/commit/20d960b) - Esa-Matti Suuronen
+- Fix \_\_() call [e014f71](https://github.com/findkit/wp-findkit/commit/e014f71) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.1...v0.2.2
+
 ## v0.2.1
 
 2023-12-01
