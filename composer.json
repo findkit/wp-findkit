@@ -26,8 +26,8 @@
 		"firebase/php-jwt": "^6.3"
 	},
 	"scripts": {
-		"phpstan": "php -d memory_limit=4G ./vendor/bin/phpstan analyze src",
-		"phpcs": "phpcs src"
+		"phpstan": "php -d memory_limit=4G ./vendor/bin/phpstan analyze src *.php",
+		"phpcs": "phpcs src *.php"
 	},
 	"support": {
 		"issues": "https://github.com/findkit/wp-findkit/issues",
