@@ -93,11 +93,15 @@ class LiveUpdate
 
 	function enqueue_post(\WP_Post $post)
 	{
+		$is_development = defined('WP_ENV') && WP_ENV === 'development';
+
 		$can_live_update = apply_filters(
 			'findkit_can_live_update_post',
-			# By default do not equeue post in cli because integrations might
-			# cause unwanted live updates
-			php_sapi_name() !== 'cli',
+			// By default do not equeue post in cli because integrations might
+			// cause unwanted live updates
+			php_sapi_name() !== 'cli' &&
+				// Disable live update when in explicit development mode
+				!$is_development,
 			$post
 		);
 
