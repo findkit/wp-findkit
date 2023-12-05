@@ -33,7 +33,7 @@
 		"@types/wordpress__components": "^23.0.3",
 		"@types/wordpress__edit-post": "^7.5.1",
 		"@types/wordpress__plugins": "^3.0.0",
-		"@valu/git-tools": "^1.1.0",
+		"@valu/git-tools": "^1.1.1",
 		"@wordpress/core-data": "^6.18.0",
 		"@wordpress/data": "^9.11.0",
 		"@wordpress/scripts": "^26.18.0",

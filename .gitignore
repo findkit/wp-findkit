@@ -2,3 +2,4 @@ node_modules
 /vendor
 .DS_Store
 findkit.toml
+build
