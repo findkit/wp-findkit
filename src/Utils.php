@@ -82,9 +82,8 @@ class Utils
 		string $filename,
 		$options = []
 	) {
-		$asset_path =
-			plugin_dir_path(__DIR__) . "build/scripts/$filename.asset.php";
-		$file_path = plugin_dir_path(__DIR__) . "build/scripts/$filename.js";
+		$asset_path = plugin_dir_path(__DIR__) . "build/$filename.asset.php";
+		$file_path = plugin_dir_path(__DIR__) . "build/$filename.js";
 
 		$script_asset = require $asset_path;
 
@@ -99,7 +98,7 @@ class Utils
 		} else {
 			\wp_register_script(
 				$handle,
-				plugin_dir_url(__DIR__) . "build/scripts/$filename.js",
+				plugin_dir_url(__DIR__) . "build/$filename.js",
 				$script_asset['dependencies'],
 				$script_asset['version'],
 				$options['in_footer'] ?? true
@@ -110,6 +109,33 @@ class Utils
 			foreach ($options['globals'] as $name => $value) {
 				\wp_localize_script($handle, $name, $value);
 			}
+		}
+	}
+
+	static function register_asset_style(
+		string $handle,
+		string $filename,
+		$options = []
+	) {
+		$asset_path = plugin_dir_path(__DIR__) . "build/$filename.asset.php";
+		$file_path = plugin_dir_path(__DIR__) . "build/$filename.css";
+
+		$style_asset = require $asset_path;
+		if (
+			($options['inline'] ?? false) &&
+			// not available in old versions of wp. We can just fallback to
+			// normal registration if not
+			function_exists('wp_add_inline_style')
+		) {
+			\wp_register_style($handle, false);
+			\wp_add_inline_style($handle, file_get_contents($file_path));
+		} else {
+			\wp_register_style(
+				$handle,
+				plugin_dir_url(__DIR__) . "build/$filename.css",
+				[],
+				$style_asset['version']
+			);
 		}
 	}
 
@@ -124,5 +150,10 @@ class Utils
 				'target' => [],
 			],
 		]);
+	}
+
+	static function magifying_class_url()
+	{
+		return plugin_dir_url(__DIR__) . 'magifying-class.svg';
 	}
 }

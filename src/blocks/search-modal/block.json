@@ -1,0 +1,30 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "findkit/search-modal",
+	"category": "widgets",
+	"attributes": {
+		"publicToken": { "type": "string" },
+		"instanceId": { "type": "string" },
+		"categories": { "type": "string" },
+		"tags": { "type": "string" },
+		"postTypes": { "type": "string" },
+		"domains": { "type": "string" },
+		"rawTags": { "type": "string" }
+	},
+	"providesContext": {
+		"findkit/publicToken": "publicToken",
+		"findkit/instanceId": "instanceId"
+	},
+	"version": "0.1.0",
+	"title": "Findkit Search Modal",
+	"icon": "search",
+	"description": "Open Findkit Search Modal from a button, image or the search form.",
+	"supports": {},
+	"textdomain": "findkit",
+	"render": "file:render.php",
+	"viewScript": "findkit-search-blocks-view",
+	"style": "findkit-search-blocks-view",
+	"editorScript": "findkit-search-blocks-editor",
+	"editorStyle": ["findkit-search-blocks-view", "findkit-search-blocks-editor"]
+}

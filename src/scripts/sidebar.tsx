@@ -14,9 +14,9 @@ interface FindkitWPPageMeta {
 	_findkit_show_in_search?: "yes" | "no";
 }
 
-const settings: {
+declare const FINDKIT_GUTENBERG_SIDEBAR: {
 	postTypes: string[];
-} = (window as any).FINDKIT_GUTENBERG_SIDEBAR;
+};
 
 function usePostMeta<Meta>(): [
 	Meta | undefined,
@@ -59,7 +59,9 @@ registerPlugin("findkit-sidebar", {
 
 		const superwords = meta?._findkit_superwords ?? "";
 		const showInSearch = meta?._findkit_show_in_search;
-		const sidebarEnabled = settings.postTypes.includes(postType.type);
+		const sidebarEnabled = FINDKIT_GUTENBERG_SIDEBAR.postTypes.includes(
+			postType.type,
+		);
 
 		const canSavePostMeta =
 			postType.supportsCustomFields ||

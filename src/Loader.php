@@ -48,6 +48,7 @@ class Loader
 		(new SearchFormOverride())->bind();
 		(new LiveUpdate($this->api_client))->bind();
 		(new Settings\Page())->bind();
-		(new Gutenberg\FindkitBlocks())->bind();
+		(new RegisterBlocks())->bind();
+		(new GutenbergSidebar())->bind();
 	}
 }
