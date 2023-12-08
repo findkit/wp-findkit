@@ -70,7 +70,7 @@ jobs:
           echo '' >> readme.txt
           echo "* <$changelog_link>" >> readme.txt
 
-          git commit -m "Bump version number to v${next_version}"
+          git commit -m "Update version numbers to v${next_version}"
 
           git tag -a "$next_tag" -m "v$next_version"
 
