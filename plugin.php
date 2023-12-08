@@ -10,6 +10,7 @@ if (!defined('ABSPATH')) {
  * Description: Findkit.com helpers
  * Author: Esa-Matti Suuronen <findkit@findkit.com>
  * Version: 0.2.2
+ * License: GPLv2 or later
  */
 
 // To make this plugin work properly for both Composer users and non-composer
