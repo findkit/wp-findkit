@@ -58,7 +58,9 @@ jobs:
           fi
 
           sed -E -i "s/(.*Version:) .*/\1 ${next_version}/" plugin.php
-          git add plugin.php
+          sed -E -i "s/(Stable tag:) .*/\1 ${next_version}/" readme.txt
+
+          git add plugin.php readme.txt
           git commit -m "Bump version number to v${next_version}"
 
           git tag -a "$next_tag" -m "v$next_version"
