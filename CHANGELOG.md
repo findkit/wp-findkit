@@ -1,3 +1,12 @@
+## v0.2.3
+
+2023-12-08
+
+- WordPress plugin directory fixes
+- Add loading indicator to the admin search [165f1fc](https://github.com/findkit/wp-findkit/commit/165f1fc) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.2...v0.2.3
+
 ## v0.2.2
 
 2023-12-04
