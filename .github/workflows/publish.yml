@@ -61,6 +61,15 @@ jobs:
           sed -E -i "s/(Stable tag:) .*/\1 ${next_version}/" readme.txt
 
           git add plugin.php readme.txt
+
+          ## Delete previous changelog. Eg. all lines after the changelog header, including the header
+          sed  -i '/== Changelog ==/Q' readme.txt
+          echo '== Changelog ==' >> readme.txt
+          echo '' >> readme.txt
+          echo "= ${next_version} =" >> readme.txt
+          echo '' >> readme.txt
+          echo "* <$changelog_link>" >> readme.txt
+
           git commit -m "Bump version number to v${next_version}"
 
           git tag -a "$next_tag" -m "v$next_version"
