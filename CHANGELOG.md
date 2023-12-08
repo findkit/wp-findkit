@@ -117,7 +117,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v0.1.4...v0.1.5
 - Fix invalid url generation on wp-admin
 - Remove `vendor` from git
 - Upload a custom zip file with `vendor` to Github Releases
-- Fix composer autoload due to "finkdit" typo
+- Fix composer autoload due to "findkit" typo
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.1.3...v0.1.4
 
