@@ -1,3 +1,11 @@
+## v0.2.6
+
+2023-12-08
+
+-   Fix changelog update on readme.txt on release [33767f5](https://github.com/findkit/wp-findkit/commit/33767f5) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.5...v0.2.6
+
 ## v0.2.5
 
 2023-12-08
