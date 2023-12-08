@@ -11,7 +11,7 @@ help() {
 }
 
 repo="$(git remote get-url public | sed -nre 's/git@github\.com:(.+)\.git/\1/p')"
-upstream_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+upstream_branch="main"
 
 if [ "${1:-}" = "-h" -o "${1:-}" = "--help" ]; then
     help
