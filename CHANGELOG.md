@@ -1,3 +1,12 @@
+## v0.2.7
+
+2023-12-11
+
+-   Use 10up wp release action [12dddb6](https://github.com/findkit/wp-findkit/commit/12dddb6) - Esa-Matti Suuronen
+-   Move assets to .wordpress-org [69c3e7f](https://github.com/findkit/wp-findkit/commit/69c3e7f) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.6...v0.2.7
+
 ## v0.2.6
 
 2023-12-08
