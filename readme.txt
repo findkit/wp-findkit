@@ -14,7 +14,7 @@ real-time index updates, and embeddable UI. Free for small websites.
 
 == Description ==
 
-This is an official complementary plugin for [Findkit.com](https://www.findkit.com/) a cloud based search engine.
+This is an official complementary plugin for [Findkit.com](https://www.findkit.com/), a cloud based search engine.
 
 Plugin features
 
