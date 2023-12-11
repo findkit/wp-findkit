@@ -1,9 +1,19 @@
+## v0.2.8
+
+2023-12-11
+
+- Deployment fixes
+- Fix missing vendor from wp deployment [4c83b39](https://github.com/findkit/wp-findkit/commit/4c83b39) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.7...v0.2.8
+
 ## v0.2.7
 
 2023-12-11
 
--   Use 10up wp release action [12dddb6](https://github.com/findkit/wp-findkit/commit/12dddb6) - Esa-Matti Suuronen
--   Move assets to .wordpress-org [69c3e7f](https://github.com/findkit/wp-findkit/commit/69c3e7f) - Esa-Matti Suuronen
+- Brokean release :(
+- Use 10up wp release action [12dddb6](https://github.com/findkit/wp-findkit/commit/12dddb6) - Esa-Matti Suuronen
+- Move assets to .wordpress-org [69c3e7f](https://github.com/findkit/wp-findkit/commit/69c3e7f) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.2.6...v0.2.7
 
@@ -11,7 +21,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v0.2.6...v0.2.7
 
 2023-12-08
 
--   Fix changelog update on readme.txt on release [33767f5](https://github.com/findkit/wp-findkit/commit/33767f5) - Esa-Matti Suuronen
+- Fix changelog update on readme.txt on release [33767f5](https://github.com/findkit/wp-findkit/commit/33767f5) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.2.5...v0.2.6
 
@@ -19,7 +29,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v0.2.5...v0.2.6
 
 2023-12-08
 
--   Release commit message++ [9cab656](https://github.com/findkit/wp-findkit/commit/9cab656) - Esa-Matti Suuronen
+- Release commit message++ [9cab656](https://github.com/findkit/wp-findkit/commit/9cab656) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.2.4...v0.2.5
 
