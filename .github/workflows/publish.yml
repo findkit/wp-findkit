@@ -30,6 +30,7 @@ jobs:
       - name: Run composer install
         run: composer install --no-dev --optimize-autoloader
 
+
       - name: Update version number and tag
         run: |
           set -eu
@@ -74,12 +75,29 @@ jobs:
 
           git tag -a "$next_tag" -m "v$next_version"
 
-          git push origin HEAD:${{ github.event.repository.default_branch }}
-          git push origin --tags
 
           echo "next_version=$next_version" >> $GITHUB_ENV
           echo "next_tag=$next_tag" >> $GITHUB_ENV
           echo "changelog_link=$changelog_link" >> $GITHUB_ENV
+
+      - name: WordPress Plugin Deploy
+        id: wp-deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        with:
+          generate-zip: true
+        env:
+          SLUG: findkit
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          VERSION: ${{ env.next_version }}
+
+      - name: Push tags and commits
+        run: |
+          set -eu
+          set -x
+
+          git push origin HEAD:${{ github.event.repository.default_branch }}
+          git push origin --tags
 
       - name: Create Github Release entry
         uses: actions/github-script@v6
@@ -113,8 +131,8 @@ jobs:
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -H "Content-Type: application/octet-stream" \
-            https://uploads.github.com/repos/${{ github.event.repository.full_name }}/releases/${RELEASE_ID}/assets?name=findkit-vendor.${next_version}.zip \
-            --data-binary "@/tmp/release.zip"
+            https://uploads.github.com/repos/${{ github.event.repository.full_name }}/releases/${RELEASE_ID}/assets?name=findkit-vendor-v${next_version}.zip \
+            --data-binary "@${{ steps.wp-deploy.outputs.zip-path }}"
 
       - name: Notify publish fail
         if: failure()
