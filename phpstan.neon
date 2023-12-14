@@ -2,3 +2,7 @@ parameters:
 	level: 5
 	paths:
 		- src
+	ignoreErrors:
+		-
+			message: '#Variable \$(attributes|content) might not be defined#'
+			path: src/blocks/*/render.php
