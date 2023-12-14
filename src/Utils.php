@@ -156,4 +156,13 @@ class Utils
 	{
 		return plugin_dir_url(__DIR__) . 'magifying-class.svg';
 	}
+
+	static function echo_inner_blocks($content)
+	{
+		// There is no way to escape the innert blocks at this point. The inner
+		// block must be escaped before.
+		// https://github.com/WordPress/gutenberg/discussions/37823
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo $content;
+	}
 }

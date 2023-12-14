@@ -20,5 +20,5 @@ $placehoder = empty($attributes['inputPlaceholder'])
 
     <div class="wp-findkit-container" ></div>
 
-    <?php echo $content; ?>
+    <?php \Findkit\Utils::echo_inner_blocks($content); ?>
 </div>
