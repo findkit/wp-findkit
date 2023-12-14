@@ -3,7 +3,7 @@ Contributors: findkit
 Tags: search, site search, instant search, crawler, cloud
 Requires at least: 6.0
 Tested up to: 6.4.1
-Stable tag: 0.3.0
+Stable tag: 0.3.1
 Requires PHP: 7.2
 Donate link: https://www.findkit.com/
 License: GPLv2 or later
@@ -43,6 +43,6 @@ The plugin source is avaiable on Github <https://github.com/findkit/wp-findkit>
 
 == Changelog ==
 
-= 0.3.0 =
+= 0.3.1 =
 
-* <https://github.com/findkit/wp-findkit/blob/main/CHANGELOG.md#v030>
+* <https://github.com/findkit/wp-findkit/blob/main/CHANGELOG.md#v031>
