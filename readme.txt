@@ -32,6 +32,10 @@ Findkit.com is a paid service but it has a free plan for small websites. See pri
 
 https://www.youtube.com/watch?v=0qnLaAFwits
 
+= Source Code =
+
+The plugin source is avaiable on Github <https://github.com/findkit/wp-findkit>
+
 == Screenshots ==
 
 1. Screenshot of the WordPress Admin interface with the Findkit plugin installed and activated.
