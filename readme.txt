@@ -23,12 +23,14 @@ Plugin features
 * Makes it easy to embed the [Findkit UI](https://docs.findkit.com/ui/) on the public frontend
 * Adds cloud based search to the admin interface
 * Private search with JWT authentication
+* Gutenberg block for embedding the Findkit UI. See to block in the video below.
 * More on <https://www.findkit.com/wordpress/>
 
-Findkit.com is a paid service but it has a free plan for small websites. See
-pricing at [Findkit.com](https://www.findkit.com/#pricing) as well as [Terms &
-Conditions](https://www.findkit.com/terms-and-conditions/) and [Privacy
-Policy](https://www.findkit.com/privacy-policy/).
+Findkit.com is a paid service but it has a free plan for small websites. See pricing at [Findkit.com](https://www.findkit.com/#pricing) as well as [Terms & Conditions](https://www.findkit.com/terms-and-conditions/) and [Privacy Policy](https://www.findkit.com/privacy-policy/).
+
+= Gutenberg Blocks in Action =
+
+https://www.youtube.com/watch?v=0qnLaAFwits
 
 == Screenshots ==
 
