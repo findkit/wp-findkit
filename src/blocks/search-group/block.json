@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Findkit Search Group",
 	"icon": "search",
-	"description": "Add as an inner blocks to the Findkit Search Modal or Findkit Search Embed blocks to group search results by custom filters",
+	"description": "Add as an inner block to the Findkit Search Modal or as a Findkit Search Embed block to group search results by custom filters",
 	"category": "widgets",
 	"supports": {},
 	"textdomain": "findkit",

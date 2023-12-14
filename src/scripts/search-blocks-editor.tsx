@@ -92,7 +92,7 @@ function SearchFilterEditor(props: {
 				<SelectControl
 					multiple
 					label="Categories"
-					help="Show search results only form the selected categories"
+					help="Show search results only from the selected categories"
 					value={splitByComma(props.attributes.categories)}
 					onChange={(values) => {
 						props.setAttributes({ categories: values.join(",") });
@@ -107,7 +107,7 @@ function SearchFilterEditor(props: {
 				<SelectControl
 					multiple
 					label="WordPress Post Tags"
-					help="Show search results only form the selected tags"
+					help="Show search results only from the selected tags"
 					value={splitByComma(props.attributes.tags)}
 					onChange={(values) => {
 						props.setAttributes({ tags: values.join(",") });
