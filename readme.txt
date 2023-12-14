@@ -34,7 +34,7 @@ https://www.youtube.com/watch?v=0qnLaAFwits
 
 = Source Code =
 
-The plugin source is avaiable on Github <https://github.com/findkit/wp-findkit>
+The plugin source is available on Github <https://github.com/findkit/wp-findkit>
 
 == Screenshots ==
 
