@@ -1,3 +1,12 @@
+## v0.3.0
+
+2023-12-14
+
+- New Search Blocks [afe4aed](https://github.com/findkit/wp-findkit/commit/afe4aed) - Esa-Matti Suuronen
+- Upgrade build-in @findkit/ui to v0.17.0
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.2.8...v0.3.0
+
 ## v0.2.8
 
 2023-12-11
