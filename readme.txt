@@ -1,4 +1,4 @@
-=== Findkit ===
+=== Findkit - Site Search ===
 Contributors: findkit
 Tags: search, site search, instant search, crawler, cloud
 Requires at least: 6.0
