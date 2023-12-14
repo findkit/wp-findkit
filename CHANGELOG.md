@@ -1,3 +1,11 @@
+## v0.3.1
+
+2023-12-14
+
+- Plugin meta++ [3f02cb7](https://github.com/findkit/wp-findkit/commit/3f02cb7) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.3.0...v0.3.1
+
 ## v0.3.0
 
 2023-12-14
