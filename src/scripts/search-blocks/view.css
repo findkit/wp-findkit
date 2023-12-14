@@ -1,0 +1,39 @@
+body:not(.wp-admin) .wp-block-findkit-search-group {
+    display: none;
+}
+
+.wp-block-findkit-search-modal figure {
+    margin: 0;
+}
+
+.wp-block-findkit-search-embed {
+    display: block;
+    --findkit-search-input-size: 56px;
+}
+
+input.wp-findkit-search-input {
+    width: 100%;
+    height: var(--findkit-search-input-size);
+    border-radius: 2rem;
+    padding-left: var(--findkit-search-input-size);
+    padding-right: 2rem;
+    background-color: rgb(249,248,248);
+    border: 1px solid black;
+}
+
+.wp-findkit-input-wrap {
+    position: relative;
+}
+
+.wp-findkit-input-wrap:after {
+    background-image: url('../../../magnifying-glass.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    width: var(--findkit-search-input-size);
+}

@@ -1,0 +1,39 @@
+
+
+.wp-block-findkit-search-modal .wp-block-findkit-search-group {
+    display: none;
+    font-style: italic;
+}
+
+.wp-block-findkit-search-group, .findkit-no-embed-inner-blocks {
+    font-size: small;
+    border: 1px dashed gray;
+    padding: 1rem;
+    margin: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    font-style: italic;
+}
+
+.findkit-search-group-title {
+    font-weight: bold;
+}
+
+.findkit-search-group-help {
+    font-size: small;
+}
+
+.findkit-no-modal-inner-blocks {
+    border: 1px dashed gray;
+    padding: 1rem;
+    font-size: small;
+    font-style: italic;
+}
+
+.findkit-no-modal-inner-blocks p {
+    margin: 0;
+    padding: 0;
+}
+
+.findkit-no-embed-inner-blocks {
+}

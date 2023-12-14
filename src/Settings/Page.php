@@ -44,7 +44,10 @@ class Page
 				'description' => function () {
 					Utils::echo_sanitized_html(
 						__(
-							'Looks for the default search form with role=search and replaces it with the Findkit search. Findkit Public Token must be defined. For more personalized search experience we recommend manually integrating the search interface to your theme. Please refer to the Findkit <a target="_blank" href="https://docs.findkit.com/ui/">documentation</a> for more information.',
+							'Look for the default search form with role=search and replace it with the Findkit search. ' .
+								'Alternatively there is also a Gutenberg Block for adding a Findkit search button or form. ' .
+								'It is also possible to add the search programmatically if you are a theme developer. ' .
+								'See the <a target="_blank" href="https://docs.findkit.com/ui/">Findkit UI Documentation</a> for more information.',
 							'findkit'
 						)
 					);

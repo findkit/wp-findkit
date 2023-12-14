@@ -1,1 +1,0 @@
-Object.assign(window,{async FINDKIT_GET_JWT_TOKEN(){if(FINDKIT_JWT.initialToken){const n=FINDKIT_JWT.initialToken;return FINDKIT_JWT.initialToken=null,{jwt:n}}return(await fetch(FINDKIT_JWT.endpoint,{method:"POST",headers:{"x-wp-nonce":FINDKIT_JWT.nonce}})).json()}});

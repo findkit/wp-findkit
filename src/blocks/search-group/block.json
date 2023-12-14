@@ -1,0 +1,27 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "findkit/search-group",
+	"version": "0.1.0",
+	"title": "Findkit Search Group",
+	"icon": "search",
+	"description": "Add as an inner blocks to the Findkit Search Modal or Findkit Search Embed blocks to group search results by custom filters",
+	"category": "widgets",
+	"supports": {},
+	"textdomain": "findkit",
+	"parent": ["findkit/search-modal", "findkit/search-embed"],
+	"attributes": {
+		"groupTitle": { "type": "string" },
+		"categories": { "type": "string" },
+		"tags": { "type": "string" },
+		"postTypes": { "type": "string" },
+		"domains": { "type": "string" },
+		"rawTags": { "type": "string" }
+	},
+	"usesContext": ["findkit/publicToken"],
+	"viewScript": "findkit-search-blocks-view",
+	"render": "file:render.php",
+	"style": "findkit-search-blocks-view",
+	"editorScript": "findkit-search-blocks-editor",
+	"editorStyle": "findkit-search-blocks-editor"
+}
