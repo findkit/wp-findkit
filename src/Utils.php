@@ -159,7 +159,7 @@ class Utils
 
 	static function echo_inner_blocks($content)
 	{
-		// There is no way to escape the innert blocks at this point. The inner
+		// There is no way to escape the inner blocks at this point. The inner
 		// block must be escaped before.
 		// https://github.com/WordPress/gutenberg/discussions/37823
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
