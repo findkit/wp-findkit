@@ -1,3 +1,12 @@
+## v0.3.2
+
+2023-12-14
+
+-   plugin meta++ [d4c6ee9](https://github.com/findkit/wp-findkit/commit/d4c6ee9) - Esa-Matti Suuronen
+-   typo [2341511](https://github.com/findkit/wp-findkit/commit/2341511) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.3.1...v0.3.2
+
 ## v0.3.1
 
 2023-12-14
