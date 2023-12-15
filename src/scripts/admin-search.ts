@@ -5,12 +5,48 @@ declare const FINDKIT_ADMIN_SEARCH: {
 	settingsURL: string;
 };
 
+function observeSize(ui: FindkitUI, selectors: Record<string, string>) {
+	ui.on("open", (event) => {
+		for (const [name, selector] of Object.entries(selectors)) {
+			if (event.container instanceof HTMLElement) {
+				event.container.style.setProperty(`--${name}-height`, `0px`);
+				event.container.style.setProperty(`--${name}-width`, `0px`);
+			}
+
+			const el = document.querySelector(selector);
+			if (!el) {
+				continue;
+			}
+
+			const observer = new ResizeObserver((entries) => {
+				const height = entries[0]?.borderBoxSize[0]?.blockSize ?? 0;
+				const width = entries[0]?.borderBoxSize[0]?.inlineSize ?? 0;
+
+				if (event.container instanceof HTMLElement) {
+					event.container.style.setProperty(`--${name}-height`, `${height}px`);
+					event.container.style.setProperty(`--${name}-width`, `${width}px`);
+				}
+			});
+
+			observer.observe(el);
+			ui.once("close", () => {
+				observer.disconnect();
+			});
+		}
+	});
+}
+
 const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
 	instanceId: "findkit_wp_admin",
 	css: css`
 		:host {
 			--findkit--brand-color: #2271b1;
+		}
+
+		.findkit--modal-container {
+			left: var(--admin-menu-width);
+			top: var(--admin-bar-height);
 		}
 
 		.findkit--magnifying-glass-lightning {
@@ -69,6 +105,12 @@ const ui = new FindkitUI({
             `;
 		},
 	},
+});
+
+
+observeSize(ui, {
+	"admin-menu": "#adminmenu",
+	"admin-bar": "#wpadminbar",
 });
 
 ui.on("loading", () => {
