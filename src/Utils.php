@@ -71,7 +71,7 @@ class Utils
 	}
 
 	/**
-	 * Register script build using wp-scripts. Returns the handle.
+	 * Register script build using wp-scripts.
 	 *
 	 * @param string $handle
 	 * @param string $filename
