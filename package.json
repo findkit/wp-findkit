@@ -9,8 +9,8 @@
 		"tsc": "tsc",
 		"phpstan": "composer phpstan",
 		"phpcs": "composer phpcs",
-		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*.{ts,tsx}",
-		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*.{ts,tsx}",
+		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*.ts?",
+		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*.ts?",
 		"build-hide": "git valu-hide-changes build",
 		"build-commit": "npm run build && git valu-commit-changes build"
 	},
