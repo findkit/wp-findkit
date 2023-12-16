@@ -33,17 +33,6 @@ class Section
 
 	function __action_admin_init()
 	{
-		$show = apply_filters(
-			'findkit_show_settings_section',
-			current_user_can('manage_options'),
-			$this->section,
-			$this->page
-		);
-
-		if (!$show) {
-			return;
-		}
-
 		\add_settings_section(
 			$this->section,
 			$this->title,

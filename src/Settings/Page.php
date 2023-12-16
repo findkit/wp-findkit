@@ -133,10 +133,22 @@ class Page
 
 	function __action_admin_menu()
 	{
-		add_options_page('Findkit', 'Findkit', 'manage_options', $this->page, [
-			$this,
-			'__options_page_findkit_settings',
+		$args = apply_filters('findkit_options_page', [
+			'title' => __('Findkit', 'findkit'),
+			'capability' => 'manage_options',
 		]);
+
+		if (!$args) {
+			return;
+		}
+
+		add_options_page(
+			'findkit',
+			$args['title'],
+			$args['capability'],
+			$this->page,
+			[$this, '__options_page_findkit_settings']
+		);
 	}
 
 	// prettier-ignore
