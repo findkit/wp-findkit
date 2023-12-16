@@ -123,12 +123,13 @@ class PageMeta
 		];
 
 		$superwords = \get_post_meta($post->ID, '_findkit_superwords', true);
+
 		if ($superwords) {
 			$superwords = trim($superwords);
 			if (!empty($superwords)) {
 				$meta['superwords'] = [];
 				foreach (preg_split('/\s+/', $superwords) as $word) {
-					$word = \esc_js(trim($word));
+					$word = trim($word);
 					if ($word) {
 						$meta['superwords'][] = $word;
 					}
