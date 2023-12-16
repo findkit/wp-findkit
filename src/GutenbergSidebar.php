@@ -59,6 +59,15 @@ class GutenbergSidebar
 				},
 			]);
 
+			\register_post_meta($type, '_findkit_content_no_highlight', [
+				'show_in_rest' => true,
+				'single' => true,
+				'type' => 'string',
+				'auth_callback' => function () {
+					return \current_user_can('edit_posts');
+				},
+			]);
+
 			\register_post_meta($type, '_findkit_show_in_search', [
 				'show_in_rest' => true,
 				'single' => true,

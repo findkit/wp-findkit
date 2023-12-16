@@ -9,6 +9,7 @@ import { useEffect } from "react";
 
 interface FindkitWPPageMeta {
 	_findkit_superwords?: string;
+	_findkit_content_no_highlight?: string;
 	// real boolean value did not work in post meta for some reason, so we use
 	// stringy value
 	_findkit_show_in_search?: "yes" | "no";
@@ -58,6 +59,8 @@ registerPlugin("findkit-sidebar", {
 		const [meta, setMeta] = usePostMeta<FindkitWPPageMeta>();
 
 		const superwords = meta?._findkit_superwords ?? "";
+		const contentNoHighlight = meta?._findkit_content_no_highlight ?? "";
+
 		const showInSearch = meta?._findkit_show_in_search;
 		const sidebarEnabled = FINDKIT_GUTENBERG_SIDEBAR.postTypes.includes(
 			postType.type,
@@ -78,10 +81,6 @@ registerPlugin("findkit-sidebar", {
 			}
 		}, [canSavePostMeta, sidebarEnabled]);
 
-		const updateMetaValue = (newValue: string) => {
-			setMeta({ ...meta, _findkit_superwords: newValue });
-		};
-
 		if (!sidebarEnabled || !canSavePostMeta) {
 			return null;
 		}
@@ -98,10 +97,26 @@ registerPlugin("findkit-sidebar", {
 					help={
 						<>
 							A space-separated list of words which will promote this page to
-							the top of the search results when these words are searched.
+							the top of the search results when these words are searched for.
 						</>
 					}
-					onChange={updateMetaValue}
+					onChange={(newValue) => {
+						setMeta({ ...meta, _findkit_superwords: newValue });
+					}}
+				/>
+
+				<TextareaControl
+					label="Content No Highlight"
+					value={contentNoHighlight}
+					help={
+						<>
+							Searchable text that will not be highlighted in the search results
+							or shown on the actual page.
+						</>
+					}
+					onChange={(newValue) => {
+						setMeta({ ...meta, _findkit_content_no_highlight: newValue });
+					}}
 				/>
 
 				<ToggleControl

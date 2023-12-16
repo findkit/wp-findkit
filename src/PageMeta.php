@@ -137,6 +137,19 @@ class PageMeta
 			}
 		}
 
+		$content_no_highlight = \get_post_meta(
+			$post->ID,
+			'_findkit_content_no_highlight',
+			true
+		);
+
+		if ($content_no_highlight) {
+			$content_no_highlight = trim($content_no_highlight);
+			if (!empty($content_no_highlight)) {
+				$meta['contentNoHighlight'] = $content_no_highlight;
+			}
+		}
+
 		// Use the post language if using polylang instead of the blog locale.
 		if (function_exists('\pll_get_post_language')) {
 			$meta['language'] = \pll_get_post_language($post->ID, 'slug');
