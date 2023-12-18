@@ -10,6 +10,9 @@
     "instanceId": {
       "type": "string"
     },
+    "colorSlug": {
+      "type": "string"
+    },
     "inputPlaceholder": {
       "type": "string"
     },
