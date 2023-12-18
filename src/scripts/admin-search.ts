@@ -39,7 +39,7 @@ function observeSize(ui: FindkitUI, selectors: Record<string, string>) {
 
 const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
-	instanceId: "findkit_wp_admin",
+	instanceId: "admsearch",
 	minTerms: 0,
 	css: css`
 		.findkit--container {
