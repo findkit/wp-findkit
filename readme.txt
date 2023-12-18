@@ -43,6 +43,4 @@ The plugin source is available on Github <https://github.com/findkit/wp-findkit>
 
 == Changelog ==
 
-= 0.3.2 =
-
-* <https://github.com/findkit/wp-findkit/blob/main/CHANGELOG.md#v032>
+Checkout on Github https://github.com/findkit/wp-findkit/blob/main/CHANGELOG.md
