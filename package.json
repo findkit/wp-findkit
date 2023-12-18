@@ -9,6 +9,7 @@
 		"tsc": "tsc",
 		"phpstan": "composer phpstan",
 		"phpcs": "composer phpcs",
+		"zip": "./tools/zip",
 		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*.ts*",
 		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*.ts*",
 		"build-hide": "git valu-hide-changes build",

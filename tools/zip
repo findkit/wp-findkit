@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eu
+
+rm -rf vendor findkit.zip
+composer install --no-dev --no-interaction --optimize-autoloader
+npm run build
+zip -r /tmp/release.zip . -x "node_modules/*" -x ".git/*"
+mv /tmp/release.zip findkit.zip
