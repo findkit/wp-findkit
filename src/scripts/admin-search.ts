@@ -42,7 +42,7 @@ const ui = new FindkitUI({
 	instanceId: "findkit_wp_admin",
 	minTerms: 0,
 	css: css`
-		:host {
+		.findkit--container {
 			--findkit--brand-color: #2271b1;
 		}
 
