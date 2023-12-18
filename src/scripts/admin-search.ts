@@ -40,6 +40,7 @@ function observeSize(ui: FindkitUI, selectors: Record<string, string>) {
 const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
 	instanceId: "findkit_wp_admin",
+	minTerms: 0,
 	css: css`
 		:host {
 			--findkit--brand-color: #2271b1;
@@ -108,10 +109,21 @@ const ui = new FindkitUI({
 	},
 });
 
-
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
 	"admin-bar": "#wpadminbar",
+});
+
+ui.on("fetch", (e) => {
+	if (e.terms.trim() === "") {
+		e.transientUpdateParams({
+			sort: {
+				modified: {
+					$order: "desc",
+				},
+			},
+		});
+	}
 });
 
 ui.on("loading", () => {
