@@ -84,7 +84,11 @@ class AdminSearch
 
 		$wp_admin_bar->add_node([
 			'id' => 'findkit-adminbar',
-			'title' => __('Findkit Search', 'findkit'),
+			'title' => _x(
+				'Findkit Search',
+				'Admin search button label',
+				'findkit'
+			),
 			// Ensures middle click opens in new tab with the search
 			'href' => add_query_arg(['findkit_wp_admin_q' => '']),
 			'meta' => [
