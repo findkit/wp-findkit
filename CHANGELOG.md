@@ -1,9 +1,20 @@
+## v0.4.0
+
+2023-12-18
+
+- Add color picker for search blocks [9161212](https://github.com/findkit/wp-findkit/commit/9161212) - Esa-Matti Suuronen
+- Add options page filter [9c2ba4f](https://github.com/findkit/wp-findkit/commit/9c2ba4f) - Esa-Matti Suuronen
+- Add contentNoHighlight input to the sidebar [29b4ffe](https://github.com/findkit/wp-findkit/commit/29b4ffe) - Esa-Matti Suuronen
+- Offset admin search to menus [70e40b5](https://github.com/findkit/wp-findkit/commit/70e40b5) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.3.2...v0.4.0
+
 ## v0.3.2
 
 2023-12-14
 
--   plugin meta++ [d4c6ee9](https://github.com/findkit/wp-findkit/commit/d4c6ee9) - Esa-Matti Suuronen
--   typo [2341511](https://github.com/findkit/wp-findkit/commit/2341511) - Esa-Matti Suuronen
+- plugin meta++ [d4c6ee9](https://github.com/findkit/wp-findkit/commit/d4c6ee9) - Esa-Matti Suuronen
+- typo [2341511](https://github.com/findkit/wp-findkit/commit/2341511) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.3.1...v0.3.2
 
