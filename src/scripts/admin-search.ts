@@ -3,6 +3,7 @@ import { FindkitUI, html, css } from "@findkit/ui";
 declare const FINDKIT_ADMIN_SEARCH: {
 	publicToken: string;
 	settingsURL: string;
+	showSettingsLink?: boolean;
 };
 
 function observeSize(ui: FindkitUI, selectors: Record<string, string>) {
@@ -68,7 +69,7 @@ const ui = new FindkitUI({
 			// prettier-ignore
 			return html`
                 ${props.children}
-                ${FINDKIT_ADMIN_SEARCH.settingsURL
+                ${FINDKIT_ADMIN_SEARCH.showSettingsLink
                     ? html`
                         <a href="${FINDKIT_ADMIN_SEARCH.settingsURL}"
                             class="findkit--wp-admin-link findkit--hit-url findkit--link">
