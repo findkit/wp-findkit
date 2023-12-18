@@ -16,6 +16,7 @@ interface Attributes {
 	publicToken?: string;
 	instanceId?: string;
 	groupTitle?: string;
+	colorSlug?: string;
 
 	categories: string[];
 	tags: string[];
@@ -48,6 +49,7 @@ function parseAttributes(container: HTMLElement): Attributes {
 		publicToken: attrs.publicToken,
 		instanceId: attrs.instanceId,
 		groupTitle: attrs.groupTitle,
+		colorSlug: attrs.colorSlug,
 		categories,
 		tags,
 		postTypes,
@@ -159,6 +161,10 @@ function initUI(
 
 	USED_IDS.add(instanceId);
 
+	const brandColor = attributes.colorSlug
+		? `var(--wp--preset--color--${attributes.colorSlug}, #c828d2)`
+		: "#c828d2";
+
 	return new FindkitUI({
 		publicToken,
 		instanceId,
@@ -167,8 +173,7 @@ function initUI(
 		groups: groups as any,
 		css: css`
 			.findkit--container {
-				/* use the block theme color if available */
-				--findkit--brand-color: var(--wp--preset--color--primary, #c828d2);
+				--findkit--brand-color: ${brandColor};
 			}
 		`,
 		...overrides,

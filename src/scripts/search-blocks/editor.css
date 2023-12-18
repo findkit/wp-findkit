@@ -37,3 +37,20 @@
 
 .findkit-no-embed-inner-blocks {
 }
+
+.findkit-color-picker {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.findkit-label {
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.findkit-help {
+    color: rgb(117, 117, 117);
+}

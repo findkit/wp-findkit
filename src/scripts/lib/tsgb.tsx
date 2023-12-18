@@ -1,5 +1,12 @@
 import { useSelect, useDispatch } from "@wordpress/data";
-import { store as blockEditorStore } from "@wordpress/block-editor";
+import {
+	store as blockEditorStore,
+
+	// deprecated but the new useSettings is not available in the current
+	// version?
+	// @ts-ignore
+	useSetting,
+} from "@wordpress/block-editor";
 import { BlockInstance } from "@wordpress/blocks";
 
 export function useBlockEditorStore(): {
@@ -27,6 +34,16 @@ interface PostType {
 		editor: boolean;
 	};
 	viewable: boolean;
+}
+
+interface PaletteColor {
+	name: string;
+	color: string;
+	slug: string;
+}
+
+export function useColorPalette(): PaletteColor[] {
+	return useSetting("color.palette");
 }
 
 export function useTaxonomyTerms(termName: string): TaxonomyTerm[] {

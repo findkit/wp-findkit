@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
 	BlockEditProps,
-	TemplateArray,
 	registerBlockType,
 	createBlock,
 } from "@wordpress/blocks";
@@ -9,7 +8,6 @@ import {
 	InnerBlocks,
 	useBlockProps,
 	InspectorControls,
-	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 
 import "./search-blocks/view.css";
@@ -17,8 +15,6 @@ import "./search-blocks/editor.css";
 
 import {
 	Button,
-	Card,
-	CardBody,
 	Panel,
 	PanelBody,
 	PanelRow,
@@ -38,6 +34,7 @@ import {
 	useTaxonomyTerms,
 } from "./lib/tsgb";
 import { ReactNode } from "react";
+import { ColorSlugPickerFromPalette } from "./lib/components";
 
 export interface FindkitFilterAttributes {
 	categories?: string;
@@ -196,6 +193,19 @@ function ConfigureSearchBlock(
 						}
 					/>
 				</PanelRow>
+				<PanelRow className="findkit-color-picker">
+					<ColorSlugPickerFromPalette
+						label="Brand Color"
+						help="Select brand color for the search UI"
+						value={props.attributes.colorSlug}
+						onChange={(value) => {
+							props.setAttributes({
+								colorSlug: value,
+							});
+						}}
+					/>
+				</PanelRow>
+
 				{props.children}
 			</PanelBody>
 			<PanelBody title="Search Filters" initialOpen={false}>

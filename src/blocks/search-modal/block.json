@@ -6,6 +6,7 @@
 	"attributes": {
 		"publicToken": { "type": "string" },
 		"instanceId": { "type": "string" },
+		"colorSlug": { "type": "string" },
 		"categories": { "type": "string" },
 		"tags": { "type": "string" },
 		"postTypes": { "type": "string" },
