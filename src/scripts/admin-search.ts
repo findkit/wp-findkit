@@ -46,6 +46,10 @@ const ui = new FindkitUI({
 			--findkit--brand-color: #2271b1;
 		}
 
+		.findkit--backdrop {
+			z-index: 1;
+		}
+
 		.findkit--modal-container {
 			left: var(--admin-menu-width);
 			top: var(--admin-bar-height);
