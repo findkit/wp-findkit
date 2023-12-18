@@ -30,7 +30,7 @@ Findkit.com is a paid service but it has a free plan for small websites. See pri
 
 = Gutenberg Blocks in Action =
 
-https://www.youtube.com/watch?v=0qnLaAFwits
+https://vimeo.com/895790608
 
 = Source Code =
 
