@@ -118,6 +118,15 @@ observeSize(ui, {
 	"admin-bar": "#wpadminbar",
 });
 
+document.body.addEventListener("click", (e) => {
+	if (
+		e.target instanceof HTMLElement &&
+		!e.target.classList.contains("findkit")
+	) {
+		ui.close();
+	}
+});
+
 ui.on("fetch", (e) => {
 	if (e.terms.trim() === "") {
 		e.transientUpdateParams({
