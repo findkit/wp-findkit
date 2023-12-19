@@ -90,7 +90,7 @@ class AdminSearch
 				'findkit'
 			),
 			// Ensures middle click opens in new tab with the search
-			'href' => add_query_arg(['findkit_wp_admin_q' => '']),
+			'href' => add_query_arg(['admsearch_q' => '']),
 			'meta' => [
 				'class' => 'findkit-adminbar-search',
 			],
