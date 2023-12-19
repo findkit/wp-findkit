@@ -30,10 +30,14 @@ jobs:
       - name: Run composer install
         run: composer install --no-dev --optimize-autoloader
 
+      - name: Run npm install
+        run: |
+          set -eu
+          npm ci
+
       - name: Build and commit wp-scripts build
         run: |
           set -eu
-          set -x
           npm run build-commit
 
       - name: Update version number and tag
