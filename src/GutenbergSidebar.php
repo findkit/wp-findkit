@@ -23,18 +23,18 @@ class GutenbergSidebar
 	}
 	function __action_enqueue_block_editor_assets()
 	{
-		\wp_localize_script(
-			'findkit-sidebar-editor-script',
-			'FINDKIT_GUTENBERG_SIDEBAR',
-			[
-				'postTypes' => $this->post_types,
-			]
-		);
-
 		Utils::register_asset_script('findkit-sidebar', 'sidebar.tsx', [
 			'globals' => [
 				'FINDKIT_GUTENBERG_SIDEBAR' => [
 					'postTypes' => $this->post_types,
+					'showSuperwordsEditor' => get_option(
+						'findkit_show_superwords_editor',
+						true
+					),
+					'showContentNoHighlightEditor' => get_option(
+						'findkit_show_content_no_highlight_editor',
+						true
+					),
 				],
 			],
 		]);

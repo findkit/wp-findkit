@@ -3,6 +3,7 @@ import { FindkitUI, html, css } from "@findkit/ui";
 declare const FINDKIT_ADMIN_SEARCH: {
 	publicToken: string;
 	settingsURL: string;
+	showSettingsLink?: boolean;
 };
 
 function observeSize(ui: FindkitUI, selectors: Record<string, string>) {
@@ -38,10 +39,15 @@ function observeSize(ui: FindkitUI, selectors: Record<string, string>) {
 
 const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
-	instanceId: "findkit_wp_admin",
+	instanceId: "admsearch",
+	minTerms: 0,
 	css: css`
-		:host {
+		.findkit--container {
 			--findkit--brand-color: #2271b1;
+		}
+
+		.findkit--backdrop {
+			z-index: 1;
 		}
 
 		.findkit--modal-container {
@@ -68,7 +74,7 @@ const ui = new FindkitUI({
 			// prettier-ignore
 			return html`
                 ${props.children}
-                ${FINDKIT_ADMIN_SEARCH.settingsURL
+                ${FINDKIT_ADMIN_SEARCH.showSettingsLink
                     ? html`
                         <a href="${FINDKIT_ADMIN_SEARCH.settingsURL}"
                             class="findkit--wp-admin-link findkit--hit-url findkit--link">
@@ -107,10 +113,30 @@ const ui = new FindkitUI({
 	},
 });
 
-
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
 	"admin-bar": "#wpadminbar",
+});
+
+document.body.addEventListener("click", (e) => {
+	if (
+		e.target instanceof HTMLElement &&
+		!e.target.classList.contains("findkit")
+	) {
+		ui.close();
+	}
+});
+
+ui.on("fetch", (e) => {
+	if (e.terms.trim() === "") {
+		e.transientUpdateParams({
+			sort: {
+				modified: {
+					$order: "desc",
+				},
+			},
+		});
+	}
 });
 
 ui.on("loading", () => {

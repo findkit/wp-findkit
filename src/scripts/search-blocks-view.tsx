@@ -168,7 +168,6 @@ function initUI(
 	return new FindkitUI({
 		publicToken,
 		instanceId,
-		minTerms: 0,
 		params,
 		groups: groups as any,
 		css: css`
@@ -229,6 +228,7 @@ for (const container of document.querySelectorAll(
 		header: false,
 		container: searchContainer,
 		infiniteScroll: false,
+		minTerms: 0,
 	});
 
 	if (input instanceof HTMLInputElement) {

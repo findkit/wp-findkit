@@ -40,9 +40,15 @@ class AdminSearch
 				'globals' => [
 					'FINDKIT_ADMIN_SEARCH' => [
 						'publicToken' => \get_option('findkit_project_id'),
-						'settingsURL' => \current_user_can('manage_options')
-							? Utils::get_findkit_settings_url()
-							: null,
+						'showSettingsLink' => \current_user_can(
+							'manage_options'
+						)
+							? get_option(
+								'findkit_admin_search_show_settings_link',
+								true
+							)
+							: false,
+						'settingsURL' => Utils::get_findkit_settings_url(),
 					],
 				],
 			]
@@ -78,7 +84,11 @@ class AdminSearch
 
 		$wp_admin_bar->add_node([
 			'id' => 'findkit-adminbar',
-			'title' => __('Findkit Search', 'findkit'),
+			'title' => _x(
+				'Findkit Search',
+				'Admin search button label',
+				'findkit'
+			),
 			// Ensures middle click opens in new tab with the search
 			'href' => add_query_arg(['findkit_wp_admin_q' => '']),
 			'meta' => [
