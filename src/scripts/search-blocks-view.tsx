@@ -182,7 +182,9 @@ function initUI(
 for (const container of document.querySelectorAll(
 	".wp-block-findkit-search-modal",
 )) {
-	const ui = initUI(container);
+	const ui = initUI(container, {
+		backdrop: true,
+	});
 	const img = container.querySelector(".wp-block-image img");
 	if (img instanceof HTMLImageElement) {
 		img.role = "button";
