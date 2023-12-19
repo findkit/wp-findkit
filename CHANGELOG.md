@@ -1,3 +1,20 @@
+## v0.5.0
+
+2023-12-19
+
+- Show backdrop by default on Search Modal block [62abb46](https://github.com/findkit/wp-findkit/commit/62abb46) - Esa-Matti Suuronen
+- Upgrade to @findkit/ui v0.18.0 [e256b8d](https://github.com/findkit/wp-findkit/commit/e256b8d) - Esa-Matti Suuronen
+- Use zero minTerms only for the embed block [ba3757e](https://github.com/findkit/wp-findkit/commit/ba3757e) - Esa-Matti Suuronen
+- New instance id for admin search: admsearch [b970e52](https://github.com/findkit/wp-findkit/commit/b970e52) - Esa-Matti Suuronen
+- Close admin search on outside click [eb82011](https://github.com/findkit/wp-findkit/commit/eb82011) - Esa-Matti Suuronen
+- Fix admin search hiding admin menus [1bd7f25](https://github.com/findkit/wp-findkit/commit/1bd7f25) - Esa-Matti Suuronen
+- Show lastly edited docs on the admin search if no search terms are entered [3bc51ad](https://github.com/findkit/wp-findkit/commit/3bc51ad) - Esa-Matti Suuronen
+- Add filters for sidebar controls [f9c94e6](https://github.com/findkit/wp-findkit/commit/f9c94e6) - Esa-Matti Suuronen
+- Add context to the admin search button label [5f89f55](https://github.com/findkit/wp-findkit/commit/5f89f55) - Esa-Matti Suuronen
+- Add options for settings link in admin search [301634e](https://github.com/findkit/wp-findkit/commit/301634e) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.4.0...v0.5.0
+
 ## v0.4.0
 
 2023-12-18
