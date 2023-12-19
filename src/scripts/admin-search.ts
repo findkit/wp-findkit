@@ -41,6 +41,7 @@ const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
 	instanceId: "admsearch",
 	minTerms: 0,
+	closeOnOutsideClick: true,
 	css: css`
 		.findkit--container {
 			--findkit--brand-color: #2271b1;
@@ -113,18 +114,11 @@ const ui = new FindkitUI({
 	},
 });
 
+ui.openFrom("#wp-admin-bar-findkit-adminbar a");
+
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
 	"admin-bar": "#wpadminbar",
-});
-
-document.body.addEventListener("click", (e) => {
-	if (
-		e.target instanceof HTMLElement &&
-		!e.target.classList.contains("findkit")
-	) {
-		ui.close();
-	}
 });
 
 ui.on("fetch", (e) => {
@@ -152,31 +146,5 @@ ui.on("loading-done", () => {
 	if (el instanceof HTMLElement && el.dataset.origContent) {
 		el.innerHTML = el.dataset.origContent;
 		delete el.dataset.origContent;
-	}
-});
-
-function isAdminItem(e: { target: unknown }) {
-	if (e.target instanceof HTMLElement) {
-		if (
-			e.target.classList.contains("findkit-admin-search") ||
-			e.target.closest(".findkit-adminbar-search")
-		) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-document.addEventListener("click", (e) => {
-	if (isAdminItem(e)) {
-		e.preventDefault();
-		ui.open();
-	}
-});
-
-document.addEventListener("mouseover", (e) => {
-	if (isAdminItem(e)) {
-		ui.preload();
 	}
 });
