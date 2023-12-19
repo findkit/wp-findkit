@@ -1,3 +1,12 @@
+## v0.5.1
+
+2023-12-19
+
+- Build with correct npm package versions
+- Always rebuild in release from now on
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.0...v0.5.1
+
 ## v0.5.0
 
 2023-12-19
