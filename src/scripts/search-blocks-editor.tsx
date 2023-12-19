@@ -334,13 +334,13 @@ function EditSearchGroup(
 					<PanelBody title="Settings" initialOpen={true}>
 						<PanelRow>
 							<TextControl
+								label="Group Title"
 								value={props.attributes.groupTitle || ""}
 								onChange={(value) => {
 									props.setAttributes({
 										groupTitle: value,
 									});
 								}}
-								label="Group Title"
 							/>
 						</PanelRow>
 
