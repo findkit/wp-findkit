@@ -27,6 +27,12 @@ jobs:
         with:
           php-version: "8.2"
 
+      - name: Configure git
+        run: |
+          set -eu
+          git config user.email "action@github.com"
+          git config user.name "${{ github.actor }}"
+
       - name: Run composer install
         run: composer install --no-dev --optimize-autoloader
 
@@ -44,9 +50,6 @@ jobs:
         run: |
           set -eu
           set -x
-
-          git config user.email "action@github.com"
-          git config user.name "${{ github.actor }}"
 
           echo "$GITHUB_REF"
           next_version=$(echo "$GITHUB_REF" | cut -d / -f 4)
