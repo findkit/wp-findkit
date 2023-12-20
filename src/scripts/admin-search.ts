@@ -115,6 +115,7 @@ const ui = new FindkitUI({
 });
 
 ui.openFrom("#wp-admin-bar-findkit-adminbar a");
+ui.trapFocus("#wp-admin-bar-findkit-adminbar a");
 
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
