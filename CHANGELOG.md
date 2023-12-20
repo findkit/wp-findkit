@@ -1,3 +1,12 @@
+## v0.5.2
+
+2023-12-20
+
+-   Trap focus to admin search opener [c4c4de7](https://github.com/findkit/wp-findkit/commit/c4c4de7) - Esa-Matti Suuronen
+-   Upgrade @findkit/ui to v0.18.1 [ddcff89](https://github.com/findkit/wp-findkit/commit/ddcff89) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.1...v0.5.2
+
 ## v0.5.1
 
 2023-12-19
