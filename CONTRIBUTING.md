@@ -1,3 +1,27 @@
+## Javascript build
+
+For Gutenberg blocks etc.
+
+Install npm deps
+
+```
+npm ci
+```
+
+Start dev watcher
+
+```
+npm run dev
+```
+
+Production build
+
+```
+npm run build
+```
+
+No need to commit the production build. It is automatically create uppon release.
+
 ## Creating releases
 
 Run
