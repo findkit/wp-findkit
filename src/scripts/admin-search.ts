@@ -48,7 +48,8 @@ const ui = new FindkitUI({
 		}
 
 		.findkit--backdrop {
-			z-index: 1;
+			/* Under the admin menu items but above the media gallery filter ui */
+			z-index: 101;
 		}
 
 		.findkit--modal-container {
