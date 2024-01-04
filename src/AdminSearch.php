@@ -54,7 +54,7 @@ class AdminSearch
 			]
 		);
 
-		if (\is_admin_bar_showing()) {
+		if (\is_admin_bar_showing() && self::is_admin_search_enabled()) {
 			wp_enqueue_script('findkit-admin-search');
 		}
 	}
@@ -72,13 +72,15 @@ class AdminSearch
 		<?php
 	}
 
+	static function is_admin_search_enabled(): bool
+	{
+		return get_option('findkit_adminbar') &&
+			get_option('findkit_project_id');
+	}
+
 	function __admin_bar_menu($wp_admin_bar)
 	{
-		if (!get_option('findkit_adminbar')) {
-			return;
-		}
-
-		if (!get_option('findkit_project_id')) {
+		if (!self::is_admin_search_enabled()) {
 			return;
 		}
 
