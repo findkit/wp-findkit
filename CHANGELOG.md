@@ -1,9 +1,19 @@
+## v0.5.3
+
+2024-01-04
+
+- Do not enqueue admin search script if not enabled [b4e98e3](https://github.com/findkit/wp-findkit/commit/b4e98e3) - Esa-Matti Suuronen
+- Upgrade @findkit/ui to v0.18.2 [5810bc9](https://github.com/findkit/wp-findkit/commit/5810bc9) - Esa-Matti Suuronen
+- Fix media library filter ui going on top findkit ui [eed7339](https://github.com/findkit/wp-findkit/commit/eed7339) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.2...v0.5.3
+
 ## v0.5.2
 
 2023-12-20
 
--   Trap focus to admin search opener [c4c4de7](https://github.com/findkit/wp-findkit/commit/c4c4de7) - Esa-Matti Suuronen
--   Upgrade @findkit/ui to v0.18.1 [ddcff89](https://github.com/findkit/wp-findkit/commit/ddcff89) - Esa-Matti Suuronen
+- Trap focus to admin search opener [c4c4de7](https://github.com/findkit/wp-findkit/commit/c4c4de7) - Esa-Matti Suuronen
+- Upgrade @findkit/ui to v0.18.1 [ddcff89](https://github.com/findkit/wp-findkit/commit/ddcff89) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.1...v0.5.2
 
