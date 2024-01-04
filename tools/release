@@ -135,4 +135,6 @@ if [ "$(git status . --porcelain)" != "" ]; then
     >&2 echo "Or use this script:"
     >&2 echo ""
     >&2 echo "     ./tools/sync-remotes"
+else
+    git commit -m "Release v$new_version" --allow-empty
 fi
