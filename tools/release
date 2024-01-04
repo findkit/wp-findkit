@@ -125,16 +125,17 @@ done
 if [ "$(git status . --porcelain)" != "" ]; then
     git add CHANGELOG.md
     git commit -m "Update changelog for v$new_version"
-    git push origin HEAD:$upstream_branch
-    git push public HEAD:$upstream_branch
-    git push public HEAD:release/$new_version
-
-    >&2 echo ""
-    >&2 echo "Release triggered in Github Actions."
-    >&2 echo "Pull in the changes once it is ready and push to origin too"
-    >&2 echo "Or use this script:"
-    >&2 echo ""
-    >&2 echo "     ./tools/sync-remotes"
 else
     git commit -m "Release v$new_version" --allow-empty
 fi
+
+git push origin HEAD:$upstream_branch
+git push public HEAD:$upstream_branch
+git push public HEAD:release/$new_version
+
+>&2 echo ""
+>&2 echo "Release triggered in Github Actions."
+>&2 echo "Pull in the changes once it is ready and push to origin too"
+>&2 echo "Or use this script:"
+>&2 echo ""
+>&2 echo "     ./tools/sync-remotes"
