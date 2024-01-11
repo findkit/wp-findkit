@@ -1,3 +1,11 @@
+## v0.5.5
+
+2024-01-11
+
+-   Upgrade to @findit/ui v0.19.1 [e609cd3](https://github.com/findkit/wp-findkit/commit/e609cd3) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.4...v0.5.5
+
 ## v0.5.4
 
 2024-01-10
