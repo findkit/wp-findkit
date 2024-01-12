@@ -14,7 +14,10 @@ class WpPlayground
 {
 	function bind()
 	{
-		if ($_SERVER['SERVER_NAME'] !== 'playground.wordpress.net') {
+		if (
+			isset($_SERVER['SERVER_NAME']) &&
+			$_SERVER['SERVER_NAME'] !== 'playground.wordpress.net'
+		) {
 			return;
 		}
 
