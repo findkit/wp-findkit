@@ -2,6 +2,10 @@
 
 See [findkit.com](https://findkit.com/) and [docs.findkit.com](https://docs.findkit.com/).
 
+Try the plugin right now in the WordPress Playground:
+
+https://playground.wordpress.net/?plugin=findkit
+
 ## Install
 
 Get zip file from [releases](https://github.com/findkit/wp-findkit/releases/) or install using Composer
@@ -13,7 +17,6 @@ composer require findkit/wp-findkit
 Note that this assumes you have configured `extra.installer-paths` for WordPress
 plugins in your main composers.json. See [this article](https://www.smashingmagazine.com/2019/03/composer-wordpress/)
 for details.
-
 
 ## Page Meta
 
