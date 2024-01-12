@@ -80,6 +80,13 @@ class KeyPair
 
 	static function generate(): ?self
 	{
+		if (!function_exists('openssl_pkey_new')) {
+			error_log(
+				'[findkit] Failed to generate RSA keypair: openssl_pkey_new not available'
+			);
+			return null;
+		}
+
 		$raw_key = openssl_pkey_new([
 			'private_key_bits' => 4096,
 			'private_key_type' => OPENSSL_KEYTYPE_RSA,
