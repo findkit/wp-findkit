@@ -1,8 +1,19 @@
+## v0.5.6
+
+2024-01-12
+
+- Add wp playground blueprint [24e28ad](https://github.com/findkit/wp-findkit/commit/24e28ad) - Esa-Matti Suuronen
+- Add playground readme links [82d2de5](https://github.com/findkit/wp-findkit/commit/82d2de5) - Esa-Matti Suuronen
+- Automatically configure the plugin in wp playground [3174d49](https://github.com/findkit/wp-findkit/commit/3174d49) - Esa-Matti Suuronen
+- Handle missing openssl in wp playground [9331661](https://github.com/findkit/wp-findkit/commit/9331661) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.5...v0.5.6
+
 ## v0.5.5
 
 2024-01-11
 
--   Upgrade to @findit/ui v0.19.1 [e609cd3](https://github.com/findkit/wp-findkit/commit/e609cd3) - Esa-Matti Suuronen
+- Upgrade to @findit/ui v0.19.1 [e609cd3](https://github.com/findkit/wp-findkit/commit/e609cd3) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.4...v0.5.5
 
