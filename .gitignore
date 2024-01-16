@@ -2,5 +2,5 @@ node_modules
 /vendor
 .DS_Store
 findkit.toml
-build
+build/*.map
 findkit.zip
