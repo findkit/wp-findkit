@@ -16,7 +16,7 @@ class GutenbergSidebar
 	{
 		\add_action('init', [$this, '__action_init']);
 
-		\add_action('admin_enqueue_scripts', [
+		\add_action('enqueue_block_editor_assets', [
 			$this,
 			'__action_enqueue_block_editor_assets',
 		]);
