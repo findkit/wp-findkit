@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
  * Plugin URI: https://www.findkit.com/wordpress/
  * Description: WordPress Plugin for Findkit Site Search. See findkit.com for details
  * Author: Findkit Team <findkit@findkit.com>
- * Version: 0.5.6
+ * Version: 0.5.7
  * License: GPLv2 or later
  */
 
