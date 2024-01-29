@@ -1,56 +1,55 @@
-
-
 .wp-block-findkit-search-modal .wp-block-findkit-search-group {
-    display: none;
-    font-style: italic;
+	display: none;
+	font-style: italic;
 }
 
-.wp-block-findkit-search-group, .findkit-no-embed-inner-blocks {
-    font-size: small;
-    border: 1px dashed gray;
-    padding: 1rem;
-    margin: 1rem;
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    font-style: italic;
+.wp-block-findkit-search-group,
+.findkit-no-embed-inner-blocks {
+	font-size: small;
+	border: 1px dashed gray;
+	padding: 1rem;
+	margin: 1rem;
+	margin-left: 1.5rem;
+	margin-right: 1.5rem;
+	font-style: italic;
 }
 
 .findkit-search-group-title {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .findkit-search-group-help {
-    font-size: small;
+	font-size: small;
 }
 
 .findkit-no-modal-inner-blocks {
-    border: 1px dashed gray;
-    padding: 1rem;
-    font-size: small;
-    font-style: italic;
+	border: 1px dashed gray;
+	padding: 1rem;
+	font-size: small;
+	font-style: italic;
 }
 
 .findkit-no-modal-inner-blocks p {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .findkit-no-embed-inner-blocks {
 }
 
 .findkit-color-picker {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
 }
 
 .findkit-label {
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    font-size: 11px;
-    font-weight: 500;
+	text-transform: uppercase;
+	margin-bottom: 0.5rem;
+	font-size: 11px;
+	font-weight: 500;
 }
 
 .findkit-help {
-    color: rgb(117, 117, 117);
+	color: rgb(117, 117, 117);
 }
