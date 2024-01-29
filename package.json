@@ -10,6 +10,7 @@
 		"phpstan": "composer phpstan",
 		"phpcs": "composer phpcs",
 		"zip": "./tools/zip",
+		"prettier-write": "prettier --write src plugin.php",
 		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*.ts*",
 		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*.ts*",
 		"build-hide": "git valu-hide-changes build",
