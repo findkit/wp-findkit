@@ -1,8 +1,17 @@
+## v0.5.8
+
+2024-01-29
+
+- Enqueue block scripts properly to block editor [7d14b14](https://github.com/findkit/wp-findkit/commit/7d14b14) - Esa-Matti Suuronen
+- Fixes some js crashes on wp-admin
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.7...v0.5.8
+
 ## v0.5.7
 
 2024-01-16
 
--   Ignore only map files from the build [d55e751](https://github.com/findkit/wp-findkit/commit/d55e751) - Esa-Matti Suuronen
+- Ignore only map files from the build [d55e751](https://github.com/findkit/wp-findkit/commit/d55e751) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.6...v0.5.7
 
