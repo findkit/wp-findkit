@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Findkit;
@@ -16,13 +17,9 @@ class PageMeta
 
 	function __action_wp_head()
 	{
-		$post = \get_queried_object();
+		$object = \get_queried_object();
 
-		if (!($post instanceof \WP_Post)) {
-			return;
-		}
-
-		$meta = self::get($post);
+		$meta = self::get($object);
 
 		if (empty($meta)) {
 			return;
@@ -49,14 +46,26 @@ class PageMeta
 	 * Generate "findkit page meta" for a post.
 	 * See https://docs.findkit.com/crawler/meta-tag/
 	 */
-	static function get(\WP_Post $post)
+	static function get($object)
 	{
-		$public = $post->post_status === 'publish';
+		$public = true;
 
-		$url_parts = parse_url(\home_url());
-		$domain = $url_parts['host'];
+		if ($object instanceof \WP_Post) {
+			$public = $object->post_status === 'publish';
+		}
 
-		$domain = \apply_filters('findkit_page_meta_domain', $domain, $post);
+		$meta = [
+			// Do not show archive pages in search by default because commonly
+			// they contain only a lists of posts which is already indexed as
+			// the individual posts.
+			'showInSearch' => \is_archive() ? false : $public,
+		];
+
+		$domain = \apply_filters(
+			'findkit_page_meta_domain',
+			parse_url(\home_url())['host'],
+			$object
+		);
 
 		$blogname_slug = \sanitize_title(self::get_blog_name());
 
@@ -66,97 +75,104 @@ class PageMeta
 		$tags = [
 			'wordpress',
 			'domain/' . $domain . '/' . 'wordpress',
-			'wp_post_type/' . $post->post_type,
-			'domain/' . $domain . '/' . 'wp_post_type/' . $post->post_type,
 			'wp_blog_name/' . $blogname_slug,
 			$blog_name_tag,
 			$public ? 'public' : 'private',
 		];
 
-		$public_taxonomies = \get_taxonomies(['public' => true], 'names');
-		$post_taxonomies = \get_the_taxonomies($post->ID);
+		if ($object instanceof \WP_Post) {
+			$meta['title'] = $object->post_title;
+			$meta['created'] = \get_the_date('c', $object);
+			$meta['modified'] = \get_the_modified_date('c', $object);
 
-		foreach ($post_taxonomies as $taxonomy_key => $taxonomy_value) {
-			// only expose public taxonomies as tags
-			if (in_array($taxonomy_key, $public_taxonomies)) {
-				$terms = \get_the_terms($post, $taxonomy_key);
-				foreach ($terms as $term) {
-					array_push(
-						$tags,
-						'domain/' .
-							$domain .
-							'/' .
-							'wp_taxonomy/' .
-							$taxonomy_key .
-							'/' .
-							$term->slug
-					);
-					array_push(
-						$tags,
-						'wp_taxonomy/' . $taxonomy_key . '/' . $term->slug
-					);
-				}
+			// Defaults to true. Only used to explicitly disable showing the page in the findkit search.
+			if (
+				\get_post_meta($object->ID, '_findkit_show_in_search', true) ===
+				'no'
+			) {
+				$meta['showInSearch'] = false;
 			}
-		}
 
-		$title = \wp_specialchars_decode(
-			\is_archive() ? \get_the_archive_title() : $post->post_title
-		);
+			$tags[] = 'wp_post_type/' . $object->post_type;
+			$tags[] =
+				'domain/' .
+				$domain .
+				'/' .
+				'wp_post_type/' .
+				$object->post_type;
 
-		$created = \get_the_date('c', $post);
-		$modified = \get_the_modified_date('c', $post);
-		$show_in_search = \is_archive() ? false : $public;
+			$public_taxonomies = \get_taxonomies(['public' => true], 'names');
+			$post_taxonomies = \get_the_taxonomies($object->ID);
 
-		// Defaults to true. Only used to explicitly disable showing the page in the findkit search.
-		if (
-			\get_post_meta($post->ID, '_findkit_show_in_search', true) === 'no'
-		) {
-			$show_in_search = false;
-		}
-
-		$meta = [
-			'showInSearch' => $show_in_search,
-			'title' => \html_entity_decode($title),
-			'created' => $created,
-			'modified' => $modified,
-			'tags' => $tags,
-		];
-
-		$superwords = \get_post_meta($post->ID, '_findkit_superwords', true);
-
-		if ($superwords) {
-			$superwords = trim($superwords);
-			if (!empty($superwords)) {
-				$meta['superwords'] = [];
-				foreach (preg_split('/\s+/', $superwords) as $word) {
-					$word = trim($word);
-					if ($word) {
-						$meta['superwords'][] = $word;
+			foreach ($post_taxonomies as $taxonomy_key => $taxonomy_value) {
+				// only expose public taxonomies as tags
+				if (in_array($taxonomy_key, $public_taxonomies)) {
+					$terms = \get_the_terms($object, $taxonomy_key);
+					foreach ($terms as $term) {
+						array_push(
+							$tags,
+							'domain/' .
+								$domain .
+								'/' .
+								'wp_taxonomy/' .
+								$taxonomy_key .
+								'/' .
+								$term->slug
+						);
+						array_push(
+							$tags,
+							'wp_taxonomy/' . $taxonomy_key . '/' . $term->slug
+						);
 					}
 				}
 			}
-		}
 
-		$content_no_highlight = \get_post_meta(
-			$post->ID,
-			'_findkit_content_no_highlight',
-			true
-		);
+			$superwords = \get_post_meta(
+				$object->ID,
+				'_findkit_superwords',
+				true
+			);
 
-		if ($content_no_highlight) {
-			$content_no_highlight = trim($content_no_highlight);
-			if (!empty($content_no_highlight)) {
-				$meta['contentNoHighlight'] = $content_no_highlight;
+			if ($superwords) {
+				$superwords = trim($superwords);
+				if (!empty($superwords)) {
+					$meta['superwords'] = [];
+					foreach (preg_split('/\s+/', $superwords) as $word) {
+						$word = trim($word);
+						if ($word) {
+							$meta['superwords'][] = $word;
+						}
+					}
+				}
 			}
+
+			$content_no_highlight = \get_post_meta(
+				$object->ID,
+				'_findkit_content_no_highlight',
+				true
+			);
+
+			if ($content_no_highlight) {
+				$content_no_highlight = trim($content_no_highlight);
+				if (!empty($content_no_highlight)) {
+					$meta['contentNoHighlight'] = $content_no_highlight;
+				}
+			}
+
+			// Use the post language if using polylang instead of the blog locale.
+			if (function_exists('\pll_get_post_language')) {
+				$meta['language'] = \pll_get_post_language($object->ID, 'slug');
+			}
+		} elseif (\is_archive()) {
+			$meta['title'] = \get_the_archive_title();
 		}
 
-		// Use the post language if using polylang instead of the blog locale.
-		if (function_exists('\pll_get_post_language')) {
-			$meta['language'] = \pll_get_post_language($post->ID, 'slug');
-		} else {
-			$meta['language'] = substr(\get_bloginfo('language'), 0, 2);
-		}
+		$meta['title'] ??= \get_the_title();
+		$meta['language'] ??= substr(\get_bloginfo('language'), 0, 2);
 
-		return apply_filters('findkit_page_meta', $meta, $post);
+		$meta['title'] = \wp_specialchars_decode($meta['title']);
+		$meta['tags'] = $tags;
+
+		return apply_filters('findkit_page_meta', $meta, $object);
 	}
 }
