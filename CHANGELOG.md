@@ -1,3 +1,12 @@
+## v0.5.9
+
+2024-02-15
+
+-   Ensure meta tag is rendered on all pages [e2f20ac](https://github.com/findkit/wp-findkit/commit/e2f20ac) - Esa-Matti Suuronen
+-   check prettier in ci [efea203](https://github.com/findkit/wp-findkit/commit/efea203) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.8...v0.5.9
+
 ## v0.5.8
 
 2024-01-29
