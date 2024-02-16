@@ -6,6 +6,6 @@ set -o pipefail
 upstream_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
 
 set -x
-git pull public $upstream_branch
+git pull --tags public $upstream_branch
 git push public $upstream_branch:$upstream_branch
 git push origin $upstream_branch:$upstream_branch
