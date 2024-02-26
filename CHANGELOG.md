@@ -1,3 +1,11 @@
+## v0.5.10
+
+2024-02-26
+
+-   Upgrade @findkit/ui to v0.22.0 [34f789a](https://github.com/findkit/wp-findkit/commit/34f789a) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.9...v0.5.10
+
 ## v0.5.9
 
 2024-02-15
