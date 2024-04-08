@@ -66,6 +66,10 @@ const ui = new FindkitUI({
 			color: var(--findkit--brand-color);
 		}
 
+		.findkit--em {
+			color: white;
+		}
+
 		.findkit--wp-admin-link {
 			display: block;
 			margin-top: 10px;
