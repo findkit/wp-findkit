@@ -41,6 +41,7 @@ const ui = new FindkitUI({
 	publicToken: FINDKIT_ADMIN_SEARCH.publicToken,
 	instanceId: "admsearch",
 	minTerms: 0,
+	inert: "#wpbody",
 	closeOnOutsideClick: true,
 	css: css`
 		.findkit--container {
@@ -116,7 +117,6 @@ const ui = new FindkitUI({
 });
 
 ui.openFrom("#wp-admin-bar-findkit-adminbar a");
-ui.trapFocus("#wp-admin-bar-findkit-adminbar a");
 
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
