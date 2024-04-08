@@ -40,6 +40,7 @@ class Loader
 			KeyPair::generate();
 		}
 
+		(new BugFixWpAdminHistoryState())->bind();
 		(new WpPlayground())->bind();
 		(new PageMeta())->bind();
 		(new AdminNotice())->bind();
