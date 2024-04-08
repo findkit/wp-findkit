@@ -169,6 +169,9 @@ function initUI(
 		publicToken,
 		instanceId,
 		params,
+		// query string routing conflicts with WordPress Interactivity API.
+		// See https://github.com/WordPress/gutenberg/issues/60455
+		router: "hash",
 		groups: groups as any,
 		css: css`
 			.findkit--container {
