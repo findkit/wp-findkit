@@ -44,10 +44,10 @@ class BugFixWpAdminHistoryState
                 const canonical = document.getElementById('wp-admin-canonical').href + window.location.hash;
                 if (state === null && url === canonical) {
                     original.call(history, history.state, unused, url);
+                    history.replaceState = original;
                 } else {
                     original.call(history, state, unused, url);
                 }
-                history.replaceState = original;
             }
         })();
         </script>
