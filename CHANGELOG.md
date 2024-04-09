@@ -7,7 +7,7 @@
   - The breaking changes affect the plugin users only if they have customized the builtin blocks the UI with the [`init`](https://docs.findkit.com/ui/api/events/#init) event.
   - Eg. if you have bundled earlier version of Findkit UI to your theme you can update to this version without any changes.
 - Add workaround for WordPress ticket [54568](https://core.trac.wordpress.org/ticket/54568) to fix scroll and focus restoration in wp-admin
-- Use `router: "hash"` in Findkit UI Blocks to colliding with the Interactivity API popstate monitoring
+- Use `router: "hash"` in Findkit UI Blocks to avoid colliding with the Interactivity API popstate monitoring
   - See https://github.com/WordPress/gutenberg/issues/60455
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.10...v1.0.0
