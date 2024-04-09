@@ -1,3 +1,11 @@
+## v1.0.1
+
+2024-04-09
+
+- Upgrade `@findkit/ui` to v1.0.1
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.0.0...v1.0.1
+
 ## v1.0.0
 
 2024-04-09
