@@ -4,8 +4,9 @@
 
 - Use `@findkit/ui` v1.0.0
   - Read the [announcement](https://www.findkit.com/findkit-ui-v1-0-a-leap-in-accessibility/) and its [changelog](https://github.com/findkit/findkit/blob/main/packages/ui/CHANGELOG.md#v100)
-  - The breaking changes affect the plugin users only if they have customized
-    the UI with the [`init`](https://docs.findkit.com/ui/api/events/#init) event.
+  - The breaking changes affect the plugin users only if they have customized the builtin blocks the UI with the [`init`](https://docs.findkit.com/ui/api/events/#init) event.
+  - Eg. if you have bundled earlier version of Findkit UI to your theme you can update to this version without any changes.
+- This is not a breaking change for the plugin users
 - Add workaround for WordPress ticket [54568](https://core.trac.wordpress.org/ticket/54568) to fix scroll and focus restoration in wp-admin
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.10...v1.0.0
