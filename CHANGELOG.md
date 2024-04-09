@@ -2,11 +2,13 @@
 
 2024-04-09
 
-- Use `@findkit/ui` v1.0.0 in blocks and wp-admin search
+- Use `@findkit/ui` v1.0.0 in Blocks and wp-admin search
   - Read the [announcement](https://www.findkit.com/findkit-ui-v1-0-a-leap-in-accessibility/) and its [changelog](https://github.com/findkit/findkit/blob/main/packages/ui/CHANGELOG.md#v100)
   - The breaking changes affect the plugin users only if they have customized the builtin blocks the UI with the [`init`](https://docs.findkit.com/ui/api/events/#init) event.
   - Eg. if you have bundled earlier version of Findkit UI to your theme you can update to this version without any changes.
 - Add workaround for WordPress ticket [54568](https://core.trac.wordpress.org/ticket/54568) to fix scroll and focus restoration in wp-admin
+- Use `router: "hash"` in Findkit UI Blocks to colliding with the Interactivity API popstate monitoring
+  - See https://github.com/WordPress/gutenberg/issues/60455
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.10...v1.0.0
 
