@@ -9,16 +9,15 @@ Donate link: https://www.findkit.com/
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Powerful cloud based search engine for your website. Search as you type,
-real-time index updates, and embeddable UI. Free for small websites.
-
-Try the plugin right now in the WordPress Playground:
-
-https://playground.wordpress.net/?plugin=findkit
+Powerful cloud based search engine for your website. Search as you type, real-time index updates, and embeddable UI. Free for small websites.
 
 == Description ==
 
 This is an official complementary plugin for [Findkit.com](https://www.findkit.com/), a cloud based search engine.
+
+Try the plugin right now in the WordPress Playground:
+
+https://playground.wordpress.net/?plugin=findkit
 
 Plugin features
 
