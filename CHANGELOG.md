@@ -1,8 +1,20 @@
+## v1.0.0
+
+2024-04-09
+
+- Use `@findkit/ui` v1.0.0
+  - Read the [announcement](https://www.findkit.com/findkit-ui-v1-0-a-leap-in-accessibility/) and its [changelog](https://github.com/findkit/findkit/blob/main/packages/ui/CHANGELOG.md#v100)
+  - The breaking changes affect the plugin users only if they have customized
+    the UI with the [`init`](https://docs.findkit.com/ui/api/events/#init) event.
+- Add workaround for WordPress ticket [54568](https://core.trac.wordpress.org/ticket/54568) to fix scroll and focus restoration in wp-admin
+
+All changes https://github.com/findkit/wp-findkit/compare/v0.5.10...v1.0.0
+
 ## v0.5.10
 
 2024-02-26
 
--   Upgrade @findkit/ui to v0.22.0 [34f789a](https://github.com/findkit/wp-findkit/commit/34f789a) - Esa-Matti Suuronen
+- Upgrade @findkit/ui to v0.22.0 [34f789a](https://github.com/findkit/wp-findkit/commit/34f789a) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.9...v0.5.10
 
@@ -10,8 +22,8 @@ All changes https://github.com/findkit/wp-findkit/compare/v0.5.9...v0.5.10
 
 2024-02-15
 
--   Ensure meta tag is rendered on all pages [e2f20ac](https://github.com/findkit/wp-findkit/commit/e2f20ac) - Esa-Matti Suuronen
--   check prettier in ci [efea203](https://github.com/findkit/wp-findkit/commit/efea203) - Esa-Matti Suuronen
+- Ensure meta tag is rendered on all pages [e2f20ac](https://github.com/findkit/wp-findkit/commit/e2f20ac) - Esa-Matti Suuronen
+- check prettier in ci [efea203](https://github.com/findkit/wp-findkit/commit/efea203) - Esa-Matti Suuronen
 
 All changes https://github.com/findkit/wp-findkit/compare/v0.5.8...v0.5.9
 
