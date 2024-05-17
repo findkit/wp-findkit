@@ -1,3 +1,12 @@
+## v1.1.0
+
+2024-05-17
+
+-   Upgrade @findkit/ui to v1.1.0 [442bb5c](https://github.com/findkit/wp-findkit/commit/442bb5c) - Esa-Matti Suuronen
+-   Do not log API calls by default [0a3dce5](https://github.com/findkit/wp-findkit/commit/0a3dce5) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.0.2...v1.1.0
+
 ## v1.0.2
 
 2024-04-11
