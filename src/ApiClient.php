@@ -35,7 +35,7 @@ class ApiClient
 		$this->project_id =
 			$options['project_id'] ?? get_option('findkit_project_id');
 
-		$this->log_requests = \get_option('findkit_log_api_requests', true);
+		$this->log_requests = \get_option('findkit_log_api_requests', false);
 	}
 
 	function request(string $method, string $path, $options = [])
