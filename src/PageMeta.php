@@ -81,7 +81,11 @@ class PageMeta
 		];
 
 		if ($object instanceof \WP_Post) {
-			$meta['title'] = $object->post_title;
+			$meta['title'] = apply_filters(
+				'the_title',
+				$object->post_title,
+				$object->ID
+			);
 			$meta['created'] = \get_the_date('c', $object);
 			$meta['modified'] = \get_the_modified_date('c', $object);
 
