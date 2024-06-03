@@ -89,6 +89,7 @@ class Section
             <input
                 type="<?php echo esc_attr($type === 'password' ? 'password' : 'text'); ?>"
                 style="width: 100%"
+                data-1p-ignore
                 <?php echo $disabled ? 'disabled' : ''; ?>
 				<?php if ($placeholder) {
 					echo "placeholder='";
