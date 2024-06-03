@@ -79,7 +79,7 @@ class Page
 			])
 			->add_field([
 				'name' => 'findkit_api_key',
-				'type' => 'input',
+				'type' => 'password',
 				'default' => '',
 				'title' => __('Findkit API Key', 'findkit'),
 				'description' => function () {
