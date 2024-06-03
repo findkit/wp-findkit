@@ -122,6 +122,9 @@ const ui = new FindkitUI({
 
 ui.openFrom("#wp-admin-bar-findkit-adminbar a");
 
+// on /wp-admin/options-general.php?page=findkit_settings
+ui.openFrom("button.findkit-admin-search");
+
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
 	"admin-bar": "#wpadminbar",
