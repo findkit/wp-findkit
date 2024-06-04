@@ -88,6 +88,9 @@ class PageMeta
 			);
 			$meta['created'] = \get_the_date('c', $object);
 			$meta['modified'] = \get_the_modified_date('c', $object);
+			$meta['customFields'] = [
+				'wpPostId' => ['type' => 'number', 'value' => $object->ID],
+			];
 
 			// Defaults to true. Only used to explicitly disable showing the page in the findkit search.
 			if (
