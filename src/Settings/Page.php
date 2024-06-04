@@ -90,6 +90,18 @@ class Page
 				'placeholder' => defined('FINDKIT_API_KEY')
 					? __('Defined in wp-config.php', 'findkit')
 					: '',
+			])
+			->add_field([
+				'name' => 'findkit_enable_jwt',
+				'type' => 'checkbox',
+				'default' => '0',
+				'title' => __('Authorize search requests', 'findkit'),
+				'description' => function () {
+					esc_html_e(
+						'Generate JWT tokens for the search requests for signed-in users. Set `private = true` and `public_key` in the findkit.toml file for the search endpoint to require authorization.',
+						'findkit'
+					);
+				},
 			]);
 
 		\add_action('admin_menu', [$this, '__action_admin_menu']);
@@ -200,19 +212,28 @@ class Page
 
 		$hub_url = \Findkit\Utils::generate_new_project_url();
 		?>
-                <h2>
-                    <?php esc_html_e('Create Findkit Project', 'findkit'); ?>
-                </h2>
+				<h2>
+					<?php esc_html_e('Create Findkit Project', 'findkit'); ?>
+				</h2>
 
-                <p>
-                    <?php esc_html_e( ' To get started, you need to create a project in the Findkit Hub.', 'findkit'); ?>
-                </p>
-                <p>
-                    <a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button button-primary">
+				<p>
+					<?php esc_html_e( ' To get started, you need to create a project in the Findkit Hub.', 'findkit'); ?>
+				</p>
+				<p>
+					<a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button button-primary">
 						<?php esc_html_e('Create Findkit Project', 'findkit'); ?>
-                    </a>
-                </p>
-        <?php
+					</a>
+				</p>
+		<?php
+	}
+
+	function render_jwt_toml()
+	{
+		echo "[search-endpoint]\n";
+		echo "private = true\n";
+		echo 'public_key = """' . "\n";
+		echo esc_html(get_option('findkit_pubkey'));
+		echo '"""' . "\n";
 	}
 
 	// prettier-ignore
@@ -224,11 +245,11 @@ class Page
 		<div class="wrap">
 			<img alt="<?php esc_html_e( 'Findkit Settings', 'findkit'); ?>" style='height: 50px; margin-top: 10px; margin-bottom: 20px;' src='<?php echo esc_url($logo_url); ?>' alt='Findkit' />
 
-            <p>
+			<p>
 				<?php
 				Utils::echo_sanitized_html(__('Findkit is a site search toolkit that helps your users find the right content on your website. See the plugin documentation <a target="_blank" href="https://findk.it/wp">here</a> and general Findkit documentation on <a target="_blank" href="https://docs.findkit.com/">docs.findkit.com</a>.', 'findkit' ));
 				?>
-            </p>
+			</p>
 
 			<?php $this->render_search_button(); ?>
 			<?php $this->render_create_findkit_project_button(); ?>
@@ -240,6 +261,35 @@ class Page
 					do_settings_sections($this->page);
 					submit_button();
 				?>
+
+				<h2>JWT Public key</h2>
+
+				<p>
+				Add the following to the findkit.toml to require JWT authenticated search requests.
+				Note that changing search endpoint settings in the TOML may take up to 10 minutes to take effect.
+				</p>
+
+				<pre id="findkit-private-toml"
+					 style="background-color: white;
+							overflow: auto;
+							border: 1px dashed black;
+							padding: 10px"><?php $this->render_jwt_toml(); ?></pre>
+
+				<button id="findkit-copy" class="button" type="button">Copy to clipboard</button>
+
+				<script type="module">
+				 const button = document.getElementById('findkit-copy');
+				 button.addEventListener('click',  () => {
+					const text =  document.getElementById('findkit-private-toml').innerText.trim();
+					navigator.clipboard.writeText(text).then(() => {
+						button.innerText = 'Copied!';
+						setTimeout(() => {
+							button.innerText = 'Copy to clipboard';
+						}, 2000);
+					});
+				 });
+				</script>
+
 			</form>
 		</div>
 		<?php
