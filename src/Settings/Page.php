@@ -181,7 +181,7 @@ class Page
 				<?php esc_html_e( 'The Findkit Project is managed in the Findkit Hub. You can access the Findkit Hub by clicking the button below.', 'findkit'); ?>
 			</p>
 			<p>
-				<a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button button-primary">
+				<a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button">
 					<?php esc_html_e('Open Project in Findkit Hub', 'findkit'); ?>
 				</a>
 			</p>
@@ -197,7 +197,7 @@ class Page
 		}
 
 		?>
-			<button type="button" class="findkit-admin-search button button-primary">
+			<button type="button" class="findkit-admin-search button">
 				<?php esc_html_e('Open Findkit Search', 'findkit'); ?>
 			</button>
         <?php
@@ -220,7 +220,7 @@ class Page
 					<?php esc_html_e( ' To get started, you need to create a project in the Findkit Hub.', 'findkit'); ?>
 				</p>
 				<p>
-					<a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button button-primary">
+					<a href="<?php echo esc_url($hub_url); ?>" target="_blank" class="button">
 						<?php esc_html_e('Create Findkit Project', 'findkit'); ?>
 					</a>
 				</p>
