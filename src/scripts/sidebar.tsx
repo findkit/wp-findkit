@@ -111,12 +111,12 @@ registerPlugin("findkit-sidebar", {
 
 				{FINDKIT_GUTENBERG_SIDEBAR.showContentNoHighlightEditor ? (
 					<TextareaControl
-						label="Content No Highlight"
+						label="Hidden keywords"
 						value={contentNoHighlight}
 						help={
 							<>
 								Searchable text that will not be highlighted in the search
-								results or shown on the actual page.
+								results or shown on the actual page. Use for synonyms etc.
 							</>
 						}
 						onChange={(newValue) => {
