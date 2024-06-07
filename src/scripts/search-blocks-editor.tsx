@@ -302,7 +302,9 @@ function EditSearchEmbed(
 						Filter results by using the "Search Filter" options in the block
 						inspector. Group the results by adding inner Findkit Group blocks.
 					</p>
-					<Button onClick={addExampleBlocks}>Add example groups</Button>
+					<Button variant="secondary" onClick={addExampleBlocks}>
+						Add example groups
+					</Button>
 				</div>
 			) : null}
 
