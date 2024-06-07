@@ -9,6 +9,7 @@ body:not(.wp-admin) .wp-block-findkit-search-group {
 .wp-block-findkit-search-embed {
 	display: block;
 	--findkit-search-input-size: 56px;
+	min-height: 200px;
 }
 
 input.wp-findkit-search-input {
