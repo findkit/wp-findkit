@@ -1,4 +1,4 @@
-body:not(.wp-admin) .wp-block-findkit-search-group {
+body:not(.wp-admin, .block-editor-iframe__body) .wp-block-findkit-search-group {
 	display: none;
 }
 
