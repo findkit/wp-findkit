@@ -1,5 +1,25 @@
 ## v1.2.0
 
+2024-06-10
+
+- Enqueue block editor assets correctly [a48db25](https://github.com/findkit/wp-findkit/commit/a48db25) - Esa-Matti Suuronen
+- Fix search group visibility in the block editor [40562b2](https://github.com/findkit/wp-findkit/commit/40562b2) - Esa-Matti Suuronen
+- Make "Add example groups" button visible [f13a86f](https://github.com/findkit/wp-findkit/commit/f13a86f) - Esa-Matti Suuronen
+- Add min-height to the search embed block [6eb07f7](https://github.com/findkit/wp-findkit/commit/6eb07f7) - Esa-Matti Suuronen
+- Rename "Content No Highlight" to "Hidden keywords" [c02df7a](https://github.com/findkit/wp-findkit/commit/c02df7a) - Esa-Matti Suuronen
+- Add `findkit_search()` php function [26b9833](https://github.com/findkit/wp-findkit/commit/26b9833) - Esa-Matti Suuronen
+- Add wpPostId to custom fields [13ca88c](https://github.com/findkit/wp-findkit/commit/13ca88c) - Esa-Matti Suuronen
+- Make only the save button primary on the settings view [a6adeb9](https://github.com/findkit/wp-findkit/commit/a6adeb9) - Esa-Matti Suuronen
+- Add JWT settings UI [ed9cfe8](https://github.com/findkit/wp-findkit/commit/ed9cfe8) - Esa-Matti Suuronen
+- Fix search button on settings page [49f673d](https://github.com/findkit/wp-findkit/commit/49f673d) - Esa-Matti Suuronen
+- Ignore 1password from Findkit settings [06158c8](https://github.com/findkit/wp-findkit/commit/06158c8) - Esa-Matti Suuronen
+- Use password input for API Key [f1c756c](https://github.com/findkit/wp-findkit/commit/f1c756c) - Esa-Matti Suuronen
+- Apply `the_title` filter on page meta titles [8ff7709](https://github.com/findkit/wp-findkit/commit/8ff7709) - Esa-Matti Suuronen
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.1.0...v1.2.0
+
+## v1.2.0
+
 2024-06-05
 
 - Upgrade `@findkit/ui` to v1.3.0 [d2edb41](https://github.com/findkit/wp-findkit/commit/d2edb41) - Esa-Matti Suuronen
