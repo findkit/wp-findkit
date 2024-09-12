@@ -108,3 +108,19 @@ add_filter('findkit_allow_jwt', function ($allow) {
     return current_user_can('edit_posts');
 }, 10, 1);
 ```
+
+## Whitelabel
+
+Wp-findkit plugin like the findkit service is a whitelabel product.
+You can customize the displayed name with filters.
+
+Ex. Renaming page sidebar settings:
+
+```php
+	add_filter('gettext_with_context_findkit', function($translation, $text, $context) {
+		if ('Findkit' === $text && 'Sidebar options label' === $context){
+			return 'My Product Name';
+		}
+		return $translation;
+	}, 10, 3);
+```
