@@ -15,7 +15,7 @@ composer require findkit/wp-findkit
 ```
 
 Note that this assumes you have configured `extra.installer-paths` for WordPress
-plugins in your main composers.json. See [this article](https://www.smashingmagazine.com/2019/03/composer-wordpress/)
+plugins in your main composer.json. See [this article](https://www.smashingmagazine.com/2019/03/composer-wordpress/)
 for details.
 
 ## Page Meta
