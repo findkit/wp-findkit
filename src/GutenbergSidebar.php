@@ -35,6 +35,11 @@ class GutenbergSidebar
 						'findkit_show_content_no_highlight_editor',
 						true
 					),
+					'sidebarPanelTitle' => _x(
+						'Findkit',
+						'Sidebar options label',
+						'findkit'
+					),
 				],
 			],
 		]);

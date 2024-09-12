@@ -19,6 +19,7 @@ declare const FINDKIT_GUTENBERG_SIDEBAR: {
 	postTypes?: string[];
 	showSuperwordsEditor?: boolean;
 	showContentNoHighlightEditor?: boolean;
+	sidebarPanelTitle?: string;
 };
 
 function usePostMeta<Meta>(): [
@@ -90,7 +91,7 @@ registerPlugin("findkit-sidebar", {
 		return (
 			<PluginDocumentSettingPanel
 				name="findkit-panel"
-				title="Findkit"
+				title={FINDKIT_GUTENBERG_SIDEBAR.sidebarPanelTitle}
 				className="findkit-panel"
 			>
 				{FINDKIT_GUTENBERG_SIDEBAR.showSuperwordsEditor ? (
