@@ -1,3 +1,11 @@
+## v1.3.1
+
+2024-12-11
+
+-   bumb tested up to [3c5d196](https://github.com/findkit/wp-findkit/commit/3c5d196) - Joonas Varis
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.3.0...v1.3.1
+
 ## v1.3.0
 
 2024-09-12
