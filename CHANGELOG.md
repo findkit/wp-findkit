@@ -1,3 +1,11 @@
+## v1.3.0
+
+2024-09-12
+
+-   Make sidebar title configureable and document it [e1f450e](https://github.com/findkit/wp-findkit/commit/e1f450e) - Joonas Varis
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.2.0...v1.3.0
+
 ## v1.2.0
 
 2024-06-10
