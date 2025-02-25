@@ -1,3 +1,11 @@
+## v1.3.2
+
+2025-02-25
+
+Small maintenance realease.
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.3.1...v1.3.2
+
 ## v1.3.1
 
 2024-12-11
