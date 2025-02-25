@@ -97,7 +97,7 @@ class LiveUpdate
 
 		$can_live_update = apply_filters(
 			'findkit_can_live_update_post',
-			// By default do not equeue post in cli because integrations might
+			// By default, do not equeue post in cli because integrations might
 			// cause unwanted live updates
 			php_sapi_name() !== 'cli' &&
 				// Disable live update when in explicit development mode
