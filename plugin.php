@@ -213,7 +213,7 @@ function findkit_search_groups(
            $options = null
 ) {
     try {
-        $public_token = $options['publicToken'] ?? \get_option( 'findkit_project_id' );
+        $public_token =  null !== $options ? $options['publicToken'] : \get_option( 'findkit_project_id' );
 
         if ( ! $public_token ) {
             findkit_log_error( 'Findkit public token is not set, cannot search' );
