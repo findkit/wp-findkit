@@ -4,3 +4,4 @@ node_modules
 findkit.toml
 build/*.map
 findkit.zip
+.idea
