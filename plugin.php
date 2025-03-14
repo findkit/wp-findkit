@@ -111,7 +111,7 @@ function findkit_get_page_meta( \WP_Post $post ) {
     } catch ( \Exception $e ) {
         findkit_log_error( 'Failed to get page meta', [
             'post_id' => $post->ID,
-            'error'   => $e->getMessage()
+            'error'   => $e->getMessage(),
         ] );
 
         return [];
@@ -141,7 +141,7 @@ function findkit_search(
     } catch ( \Exception $e ) {
         findkit_log_error( 'Search failed', [
             'terms' => $terms,
-            'error' => $e->getMessage()
+            'error' => $e->getMessage(),
         ] );
 
         return false;
@@ -151,7 +151,7 @@ function findkit_search(
 /**
  * @param string $terms
  * @param array|null $groups array for findkit search params https://docs.findkit.com/ui-api/ui.searchparams/
- * @param null $options
+ * @param array|null $options
  *
  * @return array|false Returns search results or false on error
  *
@@ -207,13 +207,9 @@ function findkit_search(
  *  ];
  * /
  */
-function findkit_search_groups(
-    string $terms,
-    array $groups = null,
-           $options = null
-) {
+function findkit_search_groups( string $terms, array $groups = null, $options = null ) {
     try {
-        $public_token =  null !== $options ? $options['publicToken'] : \get_option( 'findkit_project_id' );
+        $public_token = ( is_array($options ) && isset( $options['publicToken'] ) ) ? $options['publicToken'] : \get_option( 'findkit_project_id' );
 
         if ( ! $public_token ) {
             findkit_log_error( 'Findkit public token is not set, cannot search' );
@@ -276,7 +272,7 @@ function findkit_search_groups(
     } catch ( \Exception $e ) {
         findkit_log_error( 'Search groups failed', [
             'terms' => $terms,
-            'error' => $e->getMessage()
+            'error' => $e->getMessage(),
         ] );
 
         return false;
