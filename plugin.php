@@ -48,15 +48,17 @@ if (!\class_exists('\Findkit\Loader')) {
 \Findkit\Loader::instance();
 
 /**
- * Log Findkit errors to error log
+ * Handle Findkit errors - logs the error if WP_DEBUG is enabled and returns a WP_Error object
  *
+ * @param string $code Error code
  * @param string $message Error message
- * @param mixed $data Additional data to log
+ * @param mixed $data Additional data for context
  *
- * @return void
+ * @return WP_Error
  */
-function findkit_log_error($message, $data = null)
+function findkit_handle_error($code, $message, $data = null)
 {
+	// Log the error if debugging is enabled
 	if (defined('WP_DEBUG') && WP_DEBUG) {
 		$log_message = '[WP Findkit Error] ' . $message;
 		if ($data !== null) {
@@ -66,6 +68,9 @@ function findkit_log_error($message, $data = null)
 		}
 		error_log($log_message);
 	}
+
+	// Return a WP_Error object
+	return new WP_Error($code, $message, $data);
 }
 
 /////////////////////////
@@ -79,9 +84,11 @@ function findkit_full_crawl(array $options = [])
 
 		return $loader->api_client->full_crawl($options);
 	} catch (\Exception $e) {
-		findkit_log_error('Full crawl failed', $e->getMessage());
-
-		return false;
+		return findkit_handle_error(
+			'findkit_full_crawl_failed',
+			'Full crawl failed',
+			['error' => $e->getMessage()]
+		);
 	}
 }
 
@@ -92,9 +99,11 @@ function findkit_manual_crawl(array $urls, array $options = [])
 
 		return $loader->api_client->manual_crawl($urls, $options);
 	} catch (\Exception $e) {
-		findkit_log_error('Manual crawl failed', $e->getMessage());
-
-		return false;
+		return findkit_handle_error(
+			'findkit_manual_crawl_failed',
+			'Manual crawl failed',
+			['error' => $e->getMessage()]
+		);
 	}
 }
 
@@ -105,9 +114,14 @@ function findkit_partial_crawl(array $options = [])
 
 		return $loader->api_client->partial_crawl($options);
 	} catch (\Exception $e) {
-		findkit_log_error('Partial crawl failed', $e->getMessage());
-
-		return false;
+		return findkit_handle_error(
+			'findkit_partial_crawl_failed',
+			'Partial crawl failed',
+			[
+				'options' => $options,
+				'error' => $e->getMessage(),
+			]
+		);
 	}
 }
 
@@ -116,12 +130,14 @@ function findkit_get_page_meta(\WP_Post $post)
 	try {
 		return Findkit\PageMeta::get($post);
 	} catch (\Exception $e) {
-		findkit_log_error('Failed to get page meta', [
-			'post_id' => $post->ID,
-			'error' => $e->getMessage(),
-		]);
-
-		return [];
+		return findkit_handle_error(
+			'findkit_page_meta_failed',
+			'Failed to get page meta',
+			[
+				'post_id' => $post->ID,
+				'error' => $e->getMessage(),
+			]
+		);
 	}
 }
 
@@ -130,7 +146,7 @@ function findkit_get_page_meta(\WP_Post $post)
  * @param array|null $search_params search params https://docs.findkit.com/ui-api/ui.searchparams/
  * @param array|null $options
  *
- * @return object|false Returns search results or false on error
+ * @return array|WP_Error Returns search results or WP_Error on error
  */
 function findkit_search(
 	string $terms,
@@ -144,14 +160,25 @@ function findkit_search(
 			$options
 		);
 
+		if (is_wp_error($result)) {
+			return findkit_handle_error(
+				'findkit_search_failed',
+				'Search failed',
+				[
+					'terms' => $terms,
+					'options' => $options,
+					'error' => $result->get_error_message(),
+				]
+			);
+		}
+
 		return $result['groups'][0] ?? [];
 	} catch (\Exception $e) {
-		findkit_log_error('Search failed', [
+		return findkit_handle_error('findkit_search_failed', 'Search failed', [
 			'terms' => $terms,
+			'options' => $options,
 			'error' => $e->getMessage(),
 		]);
-
-		return false;
 	}
 }
 
@@ -160,7 +187,7 @@ function findkit_search(
  * @param array|null $groups array for findkit search params https://docs.findkit.com/ui-api/ui.searchparams/
  * @param array|null $options
  *
- * @return array|false Returns search results or false on error
+ * @return array|WP_Error Returns search results or WP_Error on error
  *
  *  Example return value:
  *  [
@@ -226,9 +253,11 @@ function findkit_search_groups(
 				: \get_option('findkit_project_id');
 
 		if (!$public_token) {
-			findkit_log_error('Findkit public token is not set, cannot search');
-
-			return false;
+			return findkit_handle_error(
+				'findkit_public_token_missing',
+				'Findkit public token is not set, cannot search',
+				['options' => $options]
+			);
 		}
 
 		$subdomain = 'search';
@@ -268,30 +297,32 @@ function findkit_search_groups(
 
 		if (is_wp_error($response)) {
 			$error_message = $response->get_error_message();
-			findkit_log_error('Findkit request search failed', $error_message);
-
-			return false;
+			return findkit_handle_error(
+				'Findkit request search failed',
+				$error_message
+			);
 		}
 
 		$body = json_decode(wp_remote_retrieve_body($response), true);
 		$status = wp_remote_retrieve_response_code($response);
 
 		if ($status !== 200) {
-			findkit_log_error(
-				"Findkit search failed with status $status",
+			return findkit_handle_error(
+				'findkit_search_response_status',
+				"Findkit search failed with status {$status}",
 				$body
 			);
-
-			return false;
 		}
 
 		return $body;
 	} catch (\Exception $e) {
-		findkit_log_error('Search groups failed', [
-			'terms' => $terms,
-			'error' => $e->getMessage(),
-		]);
-
-		return false;
+		return findkit_handle_error(
+			'findkit_search_groups_failed',
+			'Search groups failed',
+			[
+				'terms' => $terms,
+				'error' => $e->getMessage(),
+			]
+		);
 	}
 }
