@@ -1,3 +1,14 @@
+## v1.4.0
+
+2025-03-20
+
+This is a breaking change in terms of error handling. Rather than throwing Exceptions, the public api php functions return WP_Error. More detailed errors will be logged if WP_DEBUG is defined.
+
+-   Change the way the plugin handles errors. Rather than throwing exceptions, log errors. [f76592f](https://github.com/findkit/wp-findkit/commit/f76592f) - Lauri Saarni
+
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.3.2...v1.4.0
+
 ## v1.3.2
 
 2025-02-25
