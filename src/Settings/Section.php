@@ -33,6 +33,10 @@ class Section
 
 	function __action_admin_init()
 	{
+		$this->title = is_callable($this->title)
+			? call_user_func($this->title)
+			: $this->title;
+
 		\add_settings_section(
 			$this->section,
 			$this->title,
@@ -45,9 +49,13 @@ class Section
 
 			$id = esc_attr($this->get_id($field));
 
+			$field_title = is_callable($field['title'])
+				? call_user_func($field['title'])
+				: $field['title'];
+
 			\add_settings_field(
 				$field['name'],
-				"<label for='$id'>" . $field['title'] . '</label>',
+				"<label for='$id'>" . $field_title . '</label>',
 				function () use ($field) {
 					$this->render_input($field);
 				},
@@ -77,58 +85,58 @@ class Section
 
 	// prettier-ignore
 	function render_input(array $field)
-	{
-		$render_description = $field['description'];
-		$placeholder = $field['placeholder'] ?? '';
-		$disabled = $field['disabled'] ?? false;
-		$type = $field['type'] ?? 'input';
-		$rows = $field['rows'] ?? '25';
-		$option = $field['name'];
+    {
+        $render_description = $field['description'];
+        $placeholder = $field['placeholder'] ?? '';
+        $disabled = $field['disabled'] ?? false;
+        $type = $field['type'] ?? 'input';
+        $rows = $field['rows'] ?? '25';
+        $option = $field['name'];
 
-		if ($type === 'input' || $type === 'password') { ?>
-            <input
-                type="<?php echo esc_attr($type === 'password' ? 'password' : 'text'); ?>"
-                style="width: 100%"
-                data-1p-ignore
-                <?php echo $disabled ? 'disabled' : ''; ?>
-				<?php if ($placeholder) {
-					echo "placeholder='";
-					echo esc_attr($placeholder);
-					echo "'";
-				} ?>
-                name="<?php echo esc_attr($option); ?>"
-                id="<?php echo esc_attr($this->get_id($field)); ?>"
-                value="<?php echo esc_attr( get_option($option, '') ); ?>"
+        if ($type === 'input' || $type === 'password') { ?>
+					<input
+						type="<?php echo esc_attr($type === 'password' ? 'password' : 'text'); ?>"
+						style="width: 100%"
+						data-1p-ignore
+              <?php echo $disabled ? 'disabled' : ''; ?>
+              <?php if ($placeholder) {
+                  echo "placeholder='";
+                  echo esc_attr($placeholder);
+                  echo "'";
+              } ?>
+						name="<?php echo esc_attr($option); ?>"
+						id="<?php echo esc_attr($this->get_id($field)); ?>"
+						value="<?php echo esc_attr( get_option($option, '') ); ?>"
 
-            />
+					/>
         <?php } elseif ($type === 'textarea') { ?>
 
-            <textarea
-                style="width: 100%"
-                rows=<?php echo esc_attr($rows); ?>
-                type="text"
-                id="<?php echo esc_attr($this->get_id($field)); ?>"
-                name="<?php echo esc_attr($option); ?>"
-                value=""
+					<textarea
+						style="width: 100%"
+						rows=<?php echo esc_attr($rows); ?>
+						type="text"
+						id="<?php echo esc_attr($this->get_id($field)); ?>"
+						name="<?php echo esc_attr($option); ?>"
+						value=""
 
-            ><?php echo esc_textarea( get_option($option, '') ); ?></textarea>
+					><?php echo esc_textarea( get_option($option, '') ); ?></textarea>
 
-            <?php } elseif ($type === 'checkbox') { ?>
+        <?php } elseif ($type === 'checkbox') { ?>
 
-            <input
-                type="checkbox"
-                name="<?php echo esc_attr($option); ?>"
-                id="<?php echo esc_attr($this->get_id($field)); ?>"
-                value="1"
-                <?php checked(1, get_option($option), true); ?> />
+					<input
+						type="checkbox"
+						name="<?php echo esc_attr($option); ?>"
+						id="<?php echo esc_attr($this->get_id($field)); ?>"
+						value="1"
+              <?php checked(1, get_option($option), true); ?> />
 
-            <?php }
-		?>
+        <?php }
+        ?>
 
-		<p class="description">
-			<?php if ($render_description) { $render_description(); } ?>
-			<sub>(<?php echo esc_html($option); ?>)</sub>
-		</p>
-		<?php
-	}
+			<p class="description">
+          <?php if ($render_description) { $render_description(); } ?>
+				<sub>(<?php echo esc_html($option); ?>)</sub>
+			</p>
+        <?php
+    }
 }

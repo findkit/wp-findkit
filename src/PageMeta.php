@@ -67,15 +67,15 @@ class PageMeta
 			$object
 		);
 
-		$blogname_slug = \sanitize_title(self::get_blog_name());
+		$blog_name_slug = \sanitize_title(self::get_blog_name());
 
 		$blog_name_tag =
-			'domain/' . $domain . '/' . 'wp_blog_name/' . $blogname_slug;
+			'domain/' . $domain . '/' . 'wp_blog_name/' . $blog_name_slug;
 
 		$tags = [
 			'wordpress',
 			'domain/' . $domain . '/' . 'wordpress',
-			'wp_blog_name/' . $blogname_slug,
+			'wp_blog_name/' . $blog_name_slug,
 			$blog_name_tag,
 			$public ? 'public' : 'private',
 		];
@@ -116,20 +116,16 @@ class PageMeta
 				if (in_array($taxonomy_key, $public_taxonomies)) {
 					$terms = \get_the_terms($object, $taxonomy_key);
 					foreach ($terms as $term) {
-						array_push(
-							$tags,
+						$tags[] =
 							'domain/' .
-								$domain .
-								'/' .
-								'wp_taxonomy/' .
-								$taxonomy_key .
-								'/' .
-								$term->slug
-						);
-						array_push(
-							$tags,
-							'wp_taxonomy/' . $taxonomy_key . '/' . $term->slug
-						);
+							$domain .
+							'/' .
+							'wp_taxonomy/' .
+							$taxonomy_key .
+							'/' .
+							$term->slug;
+						$tags[] =
+							'wp_taxonomy/' . $taxonomy_key . '/' . $term->slug;
 					}
 				}
 			}
