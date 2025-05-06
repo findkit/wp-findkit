@@ -1,3 +1,11 @@
+## v1.4.1
+
+2025-05-06
+
+-   Reformat admin setting field titles into callable functions. This should prevent early tranlations loading happening before init. [090fd37](https://github.com/findkit/wp-findkit/commit/090fd37) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.4.0...v1.4.1
+
 ## v1.4.0
 
 2025-03-20
