@@ -16,6 +16,11 @@ class LiveUpdate
 	private $pending_posts = null;
 
 	/**
+	 * Old permalinks to be removed from the index
+	 */
+	private static $old_permalinks = [];
+
+	/**
 	 * @var ApiClient
 	 */
 	private $api_client = null;
@@ -36,6 +41,15 @@ class LiveUpdate
 			3
 		);
 
+		add_filter(
+			'wp_insert_post_data',
+			[__CLASS__, 'pre_save_store_old_permalink'],
+			10,
+			2
+		);
+
+		add_action('save_post', [$this, 'on_save_post'], 10, 3);
+
 		// Send updates on shutdown when we can be sure that post changes have been saved
 		\add_action('shutdown', [$this, 'flush_updates']);
 	}
@@ -48,9 +62,15 @@ class LiveUpdate
 
 		$urls = [];
 
-		foreach ($this->pending_posts as $post) {
-			$urls[] = Utils::get_public_permalink($post);
+		foreach ($this->pending_posts as $item) {
+			if ($item instanceof \WP_Post) {
+				$urls[] = Utils::get_public_permalink($item);
+			} elseif (is_string($item)) {
+				$urls[] = $item;
+			}
 		}
+
+		$urls = array_unique($urls);
 
 		return $this->api_client->manual_crawl($urls);
 	}
@@ -76,8 +96,26 @@ class LiveUpdate
 		// former to avoid duplicate live updates. We cannot ignore the latter
 		// because then we would ignore legit standalone updates via REST API.
 		$is_rest_request = defined('REST_REQUEST') && REST_REQUEST;
+
+		// Detect bulk or trash actions from post list (not REST)
+		$is_bulk_or_trash_action = false;
+		if (
+			isset($_REQUEST['action']) &&
+			in_array($_REQUEST['action'], ['trash', 'delete', 'edit'], true)
+		) {
+			$is_bulk_or_trash_action = true;
+		}
+		if (
+			isset($_REQUEST['action2']) &&
+			in_array($_REQUEST['action2'], ['trash', 'delete', 'edit'], true)
+		) {
+			$is_bulk_or_trash_action = true;
+		}
+
+		// If not REST, and not a bulk/trash action, and using block editor, skip to avoid duplicate
 		if (
 			!$is_rest_request &&
+			!$is_bulk_or_trash_action &&
 			\use_block_editor_for_post_type($post->post_type)
 		) {
 			return;
@@ -130,5 +168,56 @@ class LiveUpdate
 		}
 
 		return false;
+	}
+
+	public static function pre_save_store_old_permalink($data, $postarr)
+	{
+		if (empty($postarr['ID'])) {
+			return $data;
+		}
+		$post_id = (int) $postarr['ID'];
+		$old_post = get_post($post_id);
+		if ($old_post) {
+			$old_permalink = get_permalink($old_post);
+			self::$old_permalinks[$post_id] = $old_permalink;
+		}
+		return $data;
+	}
+
+	public function on_save_post($post_id, $post, $update)
+	{
+		// Only for published posts
+		if ($post->post_status !== 'publish') {
+			return;
+		}
+
+		$old_permalink = self::$old_permalinks[$post_id] ?? null;
+		$new_permalink = get_permalink($post);
+
+		if ($old_permalink && $old_permalink !== $new_permalink) {
+			$this->enqueue_url($old_permalink);
+		}
+	}
+
+	function enqueue_url(string $url)
+	{
+		$is_development = defined('WP_ENV') && WP_ENV === 'development';
+
+		$can_live_update = apply_filters(
+			'findkit_can_live_update_post',
+			php_sapi_name() !== 'cli' && !$is_development,
+			null // No post object
+		);
+
+		if (!$can_live_update) {
+			return;
+		}
+
+		if ($this->pending_posts === null) {
+			$this->pending_posts = [];
+		}
+
+		// Store as a string URL
+		$this->pending_posts[] = $url;
 	}
 }
