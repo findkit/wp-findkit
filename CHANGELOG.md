@@ -1,3 +1,14 @@
+## v1.4.2
+
+2025-05-13
+
+-   Fix live update issues [58bd260](https://github.com/findkit/wp-findkit/commit/58bd260) - Lauri Saarni
+-   Moving post to trash from post list now triggers liveupdate
+-   Bulk save posts when change state to publish now trigger liveupdate (note that manual crawl can handle 10 max urls)
+-   Permalink changes should trigger live update for old and new urls to prevent duplicates in the search index
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.4.1...v1.4.2
+
 ## v1.4.1
 
 2025-05-06
