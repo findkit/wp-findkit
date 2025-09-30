@@ -1,3 +1,11 @@
+## v1.4.3
+
+2025-09-30
+
+-   Run liveupdate when WordPress is doing cron job that publishes scheduled posts [5bfed3d](https://github.com/findkit/wp-findkit/commit/5bfed3d) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.4.2...v1.4.3
+
 ## v1.4.2
 
 2025-05-13
