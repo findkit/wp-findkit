@@ -113,12 +113,17 @@ class LiveUpdate
 		}
 
 		// If not REST, and not a bulk/trash action, and using block editor, skip to avoid duplicate
+		// BUT do not skip when cron is publishing a scheduled post (future -> publish).
+		// wp-cron is not a REST request and not a bulk/trash action, and post types
+		// often use the block editor, so without this guard we would miss scheduled publishes.
 		if (
 			!$is_rest_request &&
 			!$is_bulk_or_trash_action &&
 			\use_block_editor_for_post_type($post->post_type)
 		) {
-			return;
+			if (!function_exists('wp_doing_cron') || !wp_doing_cron()) {
+				return;
+			}
 		}
 
 		// Revision are not public
