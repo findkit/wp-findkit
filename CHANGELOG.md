@@ -1,3 +1,11 @@
+## v1.4.4
+
+2025-11-18
+
+-   Update block.json apiVersion to 3 for blocks provided by the plugin as version 2 is about to depricate. [33d1277](https://github.com/findkit/wp-findkit/commit/33d1277) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.4.3...v1.4.4
+
 ## v1.4.3
 
 2025-09-30
