@@ -1,17 +1,16 @@
 import { useSelect, useDispatch } from "@wordpress/data";
 import {
 	store as blockEditorStore,
-
-	// deprecated but the new useSettings is not available in the current
-	// version?
-	// @ts-ignore
-	useSetting,
+	useSettings,
 } from "@wordpress/block-editor";
 import { BlockInstance } from "@wordpress/blocks";
 
-export function useBlockEditorStore(): {
+interface BlockEditorDispatch {
 	insertBlock(block: BlockInstance, index: number, rootClientId?: string): void;
-} {
+}
+
+export function useBlockEditorStore(): BlockEditorDispatch {
+	// @ts-expect-error - WordPress types for useDispatch don't include store-specific actions
 	return useDispatch(blockEditorStore);
 }
 
@@ -43,7 +42,8 @@ interface PaletteColor {
 }
 
 export function useColorPalette(): PaletteColor[] {
-	return useSetting("color.palette");
+	const [palette] = useSettings("color.palette");
+	return palette ?? [];
 }
 
 export function useTaxonomyTerms(termName: string): TaxonomyTerm[] {

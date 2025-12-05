@@ -68,7 +68,9 @@ function SearchFilterEditor(props: {
 	return (
 		<>
 			<PanelRow>
-				<p>Filter down the search results</p>
+				<p className="findkit-search-group-panel-title">
+					Filter down the search results
+				</p>
 			</PanelRow>
 			<PanelRow>
 				<SelectControl
@@ -83,6 +85,8 @@ function SearchFilterEditor(props: {
 						value: tax.slug,
 						label: tax.name,
 					}))}
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 				/>
 			</PanelRow>
 			<PanelRow>
@@ -98,23 +102,29 @@ function SearchFilterEditor(props: {
 						value: tax.slug,
 						label: tax.name,
 					}))}
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 				/>
 			</PanelRow>
-			<PanelRow>
-				<SelectControl
-					multiple
-					label="WordPress Post Tags"
-					help="Show search results only from the selected tags"
-					value={splitByComma(props.attributes.tags)}
-					onChange={(values) => {
-						props.setAttributes({ tags: values.join(",") });
-					}}
-					options={tags.map((tax) => ({
-						value: tax.slug,
-						label: tax.name,
-					}))}
-				/>
-			</PanelRow>
+			{tags.length > 0 && (
+				<PanelRow>
+					<SelectControl
+						multiple
+						label="WordPress Post Tags"
+						help="Show search results only from the selected tags"
+						value={splitByComma(props.attributes.tags)}
+						onChange={(values) => {
+							props.setAttributes({ tags: values.join(",") });
+						}}
+						options={tags.map((tax) => ({
+							value: tax.slug,
+							label: tax.name,
+						}))}
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+					/>
+				</PanelRow>
+			)}
 			<PanelRow>
 				<TextareaControl
 					label="Domains"
@@ -123,6 +133,7 @@ function SearchFilterEditor(props: {
 					onChange={(values) => {
 						props.setAttributes({ domains: values });
 					}}
+					__nextHasNoMarginBottom
 				/>
 			</PanelRow>
 			<PanelRow>
@@ -150,6 +161,7 @@ function SearchFilterEditor(props: {
 					onChange={(values) => {
 						props.setAttributes({ rawTags: values });
 					}}
+					__nextHasNoMarginBottom
 				/>
 			</PanelRow>
 		</>
@@ -174,6 +186,8 @@ function ConfigureSearchBlock(
 						}}
 						label="Findkit Public Token"
 						help="Get public token from the Findkit Hub"
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
 					/>
 				</PanelRow>
 				<PanelRow>
@@ -191,6 +205,8 @@ function ConfigureSearchBlock(
 								<a href="https://findk.it/instanceid">docs</a>.
 							</>
 						}
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
 					/>
 				</PanelRow>
 				<PanelRow className="findkit-color-picker">
@@ -281,6 +297,8 @@ function EditSearchEmbed(
 							}}
 							label="Input placeholder"
 							help="Placeholder text on the search input before user types anything"
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 						/>
 					</PanelRow>
 				</ConfigureSearchBlock>
@@ -343,6 +361,8 @@ function EditSearchGroup(
 										groupTitle: value,
 									});
 								}}
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 							/>
 						</PanelRow>
 

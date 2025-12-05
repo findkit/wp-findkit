@@ -1,5 +1,5 @@
 import * as React from "react";
-import { PluginDocumentSettingPanel } from "@wordpress/edit-post";
+import { PluginDocumentSettingPanel } from "@wordpress/editor";
 import { registerPlugin } from "@wordpress/plugins";
 
 import { TextareaControl, ToggleControl } from "@wordpress/components";
@@ -107,6 +107,7 @@ registerPlugin("findkit-sidebar", {
 						onChange={(newValue) => {
 							setMeta({ ...meta, _findkit_superwords: newValue });
 						}}
+						__nextHasNoMarginBottom
 					/>
 				) : null}
 
@@ -123,6 +124,7 @@ registerPlugin("findkit-sidebar", {
 						onChange={(newValue) => {
 							setMeta({ ...meta, _findkit_content_no_highlight: newValue });
 						}}
+						__nextHasNoMarginBottom
 					/>
 				) : null}
 
