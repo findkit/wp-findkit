@@ -1,11 +1,7 @@
 import { useSelect, useDispatch } from "@wordpress/data";
 import {
 	store as blockEditorStore,
-
-	// deprecated but the new useSettings is not available in the current
-	// version?
-	// @ts-ignore
-	useSetting,
+	useSettings,
 } from "@wordpress/block-editor";
 import { BlockInstance } from "@wordpress/blocks";
 
