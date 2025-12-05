@@ -123,7 +123,10 @@ const ui = new FindkitUI({
 ui.openFrom("#wp-admin-bar-findkit-adminbar a");
 
 // on /wp-admin/options-general.php?page=findkit_settings
+const settingPageButton = document.querySelector("button.findkit-admin-search");
+if (settingPageButton instanceof HTMLButtonElement) {
 ui.openFrom("button.findkit-admin-search");
+}
 
 observeSize(ui, {
 	"admin-menu": "#adminmenu",
