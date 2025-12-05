@@ -42,7 +42,8 @@ interface PaletteColor {
 }
 
 export function useColorPalette(): PaletteColor[] {
-	return useSetting("color.palette");
+	const [palette] = useSettings("color.palette");
+	return palette ?? [];
 }
 
 export function useTaxonomyTerms(termName: string): TaxonomyTerm[] {
