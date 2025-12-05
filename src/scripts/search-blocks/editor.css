@@ -22,6 +22,11 @@
 	font-size: small;
 }
 
+.findkit-search-group-panel-title {
+	font-weight: bold;
+	margin: 0.5rem 0 0.1rem;
+}
+
 .findkit-no-modal-inner-blocks {
 	border: 1px dashed gray;
 	padding: 1rem;

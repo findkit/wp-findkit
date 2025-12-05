@@ -68,7 +68,9 @@ function SearchFilterEditor(props: {
 	return (
 		<>
 			<PanelRow>
-				<p>Filter down the search results</p>
+				<p className="findkit-search-group-panel-title">
+					Filter down the search results
+				</p>
 			</PanelRow>
 			<PanelRow>
 				<SelectControl
