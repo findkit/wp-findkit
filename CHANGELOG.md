@@ -1,3 +1,28 @@
+## v1.5.0
+
+2025-12-05
+
+-   The previous update swicthed to use block.json apiVersion to 3. This was introduced in WordPress core version 6.3. So the required version is now reflecting this change.  
+-   Update readme.txt to reflect the currently supported and tested versions. [48a6e94](https://github.com/findkit/wp-findkit/commit/48a6e94) - Lauri Saarni
+-   Commit changes in build [882bc6d](https://github.com/findkit/wp-findkit/commit/882bc6d) - Lauri Saarni
+-   Update packages [4eb7b1c](https://github.com/findkit/wp-findkit/commit/4eb7b1c) - Lauri Saarni
+-   Pin volta to use 20.18.3 so the we can use @wp-playground/cli server for development [716522c](https://github.com/findkit/wp-findkit/commit/716522c) - Lauri Saarni
+-   Update @wordpress/scripts and clean packages that come with the updated package [9855c99](https://github.com/findkit/wp-findkit/commit/9855c99) - Lauri Saarni
+-   Remove deprecated packages as @wordpress packages include these [a460649](https://github.com/findkit/wp-findkit/commit/a460649) - Lauri Saarni
+-   code formatting [a15b033](https://github.com/findkit/wp-findkit/commit/a15b033) - Lauri Saarni
+-   Updated @wordpress packages change the return format of color.palette [d9d714f](https://github.com/findkit/wp-findkit/commit/d9d714f) - Lauri Saarni
+-   As @wordpress packages are updated and they do not provide the required typing so we expect ts error [ac19fb3](https://github.com/findkit/wp-findkit/commit/ac19fb3) - Lauri Saarni
+-   Refactor to use right function name as updated packages now provide the correct version [34bf13e](https://github.com/findkit/wp-findkit/commit/34bf13e) - Lauri Saarni
+-   Unly show tag select if tags are present [fded14a](https://github.com/findkit/wp-findkit/commit/fded14a) - Lauri Saarni
+-   Fix deprecated import to use up to date package [9692d3e](https://github.com/findkit/wp-findkit/commit/9692d3e) - Lauri Saarni
+-   Prepare WP components UI to use future styles [5303877](https://github.com/findkit/wp-findkit/commit/5303877) - Lauri Saarni
+-   Update findkit UI package [01ac31e](https://github.com/findkit/wp-findkit/commit/01ac31e) - Lauri Saarni
+-   Add panel title style to improve UI [d0d1e63](https://github.com/findkit/wp-findkit/commit/d0d1e63) - Lauri Saarni
+-   Clean empty css block [bbb85ee](https://github.com/findkit/wp-findkit/commit/bbb85ee) - Lauri Saarni
+-   Make sure the element exist before bind openFrom to it [2c518b9](https://github.com/findkit/wp-findkit/commit/2c518b9) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.4.4...v1.5.0
+
 ## v1.4.4
 
 2025-11-18
