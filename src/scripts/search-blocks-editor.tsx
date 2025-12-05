@@ -107,23 +107,23 @@ function SearchFilterEditor(props: {
 				/>
 			</PanelRow>
 			{tags.length > 0 && (
-			<PanelRow>
-				<SelectControl
-					multiple
-					label="WordPress Post Tags"
-					help="Show search results only from the selected tags"
-					value={splitByComma(props.attributes.tags)}
-					onChange={(values) => {
-						props.setAttributes({ tags: values.join(",") });
-					}}
-					options={tags.map((tax) => ({
-						value: tax.slug,
-						label: tax.name,
-					}))}
+				<PanelRow>
+					<SelectControl
+						multiple
+						label="WordPress Post Tags"
+						help="Show search results only from the selected tags"
+						value={splitByComma(props.attributes.tags)}
+						onChange={(values) => {
+							props.setAttributes({ tags: values.join(",") });
+						}}
+						options={tags.map((tax) => ({
+							value: tax.slug,
+							label: tax.name,
+						}))}
 						__next40pxDefaultSize
 						__nextHasNoMarginBottom
-				/>
-			</PanelRow>
+					/>
+				</PanelRow>
 			)}
 			<PanelRow>
 				<TextareaControl
