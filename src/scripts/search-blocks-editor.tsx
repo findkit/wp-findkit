@@ -106,6 +106,7 @@ function SearchFilterEditor(props: {
 					__nextHasNoMarginBottom
 				/>
 			</PanelRow>
+			{tags.length > 0 && (
 			<PanelRow>
 				<SelectControl
 					multiple
@@ -123,6 +124,7 @@ function SearchFilterEditor(props: {
 						__nextHasNoMarginBottom
 				/>
 			</PanelRow>
+			)}
 			<PanelRow>
 				<TextareaControl
 					label="Domains"
