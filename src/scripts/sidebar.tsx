@@ -107,6 +107,7 @@ registerPlugin("findkit-sidebar", {
 						onChange={(newValue) => {
 							setMeta({ ...meta, _findkit_superwords: newValue });
 						}}
+						__nextHasNoMarginBottom
 					/>
 				) : null}
 
@@ -123,6 +124,7 @@ registerPlugin("findkit-sidebar", {
 						onChange={(newValue) => {
 							setMeta({ ...meta, _findkit_content_no_highlight: newValue });
 						}}
+						__nextHasNoMarginBottom
 					/>
 				) : null}
 
