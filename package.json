@@ -31,9 +31,7 @@
 		"@types/wordpress__blocks": "^12.5.18",
 		"@types/wordpress__edit-post": "^8.4.2",
 		"@valu/git-tools": "^1.1.4",
-		"@wordpress/core-data": "^6.25.0",
-		"@wordpress/data": "^9.18.0",
-		"@wordpress/scripts": "^26.19.0",
+		"@wordpress/scripts": "^31.1.0",
 		"typescript": "^5.2.2"
 	},
 	"volta": {
