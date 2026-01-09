@@ -52,5 +52,6 @@ class Loader
 		(new Settings\Page())->bind();
 		(new RegisterBlocks())->bind();
 		(new GutenbergSidebar())->bind();
+		(new CrawlerCompat())->bind();
 	}
 }
