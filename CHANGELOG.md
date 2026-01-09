@@ -1,3 +1,12 @@
+## v1.5.1
+
+2026-01-09
+
+-   Change Live update logic to use different wordpress hooks to avoid race conditions on certain use cases [ed2f776](https://github.com/findkit/wp-findkit/commit/ed2f776) - Lauri Saarni
+-   Add CrawlerCompat class to prevent WP url guess functionality when findkit crawls the site. [8f7b91c](https://github.com/findkit/wp-findkit/commit/8f7b91c) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.5.0...v1.5.1
+
 ## v1.5.0
 
 2025-12-05
