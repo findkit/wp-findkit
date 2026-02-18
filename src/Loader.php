@@ -36,7 +36,7 @@ class Loader
 	{
 		$pair = KeyPair::load_from_options();
 
-		if (!$pair) {
+		if (!$pair && JwtSupport::is_available()) {
 			KeyPair::generate();
 		}
 
@@ -46,7 +46,10 @@ class Loader
 		(new AdminNotice())->bind();
 		(new AdminSearch())->bind();
 		(new FindkitMetaBox())->bind();
-		(new JWT())->bind();
+
+		if (JwtSupport::is_available()) {
+			(new JWT())->bind();
+		}
 		(new SearchFormOverride())->bind();
 		(new LiveUpdate($this->api_client))->bind();
 		(new Settings\Page())->bind();
