@@ -1,9 +1,23 @@
+## v1.6.0
+
+2026-02-18
+
+- This release has a breaking change for systems running PHP versions under 8.0. The affects only the use of the JWT.
+- Show PHP 8.0+ requirement notice and disable JWT controls on unsupported runtimes [b659e79](https://github.com/findkit/wp-findkit/commit/b659e79) - Lauri Saarni
+- Guard JWT token generation paths against unsupported runtimes and disabled setting [d12b6d0](https://github.com/findkit/wp-findkit/commit/d12b6d0) - Lauri Saarni
+- Gate JWT binding and keypair generation behind JwtSupport::is_available() [8e02f52](https://github.com/findkit/wp-findkit/commit/8e02f52) - Lauri Saarni
+- Skip vendor/autoload.php on PHP <8 to avoid firebase/php-jwt 7.x platform-check fatals [252b800](https://github.com/findkit/wp-findkit/commit/252b800) - Lauri Saarni
+- Add JwtSupport helper to gate JWT features by PHP version and library availability [fd68972](https://github.com/findkit/wp-findkit/commit/fd68972) - Lauri Saarni
+- Update firebase/php-jwt package [6b56eba](https://github.com/findkit/wp-findkit/commit/6b56eba) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.5.1...v1.6.0
+
 ## v1.5.1
 
 2026-01-09
 
--   Change Live update logic to use different wordpress hooks to avoid race conditions on certain use cases [ed2f776](https://github.com/findkit/wp-findkit/commit/ed2f776) - Lauri Saarni
--   Add CrawlerCompat class to prevent WP url guess functionality when findkit crawls the site. [8f7b91c](https://github.com/findkit/wp-findkit/commit/8f7b91c) - Lauri Saarni
+- Change Live update logic to use different wordpress hooks to avoid race conditions on certain use cases [ed2f776](https://github.com/findkit/wp-findkit/commit/ed2f776) - Lauri Saarni
+- Add CrawlerCompat class to prevent WP url guess functionality when findkit crawls the site. [8f7b91c](https://github.com/findkit/wp-findkit/commit/8f7b91c) - Lauri Saarni
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.5.0...v1.5.1
 
@@ -11,24 +25,24 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.5.0...v1.5.1
 
 2025-12-05
 
--   The previous update swicthed to use block.json apiVersion to 3. This was introduced in WordPress core version 6.3. So the required version is now reflecting this change.  
--   Update readme.txt to reflect the currently supported and tested versions. [48a6e94](https://github.com/findkit/wp-findkit/commit/48a6e94) - Lauri Saarni
--   Commit changes in build [882bc6d](https://github.com/findkit/wp-findkit/commit/882bc6d) - Lauri Saarni
--   Update packages [4eb7b1c](https://github.com/findkit/wp-findkit/commit/4eb7b1c) - Lauri Saarni
--   Pin volta to use 20.18.3 so the we can use @wp-playground/cli server for development [716522c](https://github.com/findkit/wp-findkit/commit/716522c) - Lauri Saarni
--   Update @wordpress/scripts and clean packages that come with the updated package [9855c99](https://github.com/findkit/wp-findkit/commit/9855c99) - Lauri Saarni
--   Remove deprecated packages as @wordpress packages include these [a460649](https://github.com/findkit/wp-findkit/commit/a460649) - Lauri Saarni
--   code formatting [a15b033](https://github.com/findkit/wp-findkit/commit/a15b033) - Lauri Saarni
--   Updated @wordpress packages change the return format of color.palette [d9d714f](https://github.com/findkit/wp-findkit/commit/d9d714f) - Lauri Saarni
--   As @wordpress packages are updated and they do not provide the required typing so we expect ts error [ac19fb3](https://github.com/findkit/wp-findkit/commit/ac19fb3) - Lauri Saarni
--   Refactor to use right function name as updated packages now provide the correct version [34bf13e](https://github.com/findkit/wp-findkit/commit/34bf13e) - Lauri Saarni
--   Unly show tag select if tags are present [fded14a](https://github.com/findkit/wp-findkit/commit/fded14a) - Lauri Saarni
--   Fix deprecated import to use up to date package [9692d3e](https://github.com/findkit/wp-findkit/commit/9692d3e) - Lauri Saarni
--   Prepare WP components UI to use future styles [5303877](https://github.com/findkit/wp-findkit/commit/5303877) - Lauri Saarni
--   Update findkit UI package [01ac31e](https://github.com/findkit/wp-findkit/commit/01ac31e) - Lauri Saarni
--   Add panel title style to improve UI [d0d1e63](https://github.com/findkit/wp-findkit/commit/d0d1e63) - Lauri Saarni
--   Clean empty css block [bbb85ee](https://github.com/findkit/wp-findkit/commit/bbb85ee) - Lauri Saarni
--   Make sure the element exist before bind openFrom to it [2c518b9](https://github.com/findkit/wp-findkit/commit/2c518b9) - Lauri Saarni
+- The previous update swicthed to use block.json apiVersion to 3. This was introduced in WordPress core version 6.3. So the required version is now reflecting this change.
+- Update readme.txt to reflect the currently supported and tested versions. [48a6e94](https://github.com/findkit/wp-findkit/commit/48a6e94) - Lauri Saarni
+- Commit changes in build [882bc6d](https://github.com/findkit/wp-findkit/commit/882bc6d) - Lauri Saarni
+- Update packages [4eb7b1c](https://github.com/findkit/wp-findkit/commit/4eb7b1c) - Lauri Saarni
+- Pin volta to use 20.18.3 so the we can use @wp-playground/cli server for development [716522c](https://github.com/findkit/wp-findkit/commit/716522c) - Lauri Saarni
+- Update @wordpress/scripts and clean packages that come with the updated package [9855c99](https://github.com/findkit/wp-findkit/commit/9855c99) - Lauri Saarni
+- Remove deprecated packages as @wordpress packages include these [a460649](https://github.com/findkit/wp-findkit/commit/a460649) - Lauri Saarni
+- code formatting [a15b033](https://github.com/findkit/wp-findkit/commit/a15b033) - Lauri Saarni
+- Updated @wordpress packages change the return format of color.palette [d9d714f](https://github.com/findkit/wp-findkit/commit/d9d714f) - Lauri Saarni
+- As @wordpress packages are updated and they do not provide the required typing so we expect ts error [ac19fb3](https://github.com/findkit/wp-findkit/commit/ac19fb3) - Lauri Saarni
+- Refactor to use right function name as updated packages now provide the correct version [34bf13e](https://github.com/findkit/wp-findkit/commit/34bf13e) - Lauri Saarni
+- Unly show tag select if tags are present [fded14a](https://github.com/findkit/wp-findkit/commit/fded14a) - Lauri Saarni
+- Fix deprecated import to use up to date package [9692d3e](https://github.com/findkit/wp-findkit/commit/9692d3e) - Lauri Saarni
+- Prepare WP components UI to use future styles [5303877](https://github.com/findkit/wp-findkit/commit/5303877) - Lauri Saarni
+- Update findkit UI package [01ac31e](https://github.com/findkit/wp-findkit/commit/01ac31e) - Lauri Saarni
+- Add panel title style to improve UI [d0d1e63](https://github.com/findkit/wp-findkit/commit/d0d1e63) - Lauri Saarni
+- Clean empty css block [bbb85ee](https://github.com/findkit/wp-findkit/commit/bbb85ee) - Lauri Saarni
+- Make sure the element exist before bind openFrom to it [2c518b9](https://github.com/findkit/wp-findkit/commit/2c518b9) - Lauri Saarni
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.4.4...v1.5.0
 
@@ -36,7 +50,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.4.4...v1.5.0
 
 2025-11-18
 
--   Update block.json apiVersion to 3 for blocks provided by the plugin as version 2 is about to depricate. [33d1277](https://github.com/findkit/wp-findkit/commit/33d1277) - Lauri Saarni
+- Update block.json apiVersion to 3 for blocks provided by the plugin as version 2 is about to depricate. [33d1277](https://github.com/findkit/wp-findkit/commit/33d1277) - Lauri Saarni
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.4.3...v1.4.4
 
@@ -44,7 +58,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.4.3...v1.4.4
 
 2025-09-30
 
--   Run liveupdate when WordPress is doing cron job that publishes scheduled posts [5bfed3d](https://github.com/findkit/wp-findkit/commit/5bfed3d) - Lauri Saarni
+- Run liveupdate when WordPress is doing cron job that publishes scheduled posts [5bfed3d](https://github.com/findkit/wp-findkit/commit/5bfed3d) - Lauri Saarni
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.4.2...v1.4.3
 
@@ -52,10 +66,10 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.4.2...v1.4.3
 
 2025-05-13
 
--   Fix live update issues [58bd260](https://github.com/findkit/wp-findkit/commit/58bd260) - Lauri Saarni
--   Moving post to trash from post list now triggers liveupdate
--   Bulk save posts when change state to publish now trigger liveupdate (note that manual crawl can handle 10 max urls)
--   Permalink changes should trigger live update for old and new urls to prevent duplicates in the search index
+- Fix live update issues [58bd260](https://github.com/findkit/wp-findkit/commit/58bd260) - Lauri Saarni
+- Moving post to trash from post list now triggers liveupdate
+- Bulk save posts when change state to publish now trigger liveupdate (note that manual crawl can handle 10 max urls)
+- Permalink changes should trigger live update for old and new urls to prevent duplicates in the search index
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.4.1...v1.4.2
 
@@ -63,7 +77,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.4.1...v1.4.2
 
 2025-05-06
 
--   Reformat admin setting field titles into callable functions. This should prevent early tranlations loading happening before init. [090fd37](https://github.com/findkit/wp-findkit/commit/090fd37) - Lauri Saarni
+- Reformat admin setting field titles into callable functions. This should prevent early tranlations loading happening before init. [090fd37](https://github.com/findkit/wp-findkit/commit/090fd37) - Lauri Saarni
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.4.0...v1.4.1
 
@@ -73,8 +87,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.4.0...v1.4.1
 
 This is a breaking change in terms of error handling. Rather than throwing Exceptions, the public api php functions return WP_Error. More detailed errors will be logged if WP_DEBUG is defined.
 
--   Change the way the plugin handles errors. Rather than throwing exceptions, log errors. [f76592f](https://github.com/findkit/wp-findkit/commit/f76592f) - Lauri Saarni
-
+- Change the way the plugin handles errors. Rather than throwing exceptions, log errors. [f76592f](https://github.com/findkit/wp-findkit/commit/f76592f) - Lauri Saarni
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.3.2...v1.4.0
 
@@ -90,7 +103,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.3.1...v1.3.2
 
 2024-12-11
 
--   bumb tested up to [3c5d196](https://github.com/findkit/wp-findkit/commit/3c5d196) - Joonas Varis
+- bumb tested up to [3c5d196](https://github.com/findkit/wp-findkit/commit/3c5d196) - Joonas Varis
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.3.0...v1.3.1
 
@@ -98,7 +111,7 @@ All changes https://github.com/findkit/wp-findkit/compare/v1.3.0...v1.3.1
 
 2024-09-12
 
--   Make sidebar title configureable and document it [e1f450e](https://github.com/findkit/wp-findkit/commit/e1f450e) - Joonas Varis
+- Make sidebar title configureable and document it [e1f450e](https://github.com/findkit/wp-findkit/commit/e1f450e) - Joonas Varis
 
 All changes https://github.com/findkit/wp-findkit/compare/v1.2.0...v1.3.0
 
