@@ -19,11 +19,35 @@ if (!defined('ABSPATH')) {
 // class_exists(). If not it means there's no global autoloader in place and
 // the user is not using composer. In that case we can try to require the
 // bundled autoloader code.
-if (
-	!\class_exists('\Findkit\Loader') &&
-	\is_readable(__DIR__ . '/vendor/autoload.php')
-) {
-	require_once __DIR__ . '/vendor/autoload.php';
+//
+// firebase/php-jwt 7.x requires PHP ^8.0 and Composer generates a platform
+// check in vendor/autoload.php that hard-fatals on PHP 7.4. To keep the
+// plugin baseline compatible with PHP 7.4 we skip vendor/autoload.php on
+// older runtimes and fall back to a lightweight PSR-4 autoloader instead.
+if (!\class_exists('\Findkit\Loader')) {
+	if (PHP_VERSION_ID >= 80000) {
+		if (\is_readable(__DIR__ . '/vendor/autoload.php')) {
+			require_once __DIR__ . '/vendor/autoload.php';
+		}
+	} else {
+		// Avoid Composer platform-check fatals on PHP <8 by registering a
+		// minimal PSR-4 autoloader that maps Findkit\ to src/.
+		spl_autoload_register(function ($class) {
+			$prefix = 'Findkit\\';
+			$len = strlen($prefix);
+			if (strncmp($prefix, $class, $len) !== 0) {
+				return;
+			}
+			$file =
+				__DIR__ .
+				'/src/' .
+				str_replace('\\', '/', substr($class, $len)) .
+				'.php';
+			if (file_exists($file)) {
+				require $file;
+			}
+		});
+	}
 }
 
 // If the class still doesn't exist it means the autoloader files are not bundled in the plugin
