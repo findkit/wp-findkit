@@ -22,6 +22,10 @@ class KeyPair
 
 	function create_jwt_token(string $findkit_project_id): ?string
 	{
+		if (!JwtSupport::is_available()) {
+			return null;
+		}
+
 		// seconds since unix epoch
 		$now = time();
 
@@ -41,6 +45,10 @@ class KeyPair
 	 */
 	static function request_jwt_token(): ?string
 	{
+		if (!JwtSupport::is_available()) {
+			return null;
+		}
+
 		$keypair = KeyPair::load_from_options();
 
 		if (!$keypair) {

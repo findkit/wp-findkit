@@ -44,6 +44,10 @@ class JWT
 
 	function __action_enqueue_scripts()
 	{
+		if (!get_option('findkit_enable_jwt')) {
+			return;
+		}
+
 		Utils::register_asset_script('findkit-jwt', 'jwt.ts', [
 			'inline' => true,
 			'globals' => [
@@ -56,9 +60,7 @@ class JWT
 			],
 		]);
 
-		if (get_option('findkit_enable_jwt')) {
-			wp_enqueue_script('findkit-jwt');
-		}
+		wp_enqueue_script('findkit-jwt');
 	}
 
 	function __rest_token_response(\WP_REST_Request $request)

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Findkit\Settings;
 
+use Findkit\JwtSupport;
 use Findkit\Utils;
 
 if (!defined('ABSPATH')) {
@@ -109,10 +110,19 @@ class Page
 				'name' => 'findkit_enable_jwt',
 				'type' => 'checkbox',
 				'default' => '0',
+				'disabled' => !JwtSupport::is_php_supported(),
 				'title' => function () {
 					return __('Authorize search requests', 'findkit');
 				},
 				'description' => function () {
+					if (!JwtSupport::is_php_supported()) {
+						echo '<strong>';
+						esc_html_e(
+							'JWT authorization requires PHP 8.0+. Your current PHP version does not support this feature.',
+							'findkit'
+						);
+						echo '</strong> ';
+					}
 					esc_html_e(
 						'Generate JWT tokens for the search requests for signed-in users. Set `private = true` and `public_key` in the findkit.toml file for the search endpoint to require authorization.',
 						'findkit'
@@ -278,6 +288,7 @@ class Page
             submit_button();
             ?>
 
+	            <?php if (JwtSupport::is_php_supported()) { ?>
 					<h2>JWT Public key</h2>
 
 					<p>
@@ -305,6 +316,7 @@ class Page
 							});
 						});
 					</script>
+            <?php } ?>
 
 				</form>
 			</div>
