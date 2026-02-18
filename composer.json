@@ -23,7 +23,7 @@
 		}
 	},
 	"require": {
-		"firebase/php-jwt": "^6.3"
+		"firebase/php-jwt": "^7.0"
 	},
 	"scripts": {
 		"phpstan": "php -d memory_limit=4G ./vendor/bin/phpstan analyze src *.php",
