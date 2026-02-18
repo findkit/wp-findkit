@@ -3,7 +3,7 @@ Contributors: findkit
 Tags: search, site search, instant search, crawler, cloud
 Requires at least: 6.3
 Tested up to: 6.9.0
-Stable tag: 1.5.1
+Stable tag: 1.6.0
 Requires PHP: 7.2
 Donate link: https://www.findkit.com/
 License: GPLv2 or later
