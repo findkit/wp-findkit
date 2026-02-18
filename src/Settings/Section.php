@@ -128,7 +128,8 @@ class Section
 						name="<?php echo esc_attr($option); ?>"
 						id="<?php echo esc_attr($this->get_id($field)); ?>"
 						value="1"
-              <?php checked(1, get_option($option), true); ?> />
+              <?php checked(1, get_option($option), true); ?>
+              <?php echo $disabled ? 'disabled' : ''; ?> />
 
         <?php }
         ?>
