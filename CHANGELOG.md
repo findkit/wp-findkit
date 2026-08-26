@@ -1,3 +1,15 @@
+## v1.7.0
+
+2026-08-26
+
+- Delete urls directly from the search index on trash, delete and permalink change instead of relying on re-crawling the old url. Falls back to the old crawl behaviour when the delete API is not available.
+- Detect permalink changes using the post_updated hook. Fixes missed live updates on quick edit slug changes and permalink comparison issues caused by inconsistent url normalization.
+- Send manual crawl urls in chunks of 10 as the API accepts at most 10 urls per crawl. Previously larger batches failed completely.
+- Add findkit_delete_pages() public API function for deleting urls from the search index.
+- Register WordPress Abilities (WP 6.9+) for the public API functions: findkit/full-crawl, findkit/partial-crawl, findkit/manual-crawl, findkit/delete-pages, findkit/search and findkit/get-page-meta.
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.6.0...v1.7.0
+
 ## v1.6.0
 
 2026-02-18
