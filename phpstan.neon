@@ -2,7 +2,13 @@ parameters:
 	level: 5
 	paths:
 		- src
+	scanFiles:
+		- plugin.php
 	ignoreErrors:
 		-
 			message: '#Variable \$(attributes|content) might not be defined#'
 			path: src/blocks/*/render.php
+		# The bundled wordpress-stubs predate the WP 6.9 Abilities API
+		-
+			message: '#Function wp_register_ability(_category)? not found#'
+			path: src/Abilities.php

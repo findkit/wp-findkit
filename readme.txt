@@ -1,8 +1,8 @@
 === Findkit - Site Search ===
-Contributors: findkit
+Contributors: findkit, laurisaarni
 Tags: search, site search, instant search, crawler, cloud
 Requires at least: 6.3
-Tested up to: 6.9.0
+Tested up to: 7.1.0
 Stable tag: 1.6.0
 Requires PHP: 7.2
 Donate link: https://www.findkit.com/

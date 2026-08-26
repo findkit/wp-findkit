@@ -36,13 +36,13 @@ import {
 import { ReactNode } from "react";
 import { ColorSlugPickerFromPalette } from "./lib/components";
 
-export interface FindkitFilterAttributes {
+export type FindkitFilterAttributes = {
 	categories?: string;
 	tags?: string;
 	postTypes?: string;
 	domains?: string;
 	rawTags?: string;
-}
+};
 
 declare const FINDKIT_SEARCH_BLOCK: {
 	publicToken?: string;

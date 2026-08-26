@@ -38,20 +38,25 @@ class ApiClient
 		$this->log_requests = \get_option('findkit_log_api_requests', false);
 	}
 
-	function request(string $method, string $path, $options = [])
+	/**
+	 * Make a request to the Findkit API.
+	 *
+	 * @return bool true when the API responded with a 200 status
+	 */
+	function request(string $method, string $path, $options = []): bool
 	{
 		if (!$this->apikey) {
 			error_log(
 				"Findkit: Api key not set. Cannot make request $method $path"
 			);
-			return;
+			return false;
 		}
 
 		if (!$this->project_id) {
 			error_log(
 				"Findkit: findkit_project_id not set. Cannot make request $method $path"
 			);
-			return;
+			return false;
 		}
 
 		$args = [
@@ -83,7 +88,7 @@ class ApiClient
 			error_log(
 				'Findkit: Api invoke error: ' . $response->get_error_message()
 			);
-			return;
+			return false;
 		}
 
 		$code = \wp_remote_retrieve_response_code($response);
@@ -93,8 +98,10 @@ class ApiClient
 				"Findkit: Api invoke error. Code $code, Body: " .
 					\wp_remote_retrieve_body($response)
 			);
-			return;
+			return false;
 		}
+
+		return true;
 	}
 
 	private function get_crawls_path()
@@ -103,22 +110,68 @@ class ApiClient
 		return "/v1/projects/$project_id/crawls";
 	}
 
-	function manual_crawl(array $urls, array $options = [])
+	/**
+	 * Start manual crawls for the given urls. The API accepts at most 10
+	 * urls per crawl so the urls are sent in chunks of 10.
+	 *
+	 * @return bool true when all requests succeeded
+	 */
+	function manual_crawl(array $urls, array $options = []): bool
 	{
-		$this->request('POST', $this->get_crawls_path(), [
-			'data' => [
-				'mode' => 'manual',
-				'urls' => $urls,
-				'message' =>
-					$options['message'] ??
-					'Manual crawl started using Findkit WordPress plugin',
-			],
-		]);
+		$ok = true;
+
+		foreach (array_chunk($urls, 10) as $chunk) {
+			$res = $this->request('POST', $this->get_crawls_path(), [
+				'data' => [
+					'mode' => 'manual',
+					'urls' => $chunk,
+					'message' =>
+						$options['message'] ??
+						'Manual crawl started using Findkit WordPress plugin',
+				],
+			]);
+
+			if (!$res) {
+				$ok = false;
+			}
+		}
+
+		return $ok;
+	}
+
+	/**
+	 * Delete the given urls from the search index without crawling. The
+	 * urls are sent in chunks of 50.
+	 *
+	 * @return bool true when all requests succeeded
+	 */
+	function delete_pages(array $urls, array $options = []): bool
+	{
+		$project_id = $this->project_id;
+		$ok = true;
+
+		foreach (array_chunk($urls, 50) as $chunk) {
+			$res = $this->request(
+				'POST',
+				"/v1/projects/$project_id/pages/delete",
+				[
+					'data' => [
+						'urls' => $chunk,
+					],
+				]
+			);
+
+			if (!$res) {
+				$ok = false;
+			}
+		}
+
+		return $ok;
 	}
 
 	function partial_crawl(array $options = [])
 	{
-		$this->request('POST', $this->get_crawls_path(), [
+		return $this->request('POST', $this->get_crawls_path(), [
 			'data' => [
 				'mode' => 'partial',
 				'message' =>
@@ -130,7 +183,7 @@ class ApiClient
 
 	function full_crawl(array $options = [])
 	{
-		$this->request('POST', $this->get_crawls_path(), [
+		return $this->request('POST', $this->get_crawls_path(), [
 			'data' => [
 				'mode' => 'full',
 				'message' =>

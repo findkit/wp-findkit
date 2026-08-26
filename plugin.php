@@ -149,6 +149,28 @@ function findkit_partial_crawl(array $options = [])
 	}
 }
 
+/**
+ * Delete the given urls from the Findkit search index without crawling.
+ *
+ * @param array $urls Full urls to delete
+ *
+ * @return bool|WP_Error true when all delete requests succeeded
+ */
+function findkit_delete_pages(array $urls)
+{
+	try {
+		$loader = \Findkit\Loader::instance();
+
+		return $loader->api_client->delete_pages($urls);
+	} catch (\Exception $e) {
+		return findkit_handle_error(
+			'findkit_delete_pages_failed',
+			'Delete pages failed',
+			['error' => $e->getMessage()]
+		);
+	}
+}
+
 function findkit_get_page_meta(\WP_Post $post)
 {
 	try {

@@ -3,14 +3,13 @@ import {
 	store as blockEditorStore,
 	useSettings,
 } from "@wordpress/block-editor";
-import { BlockInstance } from "@wordpress/blocks";
+import { Block } from "@wordpress/blocks";
 
 interface BlockEditorDispatch {
-	insertBlock(block: BlockInstance, index: number, rootClientId?: string): void;
+	insertBlock(block: Block, index: number, rootClientId?: string): void;
 }
 
 export function useBlockEditorStore(): BlockEditorDispatch {
-	// @ts-expect-error - WordPress types for useDispatch don't include store-specific actions
 	return useDispatch(blockEditorStore);
 }
 

@@ -16,9 +16,9 @@ class LiveUpdate
 	private $pending_posts = null;
 
 	/**
-	 * Old permalinks to be removed from the index
+	 * Urls to be deleted from the search index
 	 */
-	private static $old_permalinks = [];
+	private $pending_delete_urls = [];
 
 	/**
 	 * Old statuses to detect unpublishing
@@ -53,21 +53,11 @@ class LiveUpdate
 		// Handle permanently deleted posts
 		\add_action('deleted_post', [$this, '__action_deleted_post'], 10, 2);
 
-		// Store old permalink and status before save to detect changes
-		add_filter(
-			'wp_insert_post_data',
-			[__CLASS__, 'pre_save_store_old_data'],
-			10,
-			2
-		);
-
-		// Handle permalink changes
-		add_action(
-			'save_post',
-			[$this, 'on_save_post_permalink_change'],
-			10,
-			3
-		);
+		// Detect status and permalink changes. This fires inside
+		// wp_insert_post() before save_post for every real update (REST,
+		// classic editor, quick edit, bulk edit, wp_update_post) with both
+		// the old and the new post objects.
+		\add_action('post_updated', [$this, '__action_post_updated'], 20, 3);
 
 		// Send all queued updates at the end of request
 		\add_action('shutdown', [$this, 'flush_updates']);
@@ -167,7 +157,7 @@ class LiveUpdate
 
 		$permalink = Utils::get_public_permalink($post);
 		if ($permalink) {
-			$this->enqueue_url($permalink);
+			$this->enqueue_delete_url($permalink);
 		}
 	}
 
@@ -190,7 +180,7 @@ class LiveUpdate
 		) {
 			$permalink = Utils::get_public_permalink($post);
 			if ($permalink) {
-				$this->enqueue_url($permalink);
+				$this->enqueue_delete_url($permalink);
 			}
 		}
 	}
@@ -200,17 +190,37 @@ class LiveUpdate
 	 */
 	function flush_updates()
 	{
-		if (empty($this->pending_posts)) {
+		if (empty($this->pending_posts) && empty($this->pending_delete_urls)) {
 			return;
 		}
 
 		$urls = [];
 
-		foreach ($this->pending_posts as $item) {
+		foreach ($this->pending_posts ?? [] as $item) {
 			if ($item instanceof \WP_Post) {
 				$urls[] = Utils::get_public_permalink($item);
 			} elseif (is_string($item)) {
 				$urls[] = $item;
+			}
+		}
+
+		$delete_urls = array_values(
+			array_filter(array_unique($this->pending_delete_urls))
+		);
+
+		if (!empty($delete_urls)) {
+			$deleted = $this->api_client->delete_pages($delete_urls);
+
+			if ($deleted) {
+				// No need to crawl urls that were just deleted from the
+				// index. Crawling could even add them back if WordPress
+				// redirects them instead of returning 404.
+				$urls = array_diff($urls, $delete_urls);
+			} else {
+				// The delete endpoint is not available or the request
+				// failed. Fall back to crawling the urls and letting the
+				// crawler remove them when they no longer resolve.
+				$urls = array_merge($urls, $delete_urls);
 			}
 		}
 
@@ -270,6 +280,24 @@ class LiveUpdate
 	}
 
 	/**
+	 * Add a URL to the search index delete queue.
+	 */
+	function enqueue_delete_url(string $url)
+	{
+		$can_live_update = apply_filters(
+			'findkit_can_live_update_post',
+			php_sapi_name() !== 'cli' || wp_doing_cron(),
+			null
+		);
+
+		if (!$can_live_update) {
+			return;
+		}
+
+		$this->pending_delete_urls[] = $url;
+	}
+
+	/**
 	 * Check if live update is enabled.
 	 */
 	static function is_live_update_enabled(): bool
@@ -289,41 +317,53 @@ class LiveUpdate
 	}
 
 	/**
-	 * Store old permalink and status before saving.
+	 * Detect status and permalink changes on post updates.
+	 *
+	 * When the permalink of a published post changes the old url must be
+	 * deleted from the search index. Just crawling the old url is not
+	 * reliable because WordPress redirects old slugs instead of returning
+	 * 404 which can duplicate the document in the index.
 	 */
-	public static function pre_save_store_old_data($data, $postarr)
-	{
-		if (empty($postarr['ID'])) {
-			return $data;
-		}
-
-		$post_id = (int) $postarr['ID'];
-		$old_post = get_post($post_id);
-
-		if ($old_post) {
-			if ($old_post->post_status === 'publish') {
-				self::$old_permalinks[$post_id] = get_permalink($old_post);
-			}
-			self::$old_statuses[$post_id] = $old_post->post_status;
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Handle permalink changes.
-	 */
-	public function on_save_post_permalink_change($post_id, $post, $update)
-	{
-		if ($post->post_status !== 'publish') {
+	public function __action_post_updated(
+		$post_id,
+		\WP_Post $post_after,
+		\WP_Post $post_before
+	) {
+		if (!self::is_live_update_enabled()) {
 			return;
 		}
 
-		$old_permalink = self::$old_permalinks[$post_id] ?? null;
-		$new_permalink = get_permalink($post);
+		if (\wp_is_post_revision($post_id)) {
+			return;
+		}
 
-		if ($old_permalink && $old_permalink !== $new_permalink) {
-			$this->enqueue_url($old_permalink);
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+			return;
+		}
+
+		// Used by __action_save_post_live_update to detect unpublishing.
+		// post_updated fires before save_post inside wp_insert_post().
+		self::$old_statuses[$post_id] = $post_before->post_status;
+
+		if ($post_before->post_status !== 'publish') {
+			return;
+		}
+
+		$old_permalink = Utils::get_public_permalink($post_before);
+		$new_permalink = Utils::get_public_permalink($post_after);
+
+		if (!$old_permalink || $old_permalink === $new_permalink) {
+			return;
+		}
+
+		$this->enqueue_delete_url($old_permalink);
+
+		// Ensure the new url gets crawled even when
+		// __action_save_post_live_update skips this update (eg. quick edit
+		// which is neither a REST request nor a bulk action). Duplicates
+		// are removed in flush_updates().
+		if ($post_after->post_status === 'publish') {
+			$this->enqueue_post($post_after);
 		}
 	}
 }

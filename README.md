@@ -117,10 +117,45 @@ You can customize the displayed name with filters.
 Ex. Renaming page sidebar settings:
 
 ```php
-	add_filter('gettext_with_context_findkit', function($translation, $text, $context) {
-		if ('Findkit' === $text && 'Sidebar options label' === $context){
-			return 'My Product Name';
+add_filter(
+	"gettext_with_context_findkit",
+	function ($translation, $text, $context) {
+		if ("Findkit" === $text && "Sidebar options label" === $context) {
+			return "My Product Name";
 		}
 		return $translation;
-	}, 10, 3);
+	},
+	10,
+	3
+);
+```
+
+## Development
+
+Local development environment uses [wp-env](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/) (requires Docker):
+
+```
+npm run wp-env -- start
+```
+
+The plugin is mounted and activated at http://localhost:8888 (admin/password).
+
+Run the WordPress Abilities smoke tests inside the environment:
+
+```
+npm run test-abilities
+```
+
+wp-env creates two environments: development (port 8888, latest WordPress)
+and tests (port 8889, pinned to WordPress 7.1 in `.wp-env.json`). Run the
+smoke tests against the pinned version with:
+
+```
+npm run test-abilities-wp71
+```
+
+Arbitrary WP-CLI commands work too, eg:
+
+```
+npm run wp-env -- run cli wp eval 'var_dump(array_keys(wp_get_abilities()));'
 ```

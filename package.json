@@ -10,8 +10,11 @@
 		"phpstan": "composer phpstan",
 		"phpcs": "composer phpcs",
 		"zip": "./tools/zip",
-		"prettier-write": "prettier --write src plugin.php",
-		"prettier-check": "prettier --check src plugin.php",
+		"wp-env": "wp-env",
+		"test-abilities": "wp-env run cli wp eval-file wp-content/plugins/wp-findkit/tests/abilities-smoke.php",
+		"test-abilities-wp71": "wp-env run tests-cli wp eval-file wp-content/plugins/wp-findkit/tests/abilities-smoke.php",
+		"prettier-write": "prettier --write src plugin.php tests",
+		"prettier-check": "prettier --check src plugin.php tests",
 		"dev": "git valu-hide-changes build && wp-scripts start src/scripts/*.ts*",
 		"build": "git valu-hide-changes build && wp-scripts build src/scripts/*.ts*",
 		"build-hide": "git valu-hide-changes build",
@@ -27,14 +30,18 @@
 	"devDependencies": {
 		"@types/react": "^18.2.22",
 		"@types/react-dom": "^18.2.7",
-		"@types/wordpress__block-editor": "^14.21.2",
-		"@types/wordpress__blocks": "^12.5.18",
+		"@types/wordpress__block-editor": "^15.0.6",
 		"@types/wordpress__edit-post": "^8.4.2",
-		"@valu/git-tools": "^1.1.4",
-		"@wordpress/scripts": "^31.1.0",
+		"@valu/git-tools": "^1.4.0",
+		"@wordpress/blocks": "^15.26.0",
+		"@wordpress/env": "^11.13.0",
+		"@wordpress/scripts": "^34.1.0",
 		"typescript": "^5.2.2"
 	},
 	"volta": {
-		"node": "20.18.3"
+		"node": "22.13.0"
+	},
+	"engines": {
+		"node": ">=22.13.0"
 	}
 }

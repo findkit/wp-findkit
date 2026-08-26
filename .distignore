@@ -3,3 +3,5 @@ node_modules
 /tools
 phpcs.xml
 phpstan.neon
+/tests
+.wp-env.json
