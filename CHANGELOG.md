@@ -1,3 +1,11 @@
+## v1.7.1
+
+2026-09-01
+
+- Add a link report ability. The ability is useful for Pro level subscribers. The link report contains info of broken links (404,410,403,500). Other blogins can consume the ability and use this information to help users map the broken links in the site content. (#62) [6c72c67](https://github.com/findkit/wp-findkit/commit/6c72c67) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.7.0...v1.7.1
+
 ## v1.7.0
 
 2026-08-26
