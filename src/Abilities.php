@@ -81,6 +81,105 @@ class Abilities
 			],
 		];
 
+		$link_report_output_schema = [
+			'type' => 'object',
+			'properties' => [
+				'summary' => [
+					'type' => 'object',
+					'description' => __(
+						'How many problem links each reason has',
+						'findkit'
+					),
+					'properties' => [
+						'not_found' => ['type' => 'integer'],
+						'forbidden' => ['type' => 'integer'],
+						'server_error' => ['type' => 'integer'],
+						'redirect' => ['type' => 'integer'],
+						'unknown' => ['type' => 'integer'],
+					],
+				],
+				'links' => [
+					'type' => 'array',
+					'description' => __(
+						'The problem links, one entry per link',
+						'findkit'
+					),
+					'items' => [
+						'type' => 'object',
+						'properties' => [
+							'page' => [
+								'type' => 'string',
+								'description' => __(
+									'Url of the page the link was found on',
+									'findkit'
+								),
+							],
+							'link' => [
+								'type' => 'string',
+								'description' => __(
+									'Url the link points at',
+									'findkit'
+								),
+							],
+							'http_status' => [
+								'type' => 'integer',
+								'description' => __(
+									'Http status of the linked url, 0 when the crawler got no response',
+									'findkit'
+								),
+							],
+							'reason' => [
+								'type' => 'string',
+								'enum' => [
+									'not_found',
+									'forbidden',
+									'server_error',
+									'redirect',
+									'unknown',
+								],
+							],
+							'message' => [
+								'type' => 'string',
+								'description' => __(
+									'What the crawler reported for the linked url',
+									'findkit'
+								),
+							],
+							'redirects_to' => [
+								'type' => ['string', 'null'],
+								'description' => __(
+									'Where the link leads. Set for redirects only.',
+									'findkit'
+								),
+							],
+						],
+					],
+				],
+				'targets' => [
+					'type' => 'array',
+					'description' => __(
+						'Link tracking mode of each crawler target. Without link_tracking "all" only pdf links are tracked and the report is nearly empty.',
+						'findkit'
+					),
+					'items' => [
+						'type' => 'object',
+						'properties' => [
+							'host' => ['type' => 'string'],
+							'link_tracking' => ['type' => 'string'],
+							'walk_links' => ['type' => ['boolean', 'null']],
+						],
+					],
+				],
+				'truncated' => [
+					'type' => 'boolean',
+					'description' => __(
+						'True when there were more problem links than the limit',
+						'findkit'
+					),
+				],
+			],
+		];
+
 		\wp_register_ability('findkit/full-crawl', [
 			'label' => __('Findkit Full Crawl', 'findkit'),
 			'description' => __(
@@ -206,6 +305,51 @@ class Abilities
 				'annotations' => ['readonly' => true],
 			],
 		]);
+
+		\wp_register_ability('findkit/link-report', [
+			'label' => __('Findkit Link Report', 'findkit'),
+			'description' => __(
+				'List the links on the site which point at pages that are missing, forbidden, failing or redirected. Built from the data collected during the crawl, so it sends no requests to the site. Requires track_links = "all" on the crawler target.',
+				'findkit'
+			),
+			'category' => 'findkit',
+			'input_schema' => [
+				'type' => 'object',
+				'properties' => [
+					'target' => [
+						'type' => 'string',
+						'description' => __(
+							'Limit the report to a single target host',
+							'findkit'
+						),
+					],
+					'limit' => [
+						'type' => 'integer',
+						'minimum' => 1,
+						'maximum' => 5000,
+						'description' => __(
+							'How many links to return at most',
+							'findkit'
+						),
+					],
+					'refresh' => [
+						'type' => 'boolean',
+						'description' => __(
+							'Read the report from the API instead of the cache',
+							'findkit'
+						),
+					],
+				],
+				'additionalProperties' => false,
+			],
+			'output_schema' => $link_report_output_schema,
+			'execute_callback' => [self::class, 'execute_link_report'],
+			'permission_callback' => [self::class, 'can_manage'],
+			'meta' => [
+				'show_in_rest' => true,
+				'annotations' => ['readonly' => true],
+			],
+		]);
 	}
 
 	static function can_manage(): bool
@@ -282,6 +426,16 @@ class Abilities
 			'success' => true,
 			'results' => $result,
 		];
+	}
+
+	/**
+	 * @param mixed $input
+	 */
+	static function execute_link_report($input)
+	{
+		$input = (array) $input;
+
+		return \findkit_get_link_report($input);
 	}
 
 	/**

@@ -116,6 +116,28 @@ function findkit_full_crawl(array $options = [])
 	}
 }
 
+/**
+ * Read the Findkit link report: the links on the site which point at pages
+ * that are missing, forbidden, failing or redirected.
+ *
+ * @param array $options target: limit the report to a single target host,
+ *                       limit: how many links to return (1-5000),
+ *                       refresh: bypass the cache
+ * @return array|WP_Error
+ */
+function findkit_get_link_report(array $options = [])
+{
+	try {
+		return \Findkit\LinkReport::get($options);
+	} catch (\Exception $e) {
+		return findkit_handle_error(
+			'findkit_link_report_failed',
+			'Reading the link report failed',
+			['error' => $e->getMessage()]
+		);
+	}
+}
+
 function findkit_manual_crawl(array $urls, array $options = [])
 {
 	try {

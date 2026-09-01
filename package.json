@@ -9,6 +9,8 @@
 		"tsc": "tsc",
 		"phpstan": "composer phpstan",
 		"phpcs": "composer phpcs",
+		"phpstan-wp-env": "wp-env run cli sh -c 'cd wp-content/plugins/wp-findkit && php -d memory_limit=4G vendor/bin/phpstan analyze src *.php'",
+		"phpcs-wp-env": "wp-env run cli sh -c 'cd wp-content/plugins/wp-findkit && php vendor/bin/phpcs src *.php'",
 		"zip": "./tools/zip",
 		"wp-env": "wp-env",
 		"test-abilities": "wp-env run cli wp eval-file wp-content/plugins/wp-findkit/tests/abilities-smoke.php",

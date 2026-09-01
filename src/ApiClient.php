@@ -193,6 +193,120 @@ class ApiClient
 		]);
 	}
 
+	/**
+	 * Make a request to the Findkit API and return the decoded JSON body.
+	 *
+	 * Unlike request() this returns a WP_Error instead of false so the
+	 * caller can tell the user what went wrong.
+	 *
+	 * @param array $query Query string parameters
+	 * @return array|\WP_Error
+	 */
+	function request_json(string $method, string $path, array $query = [])
+	{
+		if (!$this->apikey) {
+			return new \WP_Error(
+				'findkit_api_key_missing',
+				__(
+					'Findkit API key is not set. Add it in the Findkit settings.',
+					'findkit'
+				)
+			);
+		}
+
+		if (!$this->project_id) {
+			return new \WP_Error(
+				'findkit_project_id_missing',
+				__(
+					'Findkit public token is not set. Add it in the Findkit settings.',
+					'findkit'
+				)
+			);
+		}
+
+		$invoke_url = $this->endpoint . $path;
+
+		if ($query) {
+			$invoke_url = add_query_arg(
+				array_map('rawurlencode', $query),
+				$invoke_url
+			);
+		}
+
+		$args = [
+			'headers' => [
+				'authorization' => 'Bearer ' . $this->apikey,
+				'user-agent' => 'Findkit WordPress Plugin v0.0.0',
+			],
+			'method' => $method,
+			'timeout' => 20,
+		];
+
+		if ($this->log_requests) {
+			error_log("Findkit: Api request $method $invoke_url");
+		}
+
+		$response = wp_remote_request($invoke_url, $args);
+
+		if (\is_wp_error($response)) {
+			return $response;
+		}
+
+		$code = \wp_remote_retrieve_response_code($response);
+		$body = \wp_remote_retrieve_body($response);
+
+		if ($code !== 200) {
+			return new \WP_Error(
+				'findkit_api_request_failed',
+				sprintf(
+					/* translators: %d: http status code */
+					__('Findkit API responded with status %d', 'findkit'),
+					$code
+				),
+				['status' => $code, 'body' => $body]
+			);
+		}
+
+		$data = json_decode($body, true);
+
+		if (!is_array($data)) {
+			return new \WP_Error(
+				'findkit_api_invalid_response',
+				__('Findkit API returned an invalid response', 'findkit')
+			);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Read the link report of the project. Lists the links pointing at
+	 * pages that are missing, forbidden, failing or redirected.
+	 *
+	 * @param array $options target: limit the report to a single target
+	 *                       host, limit: how many links to return
+	 * @return array|\WP_Error
+	 */
+	function link_report(array $options = [])
+	{
+		$project_id = $this->project_id;
+		$query = [];
+
+		if (!empty($options['target'])) {
+			$query['target'] = (string) $options['target'];
+		}
+
+		if (isset($options['limit'])) {
+			$query['limit'] = (string) (int) $options['limit'];
+		}
+
+		return $this->request_json(
+			'GET',
+			"/v1/projects/$project_id/link-report",
+			$query
+		);
+	}
+
 	static function get_api_key(): ?string
 	{
 		if (defined('FINDKIT_API_KEY')) {

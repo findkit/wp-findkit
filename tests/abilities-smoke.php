@@ -46,6 +46,7 @@ $expected = [
 	'findkit/delete-pages',
 	'findkit/search',
 	'findkit/get-page-meta',
+	'findkit/link-report',
 ];
 
 $registered = array_keys(wp_get_abilities());
@@ -164,6 +165,43 @@ $check(
 	$delete->check_permissions(['urls' => ['https://example.invalid/a']]) ===
 		true
 );
+
+// Link report. Delegates to findkit_get_link_report(). Without a configured
+// project it returns a WP_Error, with one it returns the report array. Both
+// prove the wiring.
+$link_report = wp_get_ability('findkit/link-report');
+
+$check(
+	'admin can use link-report',
+	$link_report->check_permissions([]) === true
+);
+
+$res = $link_report->execute([]);
+$check(
+	'link-report executes',
+	is_wp_error($res) || (is_array($res) && isset($res['links']))
+);
+
+$res = $link_report->execute(['limit' => 99999]);
+$check(
+	'link-report rejects an out of range limit',
+	is_wp_error($res) && $res->get_error_code() === 'ability_invalid_input'
+);
+
+$res = $link_report->execute(['bogus' => true]);
+$check(
+	'link-report rejects unknown properties',
+	is_wp_error($res) && $res->get_error_code() === 'ability_invalid_input'
+);
+
+wp_set_current_user($subscriber_id);
+
+$check(
+	'subscriber cannot use link-report',
+	$link_report->check_permissions([]) === false
+);
+
+wp_set_current_user(1);
 
 // Cleanup
 wp_delete_post($draft_id, true);
