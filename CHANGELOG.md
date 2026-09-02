@@ -1,3 +1,11 @@
+## v1.7.2
+
+2026-09-02
+
+- The Findkit API now reports when the full crawl behind the report finished, so a caller can tell a week old report from an hour old one. The plugin now consumes this data and exposes it in the ability. [3e900f8](https://github.com/findkit/wp-findkit/commit/3e900f8) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.7.1...v1.7.2
+
 ## v1.7.1
 
 2026-09-01
