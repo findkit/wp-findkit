@@ -177,6 +177,13 @@ class Abilities
 						'findkit'
 					),
 				],
+				'last_full_crawl' => [
+					'type' => ['string', 'null'],
+					'description' => __(
+						'When the full crawl behind this report finished, as an ISO timestamp. Null when the project has no completed full crawl, or when the Findkit API does not report it.',
+						'findkit'
+					),
+				],
 			],
 		];
 

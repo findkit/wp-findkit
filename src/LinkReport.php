@@ -41,7 +41,9 @@ class LinkReport
 	 * @param array $options target: limit to a single target host,
 	 *                       limit: how many links to return,
 	 *                       refresh: bypass the cache
-	 * @return array|\WP_Error
+	 * @return array|\WP_Error summary, links, targets, truncated and
+	 *                         last_full_crawl: when the crawl behind the
+	 *                         report finished, or null when unknown
 	 */
 	static function get(array $options = [])
 	{
@@ -138,6 +140,11 @@ class LinkReport
 			'links' => $links,
 			'targets' => self::format_targets($raw),
 			'truncated' => !empty($raw['truncated']),
+			// Null on older Findkit deployments which do not send it, and on
+			// projects with no completed full crawl. Both mean "unknown".
+			'last_full_crawl' => isset($raw['lastFullCrawl'])
+				? (string) $raw['lastFullCrawl']
+				: null,
 		];
 	}
 

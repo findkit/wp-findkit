@@ -182,6 +182,23 @@ $check(
 	is_wp_error($res) || (is_array($res) && isset($res['links']))
 );
 
+// format() must tolerate a Findkit deployment that does not send the crawl
+// timestamp yet, and must pass it through when it does.
+$formatted = \Findkit\LinkReport::format([]);
+$check(
+	'link-report format has last_full_crawl key when the api omits it',
+	array_key_exists('last_full_crawl', $formatted) &&
+		$formatted['last_full_crawl'] === null
+);
+
+$formatted = \Findkit\LinkReport::format([
+	'lastFullCrawl' => '2026-09-01T10:00:00.000Z',
+]);
+$check(
+	'link-report format passes the crawl timestamp through',
+	($formatted['last_full_crawl'] ?? null) === '2026-09-01T10:00:00.000Z'
+);
+
 $res = $link_report->execute(['limit' => 99999]);
 $check(
 	'link-report rejects an out of range limit',
