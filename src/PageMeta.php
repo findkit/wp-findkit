@@ -163,8 +163,13 @@ class PageMeta
 			}
 
 			// Use the post language if using polylang instead of the blog locale.
+			// Polylang returns false when the post has no language assigned, in
+			// which case we fall back to the blog locale below.
 			if (function_exists('\pll_get_post_language')) {
-				$meta['language'] = \pll_get_post_language($object->ID, 'slug');
+				$post_language = \pll_get_post_language($object->ID, 'slug');
+				if (is_string($post_language) && $post_language !== '') {
+					$meta['language'] = $post_language;
+				}
 			}
 		} elseif (\is_archive()) {
 			$meta['title'] = \get_the_archive_title();
@@ -176,6 +181,41 @@ class PageMeta
 		$meta['title'] = \wp_specialchars_decode($meta['title']);
 		$meta['tags'] = $tags;
 
-		return apply_filters('findkit_page_meta', $meta, $object);
+		$meta = apply_filters('findkit_page_meta', $meta, $object);
+
+		return self::remove_invalid_string_fields($meta);
+	}
+
+	/**
+	 * Remove fields that must be strings but are not, eg. a `false` returned
+	 * by a WordPress or Polylang function. The Findkit crawler rejects the
+	 * whole page meta if a field has the wrong type so it is better to just
+	 * omit the field.
+	 */
+	static function remove_invalid_string_fields($meta)
+	{
+		if (!is_array($meta)) {
+			return $meta;
+		}
+
+		$string_fields = [
+			'title',
+			'language',
+			'created',
+			'modified',
+			'contentNoHighlight',
+		];
+
+		foreach ($string_fields as $field) {
+			if (array_key_exists($field, $meta) && !is_string($meta[$field])) {
+				unset($meta[$field]);
+			}
+		}
+
+		if (isset($meta['language']) && $meta['language'] === '') {
+			unset($meta['language']);
+		}
+
+		return $meta;
 	}
 }
