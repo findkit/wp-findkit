@@ -218,8 +218,8 @@ function findkit_get_page_meta(\WP_Post $post)
  */
 function findkit_search(
 	string $terms,
-	array $search_params = null,
-	array $options = null
+	?array $search_params = null,
+	?array $options = null
 ) {
 	try {
 		$result = findkit_search_groups(
@@ -311,7 +311,7 @@ function findkit_search(
  */
 function findkit_search_groups(
 	string $terms,
-	array $groups = null,
+	?array $groups = null,
 	$options = null
 ) {
 	try {
