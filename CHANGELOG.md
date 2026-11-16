@@ -1,3 +1,12 @@
+## v1.7.3
+
+2026-11-16
+
+- Bug fix: drop invalid non-string fields from page meta (#65) [749ecf7](https://github.com/findkit/wp-findkit/commit/749ecf7) - Lauri Saarni
+- Fix implicitly nullable parameters for PHP 8.4+ [1a89434](https://github.com/findkit/wp-findkit/commit/1a89434) - Lauri Saarni
+
+All changes https://github.com/findkit/wp-findkit/compare/v1.7.2...v1.7.3
+
 ## v1.7.2
 
 2026-09-02
